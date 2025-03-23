@@ -1,0 +1,151 @@
+/******************************************************************************
+     * Basic elements
+******************************************************************************/
+
+* {
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none
+}
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body, html {
+	color: #000000;
+	overflow: hidden;
+	margin: 0;
+}
+
+canvas {
+	top: 0;
+	left: 0;
+	display: block;
+	position: absolute;
+}
+
+a {
+	color: #000000;
+	text-decoration: underline;
+}
+
+/******************************************************************************
+	 * Containers		
+******************************************************************************/
+
+#focus, #title, #search, #legenda, #award {
+	background-color: rgba(255, 255, 255, .8);
+	position: fixed;
+	border: none;
+	padding: 10px;
+}
+
+#focus {
+	left: 0;
+	top: 10;
+	width: 200px;
+	/* float: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; */
+}
+
+#focus p {
+	white-space: nowrap;
+	width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#title {
+	right: 0;
+	bottom: 10;
+	/* width: 240px; */
+}
+
+#search {
+	right: 0;
+	top: 10;
+	width: 240px;
+}
+
+#legenda {
+	right: 0;
+	bottom: 0;
+	text-align: right;
+}
+
+input {
+	font-size: 100%;
+	margin: 5px 0;
+	font-weight: normal;
+	background-color: #333;
+	border: 0;
+	color: #999;
+}
+
+input, input:before, input:after {
+	-webkit-user-select: initial;
+	-khtml-user-select: initial;
+	-moz-user-select: initial;
+	-ms-user-select: initial;
+	user-select: initial;
+}
+
+li {
+	font-size: 70%;
+	margin: 5px 0;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 100%;
+	margin: 10px 0;
+	line-height: 18px;
+}
+
+h2 {
+	font-size: 70%;
+	margin: 10px 0;
+	font-weight: normal;
+}
+
+h3 {
+	font-size: 60%;
+	margin: 5px 0;
+}
+
+p {
+	font-size: 45%;
+	margin: 5px 0;
+	line-height: 1;
+}
+
+.block {
+	background-color: black;
+	height: 4px;
+	width: 1px;
+	display: inline-block;
+}
+
+.inverted {
+	background-color: black;
+	color: white;
+	white-space: nowrap;
+	padding: 2px 2px;
+}
+
+.red {
+	color: #A6242F;
+}
+
+.blue {
+	color: #385DA6;
+}
+
+.gray {
+	color: #999999;
+}
