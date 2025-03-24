@@ -22,8 +22,8 @@ export default (entities) => {
 
         // Cross
 
-        const length = 1
-        const tickness = .2
+        const length = 0.2      // original lenght = 1
+        const tickness = 0.1     // original thickness = 0.2
 
         const line_1 = new Graphics()
         line_1.lineStyle(tickness, e.color)

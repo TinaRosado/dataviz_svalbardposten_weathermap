@@ -53,7 +53,7 @@ export default entities => {
             const expandedPolygon = expandPolygon(polygon, 10); // Adjust the factor to control expansion
 
             // Contour with Rounded Corners, including expansion
-            stage.lineStyle(0.4, color); // Set line style
+            stage.lineStyle(0.4, color, 0.2 ); // Set line style
             stage.beginFill(color, 0.2); // Set fill color with transparency
 
             for (let i = 0; i < expandedPolygon.length; i++) {
