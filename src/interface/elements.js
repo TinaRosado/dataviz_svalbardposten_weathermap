@@ -22,7 +22,7 @@ export default (entities) => {
 
         // Cross
 
-        const length = 0.2      // original lenght = 1
+        const length = 0.4      // original lenght = 1
         const tickness = 0.1     // original thickness = 0.2
 
         const line_1 = new Graphics()
@@ -43,11 +43,11 @@ export default (entities) => {
             e.year,
             {
                 fontName: 'Lato',
-                fontSize: 1,
+                fontSize: 0.7, // 1
                 align: 'left',
                 tint: e.color,
             })
-        bitmap.position.set(e.x + .6, e.y + 0.2)
+        bitmap.position.set(e.x + .3, e.y + 0.1)  //(e.x + .6, e.y + 0.2)
         stage.addChild(bitmap)
 
 
