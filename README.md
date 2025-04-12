@@ -2,8 +2,7 @@
 ## A First Concept Develompent
 
 <br/>
-<br/>
-<br/>
+
 ### Quick links to sections of the README file
 
 [Introduction](#Introduction)
@@ -20,6 +19,8 @@
 
 ## Introduction
 
+<br/>
+
 
 ### Navigating Media Discourse through Network Maps
 
@@ -30,11 +31,13 @@ It is important to note that the scope of this thesis—and by extension, this p
 The goal of this repository is to document methodologies used to visualize the newspaper archive through the implementation of [Rodighiero and Daniélou’s Weather Map (2023)](https://pure.rug.nl/ws/portalfiles/portal/856541881/10.1515_9783111317779-017.pdf) and making them openly accessible. This ensures that the computational analysis underpinning the visualization is transparent and reproducible, allowing other researchers to explore, adapt, and build upon this work.
 
 
+<br/>
 
 ### Audience
 
 This project is intended for students and practitioners in the Digital Humanities, Information Design, and Data Science that are interested in mapping large collections of text based documents through a web-based interactive interface. 
 
+<br/>
 
 ### Repository Structure
 
@@ -57,7 +60,6 @@ You can view the interactive visualization at the following link:
 <br/>
 
 ## DATA
-
 
 This research marks the first computational exploration of Svalbardposten's digital archive, a significant resource for understanding local journalism in one of the world's northernmost permanently inhabited regions. Svalbardposten, established in 1948, started as a community paper to broadcast information about the coal mining activities and relevant notifications. Currently it serves as the primary news source for Svalbard's international community, with coverage focusing on community activities, cultural and historical news, local politics, environmental issues, tourism, scientific research, and the region's unique regulatory framework under the Svalbard Treaty.
 
@@ -85,6 +87,7 @@ This study presents the first computational exploration of the Svalbardposten di
 <br/>
 
 ## Methodology
+<br/>
 
 ### Implementation: Actor-Network Analysis (Weather Map)
 
@@ -95,24 +98,28 @@ This analysis adapts **Rodighiero and Daniélou's Weather Map** (Rodighiero and 
 The analysis and visualization process of this project follows five main steps:
 
 
+<br/>
 
 #### **STEP 1 – Entity Extraction**
 
 Entity extraction is performed by identifying syntactic elements within the text using Parts of Speech (POS) and identifying semantic categories using Named Entity Recognition (NER). Both processes are implemented using the SpaCy and the model 'nb_core_news_sm'. This computational linguistics approach enables the systematic identification of relevant subjects within the articles, including nouns, proper nouns, and organizations that function as actors within the discourse network. For the purposes of this analysis, actors are defined as subjects within the discourse therefore verbs, adjectives symbols and numbers were not extracted in this step. The extraction process includes tokenization and lemmatization and preserves the original Norwegian language terms to maintain semantic fidelity throughout the analysis.
 
 
+<br/>
 
 #### **STEP 2 – Network Construction and Clustering**
 
 Once entities are extracted, they are clustered based on frequency and co-occurrence utilizing Term Frequency-Inverse Document Frequency (TF-IDF)(Spärck Jones 1972) vectorization.  Following vectorization of the entities,, Uniform Manifold Approximation and Projection (UMAP)(McInnes, Healy, and Melville 2018) is applied for dimensionality reduction, which projects the high-dimensional relationship data onto a two-dimensional Cartesian space while preserving the topological structure of the data. With the data projected in two dimensions, clustering is performed using Hierarchical Density-Based Spatial Clustering of Applications with Noise (HDBSCAN). This density-based clustering algorithm groups entities that frequently appear together in the corpus, enabling the identification of key thematic clusters within the discourse based on actors' close relationships. It is important to note that this approach does not necessarily assign every document to a meaningful cluster; a subset of outliers with unassigned clusters are grouped into a single cluster (cluster -1) despite lacking substantive semantic commonality amongst them. 
 
 
+<br/>
 
 #### **STEP 3 – Temporal Analysis Integration**
 
 To capture the temporal evolution of the discourse, the analysis incorporates a diachronic dimension by color mapping time across the archive’s years. A color temperature gradient is implemented as a visual encoding strategy, where cooler hues (blue spectrum) are mapped to earlier temporal periods, using the earliest year as one end of the spectrum, and warmer hues (red spectrum) denote more recent occurrences, using the final year as the other end of the spectrum. In addition the time frame is divided in two, and used as a reference later in the visualization to denote major areas of past and recent discourse. The integration of this temporal dimension enables the investigation of research questions concerning the evolving significance of specific topics and actors.
 
 
+<br/>
 
 #### **STEP 4 – Prompt-Engineering Topic Labeling**
 
@@ -130,6 +137,7 @@ The Svalbardposten adaptation of the Weather Map has an additional step to syste
 This **human-in-the-loop** approach ensures meaningful, reliable cluster labels.
 
 
+<br/>
 
 #### **STEP 5 – Interactive Interface Visualization**
 
