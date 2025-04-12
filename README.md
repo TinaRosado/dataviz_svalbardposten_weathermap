@@ -1,10 +1,24 @@
 # Svalbardposten's Weather Map
 ## A First Concept Develompent
+
+---
+
+### Quick links to sections of the README file
+[Data](#Data)
+
+[Methodology](#Methodology)
+
+[Contribution & Future Work](#Contribution_&_Future_Work)
+
+[Link Text](#sample-section)
+
 ---
 
 ### Navigating Media Discourse through Network Maps
 
-This project is a component of a broader Master of Fine Arts thesis in Information Design and Data Visualization at Northeastern University. The thesis employs a Cultural Analytics approach (Manovich 2020) to examine the visualization challenges of large digital archives, using Svalbardposten’s digital news archive as a case study. It explores and compares two distinct computational approaches and visualization techniques, analyzing their outcomes through the lens of Cultural Analytics principles. The results of the computational approaches and the visualizations of the study are intended as a concepetualization experiment and are not the intended final outcomes. Further refinement of the computationsl The study's exploratory nature
+This project is a component of a broader Master of Fine Arts thesis in Information Design and Data Visualization at Northeastern University. The thesis employs a Cultural Analytics approach to examine the visualization challenges of large digital archives, using Svalbardposten’s digital news archive as a case study. It explores and compares two distinct computational approaches and visualization techniques, analyzing their outcomes through the lens of Cultural Analytics principles. The results of the computational approaches and the visualizations of the study are intended as a concepetualization experiment and are not the intended final outcomes. Further refinement of the computationsl The study's exploratory nature
+
+It is important to note that the scope of this thesis—and by extension, this project—is exploratory in nature. Its primary aim is to ideate and prototype possible interactive interfaces that facilitate access to large digital archives. As such, the analytical and visualization processes presented here should be understood as preliminary and experimental. They are not intended to represent a final or comprehensive analysis but rather to serve as a foundation for future iterations, encouraging continued refinement, expansion, and exploration through computational methods. 
 
 The goal of this repository is to document methodologies used to visualize the newspaper archive through the implementation of [Rodighiero and Daniélou’s Weather Map (2023)](https://pure.rug.nl/ws/portalfiles/portal/856541881/10.1515_9783111317779-017.pdf) and making them openly accessible. This ensures that the computational analysis underpinning the visualization is transparent and reproducible, allowing other researchers to explore, adapt, and build upon this work.
 
@@ -15,11 +29,20 @@ The goal of this repository is to document methodologies used to visualize the n
 This project is intended for students and practitioners in the Digital Humanities, Information Design, and Data Science that are interested in mapping large collections of text based documents through a web-based interactive interface. 
 
 ---
-### Quick links to sections of the README file
-[Data](#Data)
-[Methodology](#Methodology)
-[Contribution & Future Work](#Contribution_&_Future_Work)
-[Link Text](#sample-section)
+### Repository Structure
+
+This repository contains all the code and files necessary for running the data analysis and deploying the interactive interface. It is organized into three main folders, each serving a distinct role in the workflow:
+
+| Folder     | Description                                                                                                                                                                                                 |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `data`     | **Computational Analysis**: Contains the Jupyter Notebook for NLP-based computational analysis, with step-by-step code, descriptive annotations, and graphical visualizations. It also generates the CSV file used as input for the web interface. |
+| `docs`     | **Production-Ready JavaScript for Web Deployment**: Contains production-ready JavaScript files for the web application, generated using Webpack, which compiles and optimizes the code (JavaScript, CSS, and other assets) for browser deployment. |
+| `src`      | **Files to Build Interface**: Contains the application's source code, including JavaScript modules, CSS assets, and the CSV file generated during data analysis. These files define the structure, interactivity, and presentation of the web interface. |
+
+#### Visualization URL
+
+You can view the interactive visualization at the following link:  
+[Interactive Visualization](https://tinarosado.github.io/dataviz_svalbardposten_weathermap/)
 
 ---
 
