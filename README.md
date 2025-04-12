@@ -1,8 +1,9 @@
 # Svalbardposten's Weather Map
 ## A First Concept Develompent
 
----
-
+<br/>
+<br/>
+<br/>
 ### Quick links to sections of the README file
 
 [Introduction](#Introduction)
@@ -13,11 +14,12 @@
 
 [Contribution & Future Work](#Contribution_&_Future_Work)
 
-
-
+<br/>
+<br/>
+<br/>
 
 ## Introduction
----
+
 
 ### Navigating Media Discourse through Network Maps
 
@@ -50,9 +52,12 @@ You can view the interactive visualization at the following link:
 [Interactive Visualization](https://tinarosado.github.io/dataviz_svalbardposten_weathermap/)
 
 
+<br/>
+<br/>
+<br/>
 
 ## DATA
----
+
 
 This research marks the first computational exploration of Svalbardposten's digital archive, a significant resource for understanding local journalism in one of the world's northernmost permanently inhabited regions. Svalbardposten, established in 1948, started as a community paper to broadcast information about the coal mining activities and relevant notifications. Currently it serves as the primary news source for Svalbard's international community, with coverage focusing on community activities, cultural and historical news, local politics, environmental issues, tourism, scientific research, and the region's unique regulatory framework under the Svalbard Treaty.
 
@@ -75,10 +80,13 @@ This study presents the first computational exploration of the Svalbardposten di
 | `title`                   | Stiller spørsmål om kommunøkonomien                                                                                                     |
 | `type`                    | article                                                                                                                                 |
 
+<br/>
+<br/>
+<br/>
 
 ## Methodology
----
-#### Implementation: Actor-Network Analysis (Weather Map)
+
+### Implementation: Actor-Network Analysis (Weather Map)
 
 Code adapted from [Rodighiero’s GitHub repository](https://github.com/rodighiero/weather-map)
 
@@ -136,9 +144,12 @@ The design of the final JavaScript visualization was adopted from code provided 
 
 The *Svalbardposten* Weather Map offers structured, interactive access to the archive, enabling exploration of **how Longyearbyen’s news media discourse has evolved** over time and which themes have remained central.
 
+<br/>
+<br/>
+<br/>
 
 ## Contribution & Future Work
----
+
 
 This project successfully created a public-facing repository that includes both the computational analysis and an interactive visualization of *Svalbardposten*’s digital news archive (2006–2024). A core priority throughout the process was maintaining the privacy of the full article texts while ensuring transparency in the computational methodology and its outputs.
 
