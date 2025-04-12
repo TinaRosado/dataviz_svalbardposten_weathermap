@@ -61,43 +61,27 @@ The analysis and visualization process of this project follows five main steps:
 
 #### **STEP 1 – Entity Extraction**
 
-Entity extraction is performed by identifying syntactic elements using **Parts of Speech (POS)** and semantic categories using **Named Entity Recognition (NER)**, implemented with **SpaCy** and the model `'nb_core_news_sm'`.
-
-- Extracted elements include: nouns, proper nouns, and organizations functioning as actors within the discourse network.
-- Verbs, adjectives, symbols, and numbers are excluded from this step.
-- The process includes tokenization and lemmatization.
-- **Norwegian language terms are preserved** to maintain semantic fidelity.
+Entity extraction is performed by identifying syntactic elements within the text using Parts of Speech (POS) and identifying semantic categories using Named Entity Recognition (NER). Both processes are implemented using the SpaCy and the model 'nb_core_news_sm'. This computational linguistics approach enables the systematic identification of relevant subjects within the articles, including nouns, proper nouns, and organizations that function as actors within the discourse network. For the purposes of this analysis, actors are defined as subjects within the discourse therefore verbs, adjectives symbols and numbers were not extracted in this step. The extraction process includes tokenization and lemmatization and preserves the original Norwegian language terms to maintain semantic fidelity throughout the analysis.
 
 ---
 
 #### **STEP 2 – Network Construction and Clustering**
 
-Entities are clustered based on frequency and co-occurrence using:
+Once entities are extracted, they are clustered based on frequency and co-occurrence utilizing Term Frequency-Inverse Document Frequency (TF-IDF)(Spärck Jones 1972) vectorization.  Following vectorization of the entities,, Uniform Manifold Approximation and Projection (UMAP)(McInnes, Healy, and Melville 2018) is applied for dimensionality reduction, which projects the high-dimensional relationship data onto a two-dimensional Cartesian space while preserving the topological structure of the data. With the data projected in two dimensions, clustering is performed using Hierarchical Density-Based Spatial Clustering of Applications with Noise (HDBSCAN). This density-based clustering algorithm groups entities that frequently appear together in the corpus, enabling the identification of key thematic clusters within the discourse based on actors' close relationships. It is important to note that this approach does not necessarily assign every document to a meaningful cluster; a subset of outliers with unassigned clusters are grouped into a single cluster (cluster -1) despite lacking substantive semantic commonality amongst them. 
 
-- **TF-IDF vectorization** 
-- **UMAP** for dimensionality reduction
-- **HDBSCAN** for density-based clustering of co-occurring entities
-
-Clusters represent key thematic areas in the discourse. Outliers with unassigned clusters are grouped into **cluster `-1`**, though they may lack substantive semantic commonality.
 
 ---
 
 #### **STEP 3 – Temporal Analysis Integration**
 
-To visualize discourse evolution:
-
-- A **color temperature gradient** encodes time:
-  - Cool hues (blue) for earlier years
-  - Warm hues (red) for recent years
-- The archive is split into two temporal segments to highlight shifts in discourse over time.
-
-This diachronic dimension helps track **the changing prominence of topics and actors**.
+To capture the temporal evolution of the discourse, the analysis incorporates a diachronic dimension by color mapping time across the archive’s years. A color temperature gradient is implemented as a visual encoding strategy, where cooler hues (blue spectrum) are mapped to earlier temporal periods, using the earliest year as one end of the spectrum, and warmer hues (red spectrum) denote more recent occurrences, using the final year as the other end of the spectrum. In addition the time frame is divided in two, and used as a reference later in the visualization to denote major areas of past and recent discourse. The integration of this temporal dimension enables the investigation of research questions concerning the evolving significance of specific topics and actors.
 
 ---
 
 #### **STEP 4 – Prompt-Engineering Topic Labeling**
 
-This step enhances interpretability of clusters using **OpenAI’s GPT-4** via a prompt-engineering strategy:
+The Svalbardposten adaptation of the Weather Map has an additional step to systematically interpret and label topics for each cluster identified in the previous step. Using OpenAI APIs, the labeling process employs a large language model (GPT-4). Giving the model an assigned role as a domain expert in text analysis, in Norwegian language and Svalbard contexts. The process involves:
+
 
 1. **Top keywords** from each cluster (based on POS and NER data) are extracted.
 2. A structured prompt is crafted with:
@@ -113,7 +97,7 @@ This **human-in-the-loop** approach ensures meaningful, reliable cluster labels.
 
 #### **STEP 5 – Interactive Interface Visualization**
 
-The JavaScript visualization includes:
+The design of the final JavaScript visualization was adopted from code provided by Rodighiero and lightly adapted to adjust the legend and a few visual elements for readability. The visualization displays entity clusters and their relationships through an interactive web-based interface with specific visual affordances and navigation capabilities:
 
 - **Zooming functionality** for distant/close reading of the discourse
 - **Color overlays**:
