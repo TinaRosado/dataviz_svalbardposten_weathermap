@@ -1,11 +1,25 @@
 # Svalbardposten's Weather Map
 ## A First Concept Develompent
 ---
+
 ### Navigating Media Discourse through Network Maps
 
 This project is a component of a broader Master of Fine Arts thesis in Information Design and Data Visualization at Northeastern University. The thesis employs a Cultural Analytics approach (Manovich 2020) to examine the visualization challenges of large digital archives, using Svalbardposten’s digital news archive as a case study. It explores and compares two distinct computational approaches and visualization techniques, analyzing their outcomes through the lens of Cultural Analytics principles. The results of the computational approaches and the visualizations of the study are intended as a concepetualization experiment and are not the intended final outcomes. Further refinement of the computationsl The study's exploratory nature
 
-The goal of this repository is to document methodologies used to visualize the newspaper archive through the implementation of [Rodighiero and Daniélou’s Weather Map (2024)](https://pure.rug.nl/ws/portalfiles/portal/856541881/10.1515_9783111317779-017.pdf) and making them openly accessible. This ensures that the computational analysis underpinning the visualization is transparent and reproducible, allowing other researchers to explore, adapt, and build upon this work.
+The goal of this repository is to document methodologies used to visualize the newspaper archive through the implementation of [Rodighiero and Daniélou’s Weather Map (2023)](https://pure.rug.nl/ws/portalfiles/portal/856541881/10.1515_9783111317779-017.pdf) and making them openly accessible. This ensures that the computational analysis underpinning the visualization is transparent and reproducible, allowing other researchers to explore, adapt, and build upon this work.
+
+---
+
+### Audience
+
+This project is intended for students and practitioners in the Digital Humanities, Information Design, and Data Science that are interested in mapping large collections of text based documents through a web-based interactive interface. 
+
+---
+### Quick links to sections of the README file
+[Data](#Data)
+[Methodology](#Methodology)
+[Contribution & Future Work](#Contribution_&_Future_Work)
+[Link Text](#sample-section)
 
 ---
 
@@ -15,7 +29,7 @@ This research marks the first computational exploration of Svalbardposten's digi
 
 This study presents the first computational exploration of the Svalbardposten digital archive, comprising 16,786 articles with associated metadata spanning from 2006 to 2024. Svalbardposten provided URL access to their RSS feed and a list of unique IDs in Excel format for research purposes. Data was collected programmatically through the HTTPS protocol using Python code to access the newspaper's RSS feed and retrieve articles via their unique IDs. While metadata and analytical results are presented in this research, the full article texts remain proprietary and are not publicly distributed.
 
-#### Table 1: Data Sample of *Svalbardposten*’s Born-Digital Archive
+#### Table 1: Data Sample of *Svalbardposten*’s Digital Archive
 
 | Column Header             | Sample                                                                                                                                  |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
@@ -34,7 +48,8 @@ This study presents the first computational exploration of the Svalbardposten di
 
 ---
 
-### Implementation: Actor-Network Analysis (Weather Map)
+### Methodology
+#### Implementation: Actor-Network Analysis (Weather Map)
 
 Code adapted from [Rodighiero’s GitHub repository](https://github.com/rodighiero/weather-map)
 
@@ -108,6 +123,8 @@ The JavaScript visualization includes:
 - **Direct links** to original *Svalbardposten* articles
 
 The *Svalbardposten* Weather Map offers structured, interactive access to the archive, enabling exploration of **how Longyearbyen’s news media discourse has evolved** over time and which themes have remained central.
+
+---
 
 ### Contribution & Future Work
 
