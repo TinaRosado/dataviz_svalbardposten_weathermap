@@ -1,20 +1,21 @@
-# Svalbardposten's Weather Map: A First Concept Develompent
+# Svalbardposten's Weather Map
+## A First Concept Develompent
+---
 ### Navigating Media Discourse through Network Maps
 
 This project is a component of a broader Master of Fine Arts thesis in Information Design and Data Visualization at Northeastern University. The thesis employs a Cultural Analytics approach (Manovich 2020) to examine the visualization challenges of large digital archives, using Svalbardposten’s digital news archive as a case study. It explores and compares two distinct computational approaches and visualization techniques, analyzing their outcomes through the lens of Cultural Analytics principles. The results of the computational approaches and the visualizations of the study are intended as a concepetualization experiment and are not the intended final outcomes. Further refinement of the computationsl The study's exploratory nature
 
 The goal of this repository is to document methodologies used to visualize the newspaper archive through the implementation of [Rodighiero and Daniélou’s Weather Map (2024)](https://pure.rug.nl/ws/portalfiles/portal/856541881/10.1515_9783111317779-017.pdf) and making them openly accessible. This ensures that the computational analysis underpinning the visualization is transparent and reproducible, allowing other researchers to explore, adapt, and build upon this work.
 
+---
 
-
-
-## DATA
+### DATA
 
 This research marks the first computational exploration of Svalbardposten's digital archive, a significant resource for understanding local journalism in one of the world's northernmost permanently inhabited regions. Svalbardposten, established in 1948, started as a community paper to broadcast information about the coal mining activities and relevant notifications. Currently it serves as the primary news source for Svalbard's international community, with coverage focusing on community activities, cultural and historical news, local politics, environmental issues, tourism, scientific research, and the region's unique regulatory framework under the Svalbard Treaty.
 
 This study presents the first computational exploration of the Svalbardposten digital archive, comprising 16,786 articles with associated metadata spanning from 2006 to 2024. Svalbardposten provided URL access to their RSS feed and a list of unique IDs in Excel format for research purposes. Data was collected programmatically through the HTTPS protocol using Python code to access the newspaper's RSS feed and retrieve articles via their unique IDs. While metadata and analytical results are presented in this research, the full article texts remain proprietary and are not publicly distributed.
 
-### Table 1: Data Sample of *Svalbardposten*’s Born-Digital Archive
+#### Table 1: Data Sample of *Svalbardposten*’s Born-Digital Archive
 
 | Column Header             | Sample                                                                                                                                  |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,15 +34,17 @@ This study presents the first computational exploration of the Svalbardposten di
 
 ---
 
-## Implementation: Actor-Network Analysis (Weather Map)
+### Implementation: Actor-Network Analysis (Weather Map)
 
-The first analytical approach adapts **Rodighiero and Daniélou's Weather Map** (Rodighiero and Daniélou 2023) to examine the evolution of actors and discourse in *Svalbardposten*'s reporting. The Weather Map was conceived as a tool to examine public debate and is inspired by **Bruno Latour's Actor-Network Theory** (Latour 2005). It is an innovative approach to mapping public discourse using **weather patterns as a time-based metaphor**, with documents clustered based on the prominence of key actors and trends in newspaper mentions over time.
+Code adapted from [Rodighiero’s GitHub repository](https://github.com/rodighiero/weather-map)
 
-The analysis and visualization process follows five main steps:
+This analysis adapts **Rodighiero and Daniélou's Weather Map** (Rodighiero and Daniélou 2023) to examine the evolution of actors and discourse in *Svalbardposten*'s reporting. The Weather Map was conceived as a tool to examine public debate and is inspired by **Bruno Latour's Actor-Network Theory**. It is an innovative approach to mapping public discourse using **weather patterns as a time-based metaphor**, with documents clustered based on the prominence of key actors and trends in newspaper mentions over time.
+
+The analysis and visualization process of this project follows five main steps:
 
 ---
 
-### **STEP 1 – Entity Extraction**
+#### **STEP 1 – Entity Extraction**
 
 Entity extraction is performed by identifying syntactic elements using **Parts of Speech (POS)** and semantic categories using **Named Entity Recognition (NER)**, implemented with **SpaCy** and the model `'nb_core_news_sm'`.
 
@@ -52,19 +55,19 @@ Entity extraction is performed by identifying syntactic elements using **Parts o
 
 ---
 
-### **STEP 2 – Network Construction and Clustering**
+#### **STEP 2 – Network Construction and Clustering**
 
 Entities are clustered based on frequency and co-occurrence using:
 
-- **TF-IDF vectorization** (Spärck Jones 1972)
-- **UMAP** (Uniform Manifold Approximation and Projection; McInnes et al. 2018) for dimensionality reduction
+- **TF-IDF vectorization** 
+- **UMAP** for dimensionality reduction
 - **HDBSCAN** for density-based clustering of co-occurring entities
 
 Clusters represent key thematic areas in the discourse. Outliers with unassigned clusters are grouped into **cluster `-1`**, though they may lack substantive semantic commonality.
 
 ---
 
-### **STEP 3 – Temporal Analysis Integration**
+#### **STEP 3 – Temporal Analysis Integration**
 
 To visualize discourse evolution:
 
@@ -77,7 +80,7 @@ This diachronic dimension helps track **the changing prominence of topics and ac
 
 ---
 
-### **STEP 4 – Prompt-Engineering Topic Labeling**
+#### **STEP 4 – Prompt-Engineering Topic Labeling**
 
 This step enhances interpretability of clusters using **OpenAI’s GPT-4** via a prompt-engineering strategy:
 
@@ -89,14 +92,11 @@ This step enhances interpretability of clusters using **OpenAI’s GPT-4** via a
    - Translation from Norwegian to English
 3. **Manual verification** ensures semantic and contextual accuracy.
 
-This **human-in-the-loop** approach (Munk et al., 2024) ensures meaningful, reliable cluster labels.
+This **human-in-the-loop** approach ensures meaningful, reliable cluster labels.
 
 ---
 
-### **STEP 5 – Interactive Interface Visualization**
-
-Code adapted from Rodighiero’s GitHub repository:  
-[https://github.com/TinaRosado/dataviz_svalbardposten_weathermap](https://github.com/TinaRosado/dataviz_svalbardposten_weathermap)
+#### **STEP 5 – Interactive Interface Visualization**
 
 The JavaScript visualization includes:
 
@@ -108,3 +108,44 @@ The JavaScript visualization includes:
 - **Direct links** to original *Svalbardposten* articles
 
 The *Svalbardposten* Weather Map offers structured, interactive access to the archive, enabling exploration of **how Longyearbyen’s news media discourse has evolved** over time and which themes have remained central.
+
+### Contribution & Future Work
+
+This project successfully created a public-facing repository that includes both the computational analysis and an interactive visualization of *Svalbardposten*’s digital news archive (2006–2024). A core priority throughout the process was maintaining the privacy of the full article texts while ensuring transparency in the computational methodology and its outputs.
+
+Detailed analytical results and interface implementation are documented in the Northeastern MFA thesis *An Atlas of Discourse: Navigating Large Digital Archives through Visual Maps* (link to be available upon publication by the Northeastern Library).
+
+#### Methodological Contributions
+
+This project makes several methodological contributions to the field of Digital Humanities:
+
+- **Adaptation of the Weather Map to Journalistic Archives**  
+  This implementation demonstrates the versatility of the Weather Map visualization technique beyond its original use in controversy mapping and manuscript analysis. By adapting it to a longitudinal news archive, the project offers a scalable model for applying this method to other journalistic or cultural collections.
+
+- **Topic Labeling Application**  
+  The integration of prompt-engineered topic labeling adds an innovative dimension to the original Weather Map methodology. This human-in-the-loop approach combines computational clustering with the interpretive capabilities of large language models, resulting in more meaningful and accessible thematic navigation.
+
+- **Multilingual Considerations**  
+  The project addresses the challenges of analyzing Norwegian-language text using natural language processing (NLP) tools, documenting specific adaptations that could inform future work with non-English corpora.
+
+- **Reproducibility Framework**  
+  The GitHub repository, structured into three folders—`data analysis`, `source code`, and `production-ready files`—provides a transparent and reproducible framework. This modular structure supports both technical clarity and practical reuse for future projects.
+
+#### Directions for Future Research
+
+Despite its contributions, this first iteration of the *Svalbardposten* Weather Map has several limitations that suggest directions for future research:
+
+- **Temporal Resolution of Topic Evolution**  
+  While the visualization effectively captures broad shifts in discourse (e.g., early vs. late periods), not all articles could be confidently classified into thematic clusters, limiting the resolution of topic evolution across the full archive. Further refinement of the computational process can improve this outcome.
+
+- **Multilingual Integration**  
+  Currently, the implementation focuses exclusively on Norwegian-language articles. Future iterations should incorporate multilingual analysis to capture the full linguistic and cultural diversity of *Svalbardposten*’s coverage.
+
+- **User Testing and Evaluation**  
+  Formal usability testing with both scholarly and non-scholarly users would provide insight into how different audiences interact with the visualization. Such evaluation would help refine the design for broader accessibility and interpretability, as identified in Section 1.4.
+
+- **Expanded Metadata**  
+  Incorporating metadata such as article length, section placement, or associated multimedia could enrich the visualization and reveal new dimensions of the newspaper’s editorial strategies. These possibilities are explored further in the second approach presented in the thesis.
+
+- **Towards Exploratory Interfaces**  
+  A critical area for future exploration lies in expanding the interface to not only guide users through the archive but to engage them as active participants in the process of knowledge-creation. This shift—from passive exploration to interpretive collaboration—could transform how users interact with large-scale digital archives, opening new pathways for critical inquiry, cultural reflection, and collective memory-making.
