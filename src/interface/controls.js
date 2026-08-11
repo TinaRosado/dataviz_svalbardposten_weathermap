@@ -30,7 +30,16 @@ const LAYERS = [
             { label: 'fronts', name: 'Fronts' },
         ],
     },
-    { label: 'contours', name: 'Contours' },
+    {
+        label: 'contours',
+        name: 'Contours',
+        // Visually nested under Contours for the panel's visual hierarchy only —
+        // gradient-fill is its own top-level viewport child (see gradientFill.js),
+        // not a Pixi child of the contours stage, so the two switches are wired
+        // fully independently: findByLabel below searches the whole viewport
+        // tree, it doesn't require literal scene-graph nesting.
+        children: [{ label: 'gradient-fill', name: 'Gradient Fill' }],
+    },
 ]
 
 // Depth-first search for a labelled display object (sub-switches live nested

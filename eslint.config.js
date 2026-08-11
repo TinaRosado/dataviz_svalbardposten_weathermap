@@ -17,8 +17,8 @@ export default [
         },
     },
     {
-        // Config files run in Node
-        files: ['*.config.js'],
+        // Config files and the offline generator scripts run in Node
+        files: ['*.config.js', 'scripts/**/*.js'],
         languageOptions: { globals: { ...globals.node } },
     },
     prettier, // turn off rules that would conflict with Prettier formatting

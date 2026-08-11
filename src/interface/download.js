@@ -90,6 +90,25 @@ const buildSvg = (entities) => {
     const svg = el('svg', { xmlns: SVGNS })
     const bbox = makeBBox()
 
+    // Gradient fill — placed first so it prints behind every other layer, at
+    // print resolution (see scripts/generate-gradient.js), positioned from the
+    // same projection gradientFill.js already computed for the on-screen sprite.
+    if (isVisible('gradient-fill') && s.gradientFill) {
+        const { x, y, width, height } = s.gradientFill
+        svg.appendChild(
+            el('image', {
+                href: import.meta.env.BASE_URL + 'gradient-fill-print.png',
+                x,
+                y,
+                width,
+                height,
+                preserveAspectRatio: 'none',
+            }),
+        )
+        bbox.add(x, y)
+        bbox.add(x + width, y + height)
+    }
+
     // Contours — density isolines, recomputed exactly as contours.js draws them.
     if (isVisible('contours')) {
         const density = contourDensity()
