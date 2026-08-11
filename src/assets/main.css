@@ -334,6 +334,75 @@ a:hover {
 
 .switch-label { font-size: 11.5px; }
 
+/* Isolines-only layers while Point Gradient is active: kept checkable (so the
+   choice is remembered) but visibly inert — dimmed, not just non-functional,
+   so the dead control doesn't read as a bug. */
+.switch.disabled { opacity: 0.45; }
+.switch.disabled .switch-label { color: var(--muted); }
+
+/******************************************************************************
+ * Segmented controls (Visualization mode, Years time range)
+******************************************************************************/
+
+.segmented {
+	display: flex;
+	border: 1px solid var(--rule);
+	border-radius: 2px;
+	overflow: hidden;
+	margin: 6px 0 10px;
+}
+
+.segmented-btn {
+	flex: 1;
+	font-family: var(--mono);
+	font-size: 10px;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--ink);
+	background: var(--field);
+	border: none;
+	padding: 6px 4px;
+	cursor: pointer;
+	transition: background 0.15s, color 0.15s;
+}
+
+.segmented-btn + .segmented-btn { border-left: 1px solid var(--rule); }
+
+.segmented-btn:hover { background: #eef2f5; }
+
+/* Selected state reads by fill + label, not colour alone. */
+.segmented-btn[aria-pressed='true'] {
+	background: var(--ink);
+	color: #fff;
+}
+
+.segmented-btn:focus-visible {
+	outline: 2px solid var(--low);
+	outline-offset: -2px;
+}
+
+/******************************************************************************
+ * Years time control — three-year window slider
+******************************************************************************/
+
+#years-panel { margin-top: 4px; }
+
+.range-row { margin: 2px 0 10px; }
+
+.range-value {
+	font-family: var(--mono);
+	font-size: 10.5px;
+	font-weight: 600;
+	color: var(--ink);
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.range-row input[type='range'] {
+	width: 100%;
+	accent-color: var(--low);
+}
+
 /******************************************************************************
  * View controls (zoom / reset)
 ******************************************************************************/

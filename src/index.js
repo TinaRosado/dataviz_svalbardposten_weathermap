@@ -15,6 +15,7 @@ import controls from './interface/controls.js'
 import elements from './interface/elements.js'
 import fronts from './interface/fronts.js'
 import gradientFill from './interface/gradientFill.js'
+import pointGradient from './interface/pointGradient.js'
 import { filterEntities } from './lib/filterEntities.js'
 
 // Static assets live in public/ and are served verbatim (the Lato.fnt bitmap
@@ -121,11 +122,19 @@ Promise.all([
 
     contours(entities)
     clusters(entities)
+    // Between clusters and elements: below the article labels/hits (elements,
+    // added next) so titles/keywords stay readable above the circles, but
+    // above the Isolines-only decorative layers (moot while those are hidden
+    // in Point Gradient mode, but keeps the stack sane either way).
+    const pointGrad = pointGradient(entities)
     elements(entities)
     fronts(entities)
 
+    // Read by download.js — only the plain data, not the Pixi handles.
+    s.pointGradient = { points: pointGrad.points, yearExtent: pointGrad.yearExtent }
+
     // Layer show/hide switches (reads the rendered layers by their .label)
-    controls()
+    controls(pointGrad)
 
     // Draw the first frame, then fade the loading cover out to reveal the map
     // (the map is already painted underneath, so it's a clean crossfade). The

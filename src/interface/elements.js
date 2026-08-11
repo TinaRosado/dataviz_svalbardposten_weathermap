@@ -20,6 +20,11 @@ export default (entities) => {
     // stroke() commits the path built since the previous commit, keeping the
     // per-article color.
     const crosses = new Graphics()
+    // Labelled (unlike other purely-internal children here) so Point Gradient
+    // mode-switching and the export pipeline can address the cross visual
+    // independently of the shared hits/labels this stage also carries — see
+    // pointGradient.js and controls.js's mode-gating.
+    crosses.label = 'elements-crosses'
     stage.addChild(crosses)
 
     // Per-cross text labels, one container per attribute. They're mutually

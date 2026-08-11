@@ -13,6 +13,7 @@
 import { contourDensity, line, curveCatmullRomClosed } from 'd3'
 import { clusterGeometry } from './geometry.js'
 import { frontsGeometry, semicirclePoints, FRONT_COLOR_HEX, FRONT_LINE_WIDTH, PIP_R } from './fronts.js'
+import { CIRCLE_FILL_OPACITY } from './pointGradient.js'
 
 const SVGNS = 'http://www.w3.org/2000/svg'
 
@@ -109,6 +110,34 @@ const buildSvg = (entities) => {
         bbox.add(x + width, y + height)
     }
 
+    // Point Gradient circles — reuses the same points (position, radius,
+    // colour) pointGradient.js computed and the live Years/window state from
+    // controls.js, so the export matches whatever is currently on screen,
+    // including the active three-year window.
+    //
+    // One <circle> per point, not batched into shared per-colour paths (as the
+    // crosses below are): batching same-colour circles into one path's
+    // subpaths would make their overlaps merge flat under SVG's fill-rule
+    // instead of alpha-accumulating — individual elements stack with normal
+    // compositing in document order, exactly like Pixi's sequential draws.
+    if (isVisible('point-gradient') && s.pointGradient) {
+        const { points } = s.pointGradient
+        const years = s.visualization?.years ?? { enabled: false, windowMode: 'all' }
+        const g = el('g', { 'fill-opacity': CIRCLE_FILL_OPACITY })
+        points.forEach((p) => {
+            if (years.enabled && years.windowMode === 'window') {
+                if (p.year < years.windowStart || p.year > years.windowStart + 2) return
+            }
+            const fill = years.enabled ? tintHex(p.color) : '#000000'
+            g.appendChild(
+                el('circle', { cx: p.x.toFixed(2), cy: p.y.toFixed(2), r: p.r.toFixed(2), fill }),
+            )
+            bbox.add(p.x - p.r, p.y - p.r)
+            bbox.add(p.x + p.r, p.y + p.r)
+        })
+        svg.appendChild(g)
+    }
+
     // Contours — density isolines, recomputed exactly as contours.js draws them.
     if (isVisible('contours')) {
         const density = contourDensity()
@@ -186,7 +215,10 @@ const buildSvg = (entities) => {
 
     // Article crosses — one path per colour (thousands of crosses, so batch to
     // keep the SVG small). Mirrors elements.js: arms of length 0.4, width 0.1.
-    if (isVisible('elements')) {
+    // Checked via the cross visual itself (not the whole 'elements' stage,
+    // which also carries labels/hits and stays visible in Point Gradient mode)
+    // so this only draws when Isolines is actually the active mode.
+    if (isVisible('elements-crosses')) {
         const L = 0.4
         const byColor = new Map()
         entities.forEach((e) => {

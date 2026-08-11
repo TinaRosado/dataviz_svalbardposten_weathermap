@@ -64,18 +64,38 @@
         </div>
 
         <p class='section'>Stations</p>
-        <p class='lead'>Each cross marks a single article; its colour encodes the time of publication, running from blue in 2006 to red in 2024.</p>
 
-        <div class='key-spectrum'>
-            <span class='spectrum-crosses'>
-                <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#0000ff' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#4000bf' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#800080' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#bf0040' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#ff0000' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-            </span>
-            <span class='spectrum-bar'></span>
-            <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+        <div id='stations-isolines' class='stations-variant'>
+            <p class='lead'>Each cross marks a single article; its colour encodes the time of publication, running from blue in 2006 to red in 2024.</p>
+
+            <div class='key-spectrum'>
+                <span class='spectrum-crosses'>
+                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#0000ff' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#4000bf' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#800080' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#bf0040' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#ff0000' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                </span>
+                <span class='spectrum-bar'></span>
+                <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+            </div>
+        </div>
+
+        <div id='stations-point-gradient' class='stations-variant' hidden>
+            <p class='lead'>Each circle marks a single article; its size reflects word count — larger circles are longer articles.</p>
+
+            <div class='key-spectrum'>
+                <span class='spectrum-crosses'>
+                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#0000ff' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#4000bf' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#800080' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#bf0040' /></svg>
+                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#ff0000' /></svg>
+                </span>
+                <span class='spectrum-bar'></span>
+                <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+            </div>
+            <p class='key-note'>Colour is black with Years off. Turn Years on for this same time spectrum, including the 3-year window.</p>
         </div>
     </div>
 
