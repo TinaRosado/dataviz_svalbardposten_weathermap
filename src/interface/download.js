@@ -17,6 +17,11 @@ import { CIRCLE_FILL_OPACITY } from './pointGradient.js'
 
 const SVGNS = 'http://www.w3.org/2000/svg'
 
+// Used if exported before controls.js has ever run (shouldn't happen in
+// practice — the download button only exists after it does) — an
+// unrestricted range, matching "nothing filtered yet".
+const yearsFallback = { colorByYear: false, startYear: -Infinity, endYear: Infinity }
+
 // A0 landscape, in millimetres, and the white margin left around the map.
 const A0 = { w: 1189, h: 841 }
 const MARGIN = 20
@@ -111,9 +116,9 @@ const buildSvg = (entities) => {
     }
 
     // Point Gradient circles — reuses the same points (position, radius,
-    // colour) pointGradient.js computed and the live Years/window state from
+    // colour) pointGradient.js computed and the live Years range state from
     // controls.js, so the export matches whatever is currently on screen,
-    // including the active three-year window.
+    // including the active [startYear, endYear] selection.
     //
     // One <circle> per point, not batched into shared per-colour paths (as the
     // crosses below are): batching same-colour circles into one path's
@@ -122,13 +127,11 @@ const buildSvg = (entities) => {
     // compositing in document order, exactly like Pixi's sequential draws.
     if (isVisible('point-gradient') && s.pointGradient) {
         const { points } = s.pointGradient
-        const years = s.visualization?.years ?? { enabled: false, windowMode: 'all' }
+        const years = s.visualization?.years ?? yearsFallback
         const g = el('g', { 'fill-opacity': CIRCLE_FILL_OPACITY })
         points.forEach((p) => {
-            if (years.enabled && years.windowMode === 'window') {
-                if (p.year < years.windowStart || p.year > years.windowStart + 2) return
-            }
-            const fill = years.enabled ? tintHex(p.color) : '#000000'
+            if (p.year < years.startYear || p.year > years.endYear) return
+            const fill = years.colorByYear ? tintHex(p.color) : '#000000'
             g.appendChild(
                 el('circle', { cx: p.x.toFixed(2), cy: p.y.toFixed(2), r: p.r.toFixed(2), fill }),
             )
@@ -214,14 +217,19 @@ const buildSvg = (entities) => {
     }
 
     // Article crosses — one path per colour (thousands of crosses, so batch to
-    // keep the SVG small). Mirrors elements.js: arms of length 0.4, width 0.1.
+    // keep the SVG small). Mirrors elements.js: arms of length 0.4, width 0.1,
+    // and the same shared year range (crosses always keep their own colour —
+    // Isolines has no "off" colour state, unaffected by Colour by year).
     // Checked via the cross visual itself (not the whole 'elements' stage,
     // which also carries labels/hits and stays visible in Point Gradient mode)
     // so this only draws when Isolines is actually the active mode.
     if (isVisible('elements-crosses')) {
         const L = 0.4
+        const years = s.visualization?.years ?? yearsFallback
         const byColor = new Map()
         entities.forEach((e) => {
+            const year = parseInt(e.year, 10)
+            if (year < years.startYear || year > years.endYear) return
             const hex = '#' + e.color.slice(2)
             const x = e.x,
                 y = e.y

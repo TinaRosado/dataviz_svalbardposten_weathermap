@@ -382,12 +382,10 @@ a:hover {
 }
 
 /******************************************************************************
- * Years time control — three-year window slider
+ * Years time control — presets, histogram, two-handle range slider
 ******************************************************************************/
 
 #years-panel { margin-top: 4px; }
-
-.range-row { margin: 2px 0 10px; }
 
 .range-value {
 	font-family: var(--mono);
@@ -398,9 +396,125 @@ a:hover {
 	margin-bottom: 5px;
 }
 
-.range-row input[type='range'] {
+/* Histogram — one bar per year, height by article count, colored by that
+   year's existing map color. Purely an overview; the slider below is the
+   actual control, so no axes/gridlines/labels here. */
+.histogram {
+	position: relative;
+	height: 30px;
+	margin: 0 0 2px;
+}
+
+.histogram-bar {
+	position: absolute;
+	bottom: 0;
+	border-radius: 1px 1px 0 0;
+	opacity: 1;
+	transition: opacity 0.15s;
+}
+
+.histogram-bar.is-out { opacity: 0.3; }
+
+/* The native range inputs below exist for keyboard/ARIA only — all mouse and
+   touch dragging goes through `.dual-slider-drag-layer` instead (see
+   controls.js for why: two coincident native thumbs can't be told apart by
+   the browser, so the drag layer decides start/end/whole-window intent from
+   click position itself). */
+.dual-slider {
+	position: relative;
+	height: 20px;
+	margin: 0 0 4px;
+}
+
+/* The visual link between the two endpoints — a rounded bar (pill ends),
+   like the reference image, rather than a hairline. */
+.dual-slider-track {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	height: 6px;
+	margin-top: -3px;
+	background: var(--rule);
+	border-radius: 3px;
+}
+
+.dual-slider-fill {
+	position: absolute;
+	top: 50%;
+	height: 6px;
+	margin-top: -3px;
+	background: var(--low);
+	border-radius: 3px;
+	pointer-events: none;
+}
+
+.dual-slider-input {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
-	accent-color: var(--low);
+	height: 20px;
+	margin: 0;
+	background: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+	pointer-events: none; /* keyboard/ARIA only — see the comment above */
+}
+
+.dual-slider-input::-webkit-slider-runnable-track { background: transparent; }
+.dual-slider-input::-moz-range-track { background: transparent; }
+
+/* Circular handles, sized close to the existing toggle knobs. Purely visual
+   now (pointer-events stay off — the drag layer above handles interaction). */
+.dual-slider-input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #fff;
+	border: 2px solid var(--low);
+	box-shadow: 0 1px 2px rgba(11, 29, 42, 0.25);
+}
+
+.dual-slider-input::-moz-range-thumb {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #fff;
+	border: 2px solid var(--low);
+	box-shadow: 0 1px 2px rgba(11, 29, 42, 0.25);
+}
+
+.dual-slider-input:focus-visible::-webkit-slider-thumb {
+	outline: 2px solid var(--low);
+	outline-offset: 2px;
+}
+
+.dual-slider-input:focus-visible::-moz-range-thumb {
+	outline: 2px solid var(--low);
+	outline-offset: 2px;
+}
+
+/* Sits above the (now pointer-inert) native inputs and handles every
+   mouse/touch interaction itself — see controls.js. */
+.dual-slider-drag-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: grab;
+	z-index: 3;
+}
+
+.dual-slider-drag-layer.dragging { cursor: grabbing; }
+
+.range-count {
+	font-family: var(--mono);
+	font-size: 10px;
+	color: var(--muted);
+	text-align: center;
 }
 
 /******************************************************************************

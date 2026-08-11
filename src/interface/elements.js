@@ -79,19 +79,9 @@ export default (entities) => {
     hits.label = 'elements-hits'
     stage.addChild(hits)
 
-    entities.forEach((e) => {
-        // Cross
-
-        const color = Number(e.color)
-
-        crosses.moveTo(e.x, e.y - length).lineTo(e.x, e.y + length)
-        crosses.moveTo(e.x - length, e.y).lineTo(e.x + length, e.y)
-        crosses.stroke({ width: tickness, color })
-
-        // Interaction — an empty container carrying only a hitArea square
-        // around the cross. hitArea is in local coords, so centre it on origin
-        // and position the container at the cross.
-
+    // One hit Container per article, built once (position/hitArea never
+    // change — only its .visible, when the year range moves).
+    const hitList = entities.map((e) => {
         const hit = new Container()
         hit.position.set(e.x, e.y)
         hit.hitArea = new Rectangle(-hitRadius, -hitRadius, hitRadius * 2, hitRadius * 2)
@@ -104,7 +94,34 @@ export default (entities) => {
             click(e)
         }) // On click
         hits.addChild(hit)
+        return { hit, year: parseInt(e.year, 10) }
     })
+
+    // Rebuilds the visible cross field for a year range [startYear, endYear]
+    // (inclusive) — called by controls.js when the shared Years range control
+    // moves. Crosses always keep their existing per-article colour (Isolines
+    // has no "off" colour state); only which articles are drawn/clickable
+    // changes. Stashed on `crosses` (the labelled object controls.js can find),
+    // mirroring the `layer.build` convention above rather than changing this
+    // module's return signature.
+    crosses.redrawByRange = (startYear, endYear) => {
+        crosses.clear()
+        for (let i = 0; i < entities.length; i++) {
+            const e = entities[i]
+            const inRange = hitList[i].year >= startYear && hitList[i].year <= endYear
+            hitList[i].hit.visible = inRange
+            if (!inRange) continue
+            const color = Number(e.color)
+            crosses.moveTo(e.x, e.y - length).lineTo(e.x, e.y + length)
+            crosses.moveTo(e.x - length, e.y).lineTo(e.x + length, e.y)
+            crosses.stroke({ width: tickness, color })
+        }
+    }
+
+    // Initial draw: every article, exactly matching the pre-existing
+    // unconditional behavior (no range control has ever narrowed this yet).
+    const initialYears = entities.map((e) => parseInt(e.year, 10))
+    crosses.redrawByRange(Math.min(...initialYears), Math.max(...initialYears))
 
     // Clicking empty map (anywhere the tap didn't hit an article) closes the
     // station report. The viewport is hittable everywhere — that's how panning

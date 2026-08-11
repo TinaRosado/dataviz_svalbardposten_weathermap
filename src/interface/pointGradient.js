@@ -51,7 +51,7 @@ export default (entities) => {
     const maxArea = MAX_RADIUS * MAX_RADIUS
 
     // Computed once from the complete dataset; never recalculated when the
-    // three-year window (or anything else) filters which points are drawn.
+    // year range (or anything else) filters which points are drawn.
     const radiusFor = (wordCount) => {
         const t =
             domainMax === domainMin
@@ -108,25 +108,25 @@ export default (entities) => {
         return { hit, year: p.year }
     })
 
-    // Rebuilds the visible circle field for the given color mode and optional
-    // three-year window. Called on discrete state changes only (Years toggle,
-    // All/window choice, slider move) — never per frame — so a full redraw of
-    // a few thousand circles is well within budget. Iterates `points` in its
-    // fixed original order every time, so overlap order never changes between
-    // redraws.
-    const redraw = (colorMode, windowRange) => {
+    // Rebuilds the visible circle field for the given color mode and year
+    // range [startYear, endYear] (inclusive). Called on discrete state changes
+    // only (Years toggle, preset, slider drag) — never per frame — so a full
+    // redraw of a few thousand circles is well within budget. Iterates
+    // `points` in its fixed original order every time, so overlap order never
+    // changes between redraws.
+    const redraw = (colorMode, [startYear, endYear]) => {
         circles.clear()
         for (let i = 0; i < points.length; i++) {
             const p = points[i]
-            const inWindow = !windowRange || (p.year >= windowRange[0] && p.year <= windowRange[1])
-            hitList[i].hit.visible = inWindow
-            if (!inWindow) continue
+            const inRange = p.year >= startYear && p.year <= endYear
+            hitList[i].hit.visible = inRange
+            if (!inRange) continue
             const color = colorMode === 'on' ? p.color : 0x000000
             circles.circle(p.x, p.y, p.r).fill({ color, alpha: CIRCLE_FILL_OPACITY })
         }
     }
 
-    redraw('off', null) // initial state: Years off, black, every article
+    redraw('off', [minYear, maxYear]) // initial state: Years off, black, every article
 
     return { root, redraw, points, yearExtent: [minYear, maxYear] }
 }
