@@ -128,15 +128,31 @@ const buildSvg = (entities) => {
     if (isVisible('point-gradient') && s.pointGradient) {
         const { points } = s.pointGradient
         const years = s.visualization?.years ?? yearsFallback
+        // The global Layers-panel selection (network/grid/collision, set by
+        // controls.js's Grid Layout/Collision Free toggles) — never the
+        // transient, hover-driven render position: hovering a cluster is
+        // temporary interface state and must not make the export depend on
+        // whether a cluster happens to be active or mid-transition when the
+        // button is clicked (see prompts/cluster-hover.md §11). The global
+        // toggle is a deliberate, stable choice, so it's fine for exports to
+        // reflect it.
+        const layout = s.visualization?.layout ?? 'network'
+        const coordsFor =
+            layout === 'grid'
+                ? (p) => [p.gridX, p.gridY]
+                : layout === 'collision'
+                  ? (p) => [p.collisionX, p.collisionY]
+                  : (p) => [p.networkX, p.networkY]
         const g = el('g', { 'fill-opacity': CIRCLE_FILL_OPACITY })
         points.forEach((p) => {
             if (p.year < years.startYear || p.year > years.endYear) return
+            const [x, y] = coordsFor(p)
             const fill = years.colorByYear ? tintHex(p.color) : '#000000'
             g.appendChild(
-                el('circle', { cx: p.x.toFixed(2), cy: p.y.toFixed(2), r: p.r.toFixed(2), fill }),
+                el('circle', { cx: x.toFixed(2), cy: y.toFixed(2), r: p.r.toFixed(2), fill }),
             )
-            bbox.add(p.x - p.r, p.y - p.r)
-            bbox.add(p.x + p.r, p.y + p.r)
+            bbox.add(x - p.r, y - p.r)
+            bbox.add(x + p.r, y + p.r)
         })
         svg.appendChild(g)
     }

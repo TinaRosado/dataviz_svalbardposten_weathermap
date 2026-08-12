@@ -48,7 +48,7 @@ const TUNING = {
     printMaxDim: 2600,
     // Kernel bandwidth (blur radius), in the CSV's raw x/y units — see the
     // header comment above for why this can't be a literal screen-pixel value.
-    bandwidth: 24,
+    bandwidth: 16,
     // The padded canvas extends this many bandwidths beyond the article
     // extent on every side, so the Gaussian-ish falloff reaches ~0 well inside
     // the texture edge instead of being cut off into a visible rectangle.
@@ -61,15 +61,15 @@ const TUNING = {
     minDensityFrac: 0.04,
     // Density (as a fraction of the peak) at which opacity saturates to
     // maxOpacity.
-    refDensityFrac: 0.45,
+    refDensityFrac: 0.50,
     maxOpacity: 0.85,
     // Opacity-vs-density curve exponent. <1 pushes sparse regions toward
     // maxOpacity sooner (softer overall look); >1 keeps only the densest
     // cores opaque.
-    opacityCurve: 0.6,
+    opacityCurve: 0.8,
     // Multiplies the blended color's OKLCH chroma. Averaging many hues in
     // OKLab pulls mixed-year regions toward gray; this compensates.
-    chromaBoost: 1.35,
+    chromaBoost: 1.5,
     // Extra fade applied within this fraction of the texture's shorter side,
     // measured from each edge — insurance against a hard boundary on top of
     // the natural Gaussian falloff.

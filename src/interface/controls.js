@@ -84,7 +84,7 @@ const makeSwitch = (layer, name, sub) => {
     return { row, input, layer }
 }
 
-export default (pointGradient, setLabelColorByYear) => {
+export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHoverHandle) => {
     const panel = document.createElement('div')
     panel.id = 'controls'
 
@@ -151,6 +151,66 @@ export default (pointGradient, setLabelColorByYear) => {
     frontsSwitch.input.addEventListener('change', refreshClusterDependents)
     labelsSwitch.input.addEventListener('change', refreshClusterDependents)
     refreshClusterDependents()
+
+    // Grid Layout / Collision Free — directly below Gradient Fill (the last
+    // LAYERS row above), same switch component, but these don't toggle a
+    // Pixi layer's `.visible`: they select which of pointGradient's three
+    // precomputed coordinate sets (network/grid/collision, see layouts.js)
+    // the circles animate to, globally. Mutually exclusive with each other,
+    // same as the Year/Title/Keywords group above — checking one unchecks
+    // the other; unchecking the active one returns to the original network
+    // layout, so "neither checked" is a real, reachable third state, not
+    // just absence.
+    //
+    // Per-cluster hover (clusterHover.js) is a separate, additional way to
+    // reach the grid layout, scoped to one cluster at a time, and only while
+    // this global selection is at its network default — switching either of
+    // these toggles on disables hover (see the setEnabled call below) so the
+    // two mechanisms never fight over the same points.
+    const makeLayoutSwitch = (name) => {
+        const row = document.createElement('label')
+        row.className = 'switch'
+        const input = document.createElement('input')
+        input.type = 'checkbox'
+        const slider = document.createElement('span')
+        slider.className = 'slider'
+        const text = document.createElement('span')
+        text.className = 'switch-label'
+        text.textContent = name
+        row.append(input, slider, text)
+        return { row, input }
+    }
+
+    const gridSwitch = makeLayoutSwitch('Grid Layout')
+    const collisionSwitch = makeLayoutSwitch('Collision Free')
+
+    // Exposes the exclusive relationship to assistive tech without losing the
+    // "neither" state a true radiogroup can't represent as cleanly.
+    const layoutGroup = document.createElement('div')
+    layoutGroup.setAttribute('role', 'group')
+    layoutGroup.setAttribute('aria-label', 'Article layout')
+    layoutGroup.append(gridSwitch.row, collisionSwitch.row)
+    panel.appendChild(layoutGroup)
+
+    const setLayout = (mode) => {
+        gridSwitch.input.checked = mode === 'grid'
+        collisionSwitch.input.checked = mode === 'collision'
+        s.visualization.layout = mode
+        // Disabled (and any active hover cleared) whenever a global mode is
+        // selected; re-enabled back on network — see clusterHover.js.
+        clusterHoverHandle?.setEnabled(mode === 'network')
+        pointGradient.setLayout(mode)
+        // Year/Title/Keywords labels (elements.js) sit right next to each
+        // article's circle — move them to match, whether or not any of them
+        // is currently switched on (setLayout no-ops on unbuilt layers).
+        elementsHandle?.setLayout(mode)
+    }
+    gridSwitch.input.addEventListener('change', () => {
+        setLayout(gridSwitch.input.checked ? 'grid' : 'network')
+    })
+    collisionSwitch.input.addEventListener('change', () => {
+        setLayout(collisionSwitch.input.checked ? 'collision' : 'network')
+    })
 
     // Point Gradient is the only reading of the articles now — the crosses
     // and their fixed hit targets from elements.js (the Isolines reading of
@@ -490,6 +550,7 @@ export default (pointGradient, setLabelColorByYear) => {
 
         pointGradient.redraw(colorByYear ? 'on' : 'off', [startYear, endYear])
         setLabelColorByYear?.(colorByYear)
+        elementsHandle?.setYearRange(startYear, endYear)
 
         s.visualization.years = { ...yearsState }
         s.app.render()
@@ -499,7 +560,10 @@ export default (pointGradient, setLabelColorByYear) => {
 
     // Shared state read by the export pipeline (download.js) — kept in sync by
     // applyYears() above, never replaced wholesale so it always sees live values.
-    s.visualization = { years: { ...yearsState } }
+    // `layout` ('network'/'grid'/'collision') is set by setLayout() above —
+    // the global toggle only; a hovered cluster never affects it (see
+    // download.js).
+    s.visualization = { years: { ...yearsState }, layout: 'network' }
 
     // Establish the consistent initial state (Point Gradient visible per the
     // Articles checkbox, Years range defaulted to All).

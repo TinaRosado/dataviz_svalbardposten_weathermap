@@ -45,14 +45,41 @@ export default (entities) => {
     const labelModes = [
         { key: 'elements-years', text: (e) => e.year },
         { key: 'elements-titles', text: (e) => e.title_en || e.title },
-        { key: 'elements-keywords', text: (e) => topKeywords(e.top_keywords_en || e.top_keywords, 3) },
+        {
+            key: 'elements-keywords',
+            text: (e) => topKeywords(e.top_keywords_en || e.top_keywords, 3),
+        },
     ]
 
-    labelModes.forEach((mode) => {
+    // Which of an entity's coordinate sets to read — mirrors pointGradient.js's
+    // own layoutMode (the global Grid Layout/Collision Free toggles) and
+    // activeClusterIds (hover, via clusterHover.js — the directly-hovered
+    // cluster plus its precomputed nearby clusters, only meaningful while
+    // layoutMode is 'network') selection exactly. gridX/gridY/collisionX/
+    // collisionY are copied onto each entity by pointGradient.js once
+    // layouts.js has computed them.
+    let layoutMode = 'network'
+    let activeClusterIds = new Set()
+    const targetFor = (e) => {
+        if (layoutMode === 'grid') return [e.gridX, e.gridY]
+        if (layoutMode === 'collision') return [e.collisionX, e.collisionY]
+        return layoutMode === 'network' && activeClusterIds.has(e.cluster)
+            ? [e.gridX, e.gridY]
+            : [e.x, e.y]
+    }
+
+    const layers = labelModes.map((mode) => {
         const layer = new Container()
         layer.label = mode.key
         layer.visible = false
         let built = false
+        // Built lazily (first activation) at whatever cluster is currently
+        // active, so a label mode switched on while a cluster is already
+        // expanded starts in the right place rather than always on the
+        // network position. `items` keeps the entity each bitmap belongs to,
+        // so setActiveCluster() below can move already-built labels without
+        // rebuilding.
+        const items = []
         // Called by controls.js before the layer is first shown.
         layer.build = () => {
             if (built) return
@@ -65,12 +92,79 @@ export default (entities) => {
                     style: { fontFamily: 'Lato', fontSize: 0.7, align: 'left' },
                 })
                 bitmap.tint = Number(e.color)
-                bitmap.position.set(e.x + 0.3, e.y + 0.1)
+                const [x, y] = targetFor(e)
+                bitmap.position.set(x + 0.3, y + 0.1)
                 layer.addChild(bitmap)
+                items.push({ bitmap, entity: e, year: parseInt(e.year, 10) })
             })
+            applyYearRange() // in case this layer is built after the range was already narrowed
         }
         stage.addChild(layer)
+        return items
     })
+
+    // Kept in sync by controls.js calling setYearRange() below, same pattern
+    // as activeClusterIds above — defaults open so a layer built before
+    // controls.js ever runs (shouldn't happen, but see applyYears() calling
+    // it once during initial setup) doesn't hide everything by mistake.
+    let currentRange = [-Infinity, Infinity]
+    const applyYearRange = () => {
+        const [startYear, endYear] = currentRange
+        layers.forEach((items) => {
+            items.forEach(({ bitmap, year }) => {
+                bitmap.visible = year >= startYear && year <= endYear
+            })
+        })
+    }
+
+    // Called by controls.js whenever the Years range changes — shows only the
+    // labels (Year/Title/Keywords) whose article falls in [startYear, endYear],
+    // matching the Point Gradient circles' own year filtering.
+    const setYearRange = (startYear, endYear) => {
+        currentRange = [startYear, endYear]
+        applyYearRange()
+    }
+
+    // Repositions every already-built label to its current targetFor() —
+    // used when the *global* layout changes, since every label's target may
+    // change at once (unlike hover, which only ever touches two clusters).
+    const repositionAll = () => {
+        layers.forEach((items) => {
+            items.forEach(({ bitmap, entity }) => {
+                const [x, y] = targetFor(entity)
+                bitmap.position.set(x + 0.3, y + 0.1)
+            })
+        })
+    }
+
+    // Called by controls.js whenever the Grid Layout/Collision Free toggles
+    // change.
+    const setLayout = (mode) => {
+        layoutMode = mode
+        repositionAll()
+    }
+
+    // Called by clusterHover.js on every activation change — `newActiveIds`
+    // is the hovered cluster plus its precomputed nearby clusters (see
+    // clusters.js's neighborsByClusterId), already expanded by
+    // clusterHover.js. Moves only the previously-active and newly-active
+    // clusters' already-built labels (Year/Title/Keywords) to match their
+    // circle, exactly mirroring pointGradient.js's own scoping so unrelated
+    // clusters' labels are never touched. Labels snap directly to their new
+    // target rather than animating alongside the circle's tween — a
+    // deliberate, smaller-scope choice; see the completion report.
+    const setActiveCluster = (newActiveIds) => {
+        const previousIds = activeClusterIds
+        activeClusterIds = newActiveIds
+        if (layoutMode !== 'network') return // no visual effect while a global mode is active — see clusterHover.js's setEnabled
+        layers.forEach((items) => {
+            items.forEach(({ bitmap, entity }) => {
+                if (!previousIds.has(entity.cluster) && !newActiveIds.has(entity.cluster)) return
+                const [x, y] = targetFor(entity)
+                bitmap.position.set(x + 0.3, y + 0.1)
+            })
+        })
+    }
 
     // Invisible per-article hit targets, centred on each cross. Kept in their
     // own container above the crosses/labels so selection works whether or not
@@ -128,4 +222,6 @@ export default (entities) => {
     // works — so its pointertap fires for background clicks.
     s.viewport.eventMode = 'static'
     s.viewport.on('pointertap', () => deselect())
+
+    return { setLayout, setActiveCluster, setYearRange }
 }
