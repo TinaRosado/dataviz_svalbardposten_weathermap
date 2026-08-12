@@ -15,6 +15,7 @@ import controls from './interface/controls.js'
 import elements from './interface/elements.js'
 import fronts from './interface/fronts.js'
 import gradientFill from './interface/gradientFill.js'
+import legend from './interface/legend.js'
 import pointGradient from './interface/pointGradient.js'
 import { filterEntities } from './lib/filterEntities.js'
 
@@ -22,6 +23,10 @@ import { filterEntities } from './lib/filterEntities.js'
 // font references Lato.png by a stable, unhashed name, so it must not be bundled)
 
 const base = import.meta.env.BASE_URL
+
+// Pure DOM, no map data needed — wired immediately rather than waiting on
+// the CSV/Pixi load below.
+legend()
 
 // Set app — init runs concurrently with the asset loads below (it needs none
 // of that data), overlapping renderer creation with network/decode latency.
@@ -121,20 +126,25 @@ Promise.all([
     await gradientFill(scale_X, scale_Y, marginLeft, marginTop)
 
     contours(entities)
-    clusters(entities)
-    // Between clusters and elements: below the article labels/hits (elements,
-    // added next) so titles/keywords stay readable above the circles, but
-    // above the Isolines-only decorative layers (moot while those are hidden
-    // in Point Gradient mode, but keeps the stack sane either way).
+    const { labels: clusterLabels, setLabelColorByYear } = clusters(entities)
+    // Between clusters and elements, i.e. above contours/cluster fills, below
+    // everything else — the circles/labels/fronts added next reorder on top
+    // of it regardless.
     const pointGrad = pointGradient(entities)
     elements(entities)
     fronts(entities)
+
+    // Cluster topic labels (+ their glow, see geometry.js) need to stay
+    // readable over every other layer, so they move to the very top only
+    // once everything else is in place — re-parenting via addChild() moves
+    // an existing child rather than duplicating it.
+    s.viewport.addChild(clusterLabels)
 
     // Read by download.js — only the plain data, not the Pixi handles.
     s.pointGradient = { points: pointGrad.points, yearExtent: pointGrad.yearExtent }
 
     // Layer show/hide switches (reads the rendered layers by their .label)
-    controls(pointGrad)
+    controls(pointGrad, setLabelColorByYear)
 
     // Draw the first frame, then fade the loading cover out to reveal the map
     // (the map is already painted underneath, so it's a clean crossfade). The

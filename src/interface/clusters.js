@@ -29,4 +29,21 @@ export default (entities) => {
     // between neighbours so the fronts running between clusters have room; the
     // extra iterations let the (now larger) labels fully settle to no overlap.
     deconflictLabels(labelList, { padding: 4, iterations: 200 })
+
+    // Recolours every label's main text (not its white glow) to follow
+    // "Colour by year", exactly like the circles/crosses do: black when off,
+    // each label's own red/blue temperature tint when on. Called by
+    // controls.js once on load and again whenever the toggle changes.
+    const setLabelColorByYear = (colorByYear) => {
+        labelList.forEach((container) => {
+            container.mainText.tint = colorByYear ? container.temperatureTint : 0x000000
+        })
+    }
+
+    // `labels` handed back so index.js can re-parent it to the very top of
+    // the viewport (above the Point Gradient circles, elements, and fronts)
+    // once every other layer is in place — topic labels (and their glow, see
+    // geometry.js) need to stay readable over all of them, while the fill
+    // blobs stay behind at this stage's original position.
+    return { labels, setLabelColorByYear }
 }

@@ -2,17 +2,14 @@
 // layer by flipping its `.visible`. Call after all layers are rendered so they
 // can be located by their `.label`. Some layers expose nested sub-switches
 // (Clusters splits into independently toggleable Fills, Labels, and Fronts).
-// The panel also holds the Visualization mode selector, Years time control,
-// zoom, "Reset view", and A0 print-export controls.
+// The panel also holds the Years time control, zoom, "Reset view", and A0
+// print-export controls.
 
 import download from './download.js'
 
-// Every layer below is available in both visualization modes — in Point
-// Gradient, Contours/Clusters/Fronts/Gradient Fill render as a pressure/
-// isoline/front/density reading alongside the circles (see the render order
-// in index.js). None are currently flagged `isolinesOnly`, but the gating
-// mechanism (see refreshGatedVisibility below) stays in place in case a
-// layer needs to be restricted to Isolines again later.
+// Contours/Clusters/Fronts/Gradient Fill render as a pressure/isoline/front/
+// density reading alongside the Point Gradient circles (see the render order
+// in index.js).
 const LAYERS = [
     {
         label: 'elements',
@@ -30,6 +27,11 @@ const LAYERS = [
         label: 'clusters',
         name: 'Clusters',
         children: [
+            // Fills is still a literal Pixi child of 'clusters' (hidden for
+            // free when its parent is). Labels and Fronts are both separate
+            // top-level viewport children now (Labels sits re-parented above
+            // everything else, see index.js), so their dependency on
+            // Clusters is wired explicitly below (refreshClusterDependents).
             { label: 'clusters-fills', name: 'Fills' },
             { label: 'clusters-labels', name: 'Labels' },
             // Front curves only — off by default; combine with Labels (and no
@@ -40,12 +42,10 @@ const LAYERS = [
     {
         label: 'contours',
         name: 'Contours',
-        // Visually nested under Contours for the panel's visual hierarchy only —
-        // gradient-fill is its own top-level viewport child (see gradientFill.js),
-        // not a Pixi child of the contours stage, so the two switches are wired
-        // fully independently: findByLabel below searches the whole viewport
-        // tree, it doesn't require literal scene-graph nesting.
-        children: [{ label: 'gradient-fill', name: 'Gradient Fill' }],
+    },
+    {
+        label: 'gradient-fill',
+        name: 'Gradient Fill',
     },
 ]
 
@@ -60,7 +60,7 @@ const findByLabel = (node, label) => {
     return null
 }
 
-const makeSwitch = (layer, name, sub, isolinesOnly) => {
+const makeSwitch = (layer, name, sub) => {
     const row = document.createElement('label')
     row.className = sub ? 'switch sub' : 'switch'
 
@@ -81,70 +81,40 @@ const makeSwitch = (layer, name, sub, isolinesOnly) => {
     text.textContent = name
 
     row.append(input, slider, text)
-    return { row, input, layer, isolinesOnly }
+    return { row, input, layer }
 }
 
-export default (pointGradient) => {
+export default (pointGradient, setLabelColorByYear) => {
     const panel = document.createElement('div')
     panel.id = 'controls'
-
-    // ---- Visualization mode --------------------------------------------------
-    // Isolines is the existing weather-chart reading; Point Gradient is the new
-    // halftone reading. Switching modes never touches the viewport (zoom/pan),
-    // selection, or search — only layer visibility.
-    let mode = 'isolines'
-
-    const visSection = document.createElement('p')
-    visSection.className = 'eyebrow'
-    visSection.textContent = 'Visualization'
-    panel.appendChild(visSection)
-
-    const modeGroup = document.createElement('div')
-    modeGroup.className = 'segmented'
-    modeGroup.setAttribute('role', 'group')
-    modeGroup.setAttribute('aria-label', 'Visualization')
-    panel.appendChild(modeGroup)
-
-    const modeButtons = [
-        { value: 'isolines', label: 'Isolines' },
-        { value: 'point-gradient', label: 'Point Gradient' },
-    ].map(({ value, label }) => {
-        const b = document.createElement('button')
-        b.type = 'button'
-        b.className = 'segmented-btn'
-        b.textContent = label
-        b.setAttribute('aria-pressed', String(value === mode))
-        b.addEventListener('click', () => setMode(value))
-        modeGroup.appendChild(b)
-        return { value, button: b }
-    })
 
     // ---- Layers ----------------------------------------------------------------
 
     const heading = document.createElement('p')
-    heading.className = 'eyebrow'
+    heading.className = 'section'
     heading.textContent = 'Layers'
     panel.appendChild(heading)
 
-    // Every switch created below (gated or not), so mode changes can recompute
-    // gated layers' effective visibility in one pass.
-    const allSwitches = []
     let articlesSwitch = null
+    let clustersSwitch = null
+    let frontsSwitch = null
+    let labelsSwitch = null
 
-    LAYERS.forEach(({ label, name, children, exclusive, isolinesOnly }) => {
+    LAYERS.forEach(({ label, name, children, exclusive }) => {
         const layer = findByLabel(s.viewport, label)
         if (!layer) return
-        const sw = makeSwitch(layer, name, false, isolinesOnly)
-        allSwitches.push(sw)
+        const sw = makeSwitch(layer, name, false)
         if (label === 'elements') articlesSwitch = sw
+        if (label === 'clusters') clustersSwitch = sw
         panel.appendChild(sw.row)
 
         const subs = []
         children?.forEach((sub) => {
             const subLayer = findByLabel(s.viewport, sub.label)
             if (!subLayer) return
-            const subSw = makeSwitch(subLayer, sub.name, true, sub.isolinesOnly)
-            allSwitches.push(subSw)
+            const subSw = makeSwitch(subLayer, sub.name, true)
+            if (sub.label === 'fronts') frontsSwitch = subSw
+            if (sub.label === 'clusters-labels') labelsSwitch = subSw
             panel.appendChild(subSw.row)
             subs.push(subSw)
         })
@@ -166,49 +136,46 @@ export default (pointGradient) => {
         }
     })
 
-    // Isolines-only layers force-hide in Point Gradient mode without losing
-    // their checkbox state (restored exactly when back in Isolines). When
-    // mode is Isolines, this is a no-op — identical to the pre-existing
-    // `layer.visible = input.checked` behavior.
-    const refreshGatedVisibility = () => {
-        const isolines = mode === 'isolines'
-        allSwitches.forEach((sw) => {
-            if (!sw.isolinesOnly) return
-            sw.layer.visible = sw.input.checked && isolines
-            sw.input.disabled = !isolines
-            sw.row.classList.toggle('disabled', !isolines)
-        })
+    // Fronts and Labels are both separate top-level viewport children, not
+    // literal Pixi children of the 'clusters' Container the way Fills is (see
+    // index.js — Labels re-parents to the very top once every layer exists,
+    // so its topic text stays above the circles). So unlike Fills, turning
+    // Clusters off wouldn't hide either of them for free. This makes them
+    // behave the same way: visible only when both their own switch and the
+    // Clusters switch are checked, restored exactly when Clusters comes back.
+    const refreshClusterDependents = () => {
+        frontsSwitch.layer.visible = frontsSwitch.input.checked && clustersSwitch.input.checked
+        labelsSwitch.layer.visible = labelsSwitch.input.checked && clustersSwitch.input.checked
     }
-    allSwitches.forEach((sw) => {
-        if (sw.isolinesOnly) sw.input.addEventListener('change', refreshGatedVisibility)
-    })
+    clustersSwitch.input.addEventListener('change', refreshClusterDependents)
+    frontsSwitch.input.addEventListener('change', refreshClusterDependents)
+    labelsSwitch.input.addEventListener('change', refreshClusterDependents)
+    refreshClusterDependents()
 
-    // Articles governs both readings of the same data: crosses (+ their fixed
-    // hit targets) in Isolines, word-count circles (+ their own, size-matched
-    // hit targets) in Point Gradient. The shared hits/labels container
-    // ('elements') stays visible in both modes — only the visual + its hits
-    // switch. `crossesLayer`/`hitsLayer` are found once; elements.js exposes
-    // them only via their existing/added `.label`, nothing else changed there.
+    // Point Gradient is the only reading of the articles now — the crosses
+    // and their fixed hit targets from elements.js (the Isolines reading of
+    // the same data) are permanently hidden rather than ever shown, matching
+    // Point Gradient's existing appearance. Their labels/keywords/year text
+    // and hit-target *code* stay in elements.js untouched (Titles/Keywords/
+    // Year still render on the shared 'elements' stage); only the visual
+    // cross drawing and its click targets are inert.
     const crossesLayer = findByLabel(s.viewport, 'elements-crosses')
     const hitsLayer = findByLabel(s.viewport, 'elements-hits')
+    if (crossesLayer) crossesLayer.visible = false
+    if (hitsLayer) hitsLayer.visible = false
+
     const refreshArticlesVisibility = () => {
-        const articlesOn = articlesSwitch.input.checked
-        const isolines = mode === 'isolines'
-        if (crossesLayer) crossesLayer.visible = articlesOn && isolines
-        if (hitsLayer) hitsLayer.visible = articlesOn && isolines
-        pointGradient.root.visible = articlesOn && !isolines
+        pointGradient.root.visible = articlesSwitch.input.checked
     }
     articlesSwitch.input.addEventListener('change', refreshArticlesVisibility)
 
     // ---- Years ------------------------------------------------------------------
-    // Available in both modes. One authoritative range [startYear, endYear]
-    // drives the presets, slider, histogram, range label, article filtering
-    // (both the Point Gradient circles and, via `crossesLayer.redrawByRange`,
-    // the Isolines crosses) and the export pipeline. State persists for the
-    // app's lifetime: turning "Colour by year" off/on, moving between modes,
-    // or touching any other control never resets it.
+    // One authoritative range [startYear, endYear] drives the presets, slider,
+    // histogram, range label, article filtering, and the export pipeline.
+    // State persists for the app's lifetime: turning "Colour by year" off/on,
+    // or touching any other control, never resets it.
     const [earliestYear, latestYear] = pointGradient.yearExtent
-    const yearsState = { colorByYear: false, startYear: earliestYear, endYear: latestYear }
+    const yearsState = { colorByYear: true, startYear: earliestYear, endYear: latestYear }
 
     // PixiJS tint (0xRRGGBB) → CSS hex — small local copy, same as download.js's.
     const tintHex = (n) => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6)
@@ -250,7 +217,7 @@ export default (pointGradient) => {
     yearsSection.id = 'years-panel'
 
     const yearsHeading = document.createElement('p')
-    yearsHeading.className = 'eyebrow'
+    yearsHeading.className = 'section'
     yearsHeading.textContent = 'Years'
     yearsSection.appendChild(yearsHeading)
 
@@ -307,11 +274,10 @@ export default (pointGradient) => {
         return { value, input }
     })
 
-    // Range label above the slider — a single year for a one-year selection,
-    // both endpoints otherwise.
-    const rangeLabel = document.createElement('div')
-    rangeLabel.className = 'range-value'
-    yearsSection.appendChild(rangeLabel)
+    // Total article count for the current selection, above the histogram.
+    const rangeCount = document.createElement('div')
+    rangeCount.className = 'range-count'
+    yearsSection.appendChild(rangeCount)
 
     // Histogram — one bar per year in the complete timeline, height by
     // article count, colored by that year's existing map color. Purely a
@@ -475,15 +441,18 @@ export default (pointGradient) => {
     dragLayer.addEventListener('pointerup', endDrag)
     dragLayer.addEventListener('pointercancel', endDrag)
 
-    const rangeCount = document.createElement('div')
-    rangeCount.className = 'range-count'
-    yearsSection.appendChild(rangeCount)
+    // Range label below the slider — a single year for a one-year selection,
+    // both endpoints otherwise. Each year is tinted with that year's own
+    // color from the map's existing year mapping (`yearColors`, above), not
+    // a static color, since which year(s) are shown changes as the range moves.
+    const rangeLabel = document.createElement('div')
+    rangeLabel.className = 'range-value'
+    yearsSection.appendChild(rangeLabel)
 
     // Single source of truth for the Years UI: recomputes every dependent
     // display (presets, slider positions, range label, histogram emphasis,
-    // count), redraws both the Point Gradient circles and the Isolines
-    // crosses for the current range, and mirrors state onto `s.visualization`
-    // for the export pipeline to read.
+    // count), redraws the Point Gradient circles for the current range, and
+    // mirrors state onto `s.visualization` for the export pipeline to read.
     function applyYears() {
         const { startYear, endYear, colorByYear } = yearsState
 
@@ -493,7 +462,18 @@ export default (pointGradient) => {
         const preset = activePreset(startYear, endYear)
         presetButtons.forEach(({ value, input }) => (input.checked = value === preset))
 
-        rangeLabel.textContent = startYear === endYear ? `${startYear}` : `${startYear}–${endYear}`
+        rangeLabel.textContent = ''
+        const startYearSpan = document.createElement('span')
+        startYearSpan.textContent = String(startYear)
+        startYearSpan.style.color = yearColors.get(startYear) || 'inherit'
+        rangeLabel.appendChild(startYearSpan)
+        if (startYear !== endYear) {
+            rangeLabel.append('–')
+            const endYearSpan = document.createElement('span')
+            endYearSpan.textContent = String(endYear)
+            endYearSpan.style.color = yearColors.get(endYear) || 'inherit'
+            rangeLabel.appendChild(endYearSpan)
+        }
 
         const startPct = ((startYear - earliestYear) / totalSpan) * 100
         const endPct = ((endYear + 1 - earliestYear) / totalSpan) * 100
@@ -509,7 +489,7 @@ export default (pointGradient) => {
         rangeCount.textContent = `${count.toLocaleString()} article${count === 1 ? '' : 's'}`
 
         pointGradient.redraw(colorByYear ? 'on' : 'off', [startYear, endYear])
-        crossesLayer?.redrawByRange?.(startYear, endYear)
+        setLabelColorByYear?.(colorByYear)
 
         s.visualization.years = { ...yearsState }
         s.app.render()
@@ -517,33 +497,12 @@ export default (pointGradient) => {
 
     panel.appendChild(yearsSection)
 
-    // ---- Mode switching ----------------------------------------------------------
-
-    const stationsIsolines = document.getElementById('stations-isolines')
-    const stationsPointGradient = document.getElementById('stations-point-gradient')
-
-    function setMode(newMode) {
-        if (newMode === mode) return
-        mode = newMode
-        modeButtons.forEach(({ value, button }) =>
-            button.setAttribute('aria-pressed', String(value === mode)),
-        )
-        refreshGatedVisibility()
-        refreshArticlesVisibility()
-        if (stationsIsolines) stationsIsolines.hidden = mode !== 'isolines'
-        if (stationsPointGradient) stationsPointGradient.hidden = mode === 'isolines'
-        s.visualization.mode = mode
-        s.app.render()
-    }
-
     // Shared state read by the export pipeline (download.js) — kept in sync by
-    // setMode()/applyYears() above, never replaced wholesale so both always
-    // see the live values.
-    s.visualization = { mode, years: { ...yearsState } }
+    // applyYears() above, never replaced wholesale so it always sees live values.
+    s.visualization = { years: { ...yearsState } }
 
-    // Establish the consistent initial state (Point Gradient hidden, Isolines
-    // layers exactly as their checkboxes say, Years range defaulted to All).
-    refreshGatedVisibility()
+    // Establish the consistent initial state (Point Gradient visible per the
+    // Articles checkbox, Years range defaulted to All).
     refreshArticlesVisibility()
     applyYears()
 

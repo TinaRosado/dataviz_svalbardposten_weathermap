@@ -146,7 +146,8 @@ export default (entities) => {
     const stage = new Container()
     stage.interactiveChildren = false
     stage.label = 'fronts'
-    s.viewport.addChild(stage) // on by default; toggled independently of fills/labels
+    stage.visible = false // off by default; also hidden whenever Clusters is off, like fills/labels (see controls.js)
+    s.viewport.addChild(stage)
 
     const g = new Graphics()
     stage.addChild(g)

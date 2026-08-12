@@ -7,96 +7,105 @@
     <title>Weather Map of Svalbardposten's Digital News Archive</title>
     <!-- Linked (not JS-imported) so it's render-blocking and the overlay text
          never flashes at default sizes before styling loads. -->
-  <script type="module" crossorigin src="./assets/index-Co5KKolO.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-8dz4loOw.css">
+  <script type="module" crossorigin src="./assets/index-BVchjRnD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DKddIz3a.css">
 </head>
 
 <body>
 
-    <div id='title'>
-        <p class='eyebrow'>Synoptic chart of news discourse</p>
-        <h1>Svalbard Weather Map</h1>
-        <p class='sub'>Svalbardposten · digital archive 2006–2024</p>
-        <p class='credit'>After Rodighiero &amp; Daniélou · <a href='https://github.com/TinaRosado/dataviz_svalbardposten_weathermap'>source</a></p>
-    </div>
-
-    <div id='legenda'>
-        <p class='eyebrow'>Legend</p>
-        <hr class='key-rule'>
-        <p class='lead'>Read the map as a weather chart: warm systems are discourse entering the debate, cool systems are discourse leaving it.</p>
-
-        <p class='section'>Pressure</p>
-        <p class='lead'>Clusters of co-occurring actors form pressure systems — highs are discourse warming into the debate, lows are discourse cooling out of it.</p>
-        <div class='key-row'>
-            <span class='key-glyph'>
-                <svg width='18' height='12'><rect x='1' y='1' width='16' height='10' rx='3' fill='#a6242f' fill-opacity='0.22' stroke='#a6242f' /></svg>
-            </span>
-            <span><b class='hi'>High</b> — emerging discourse (warming)</span>
-        </div>
-        <div class='key-row'>
-            <span class='key-glyph'>
-                <svg width='18' height='12'><rect x='1' y='1' width='16' height='10' rx='3' fill='#385da6' fill-opacity='0.22' stroke='#385da6' /></svg>
-            </span>
-            <span><b class='lo'>Low</b> — receding discourse (cooling)</span>
+    <div id='left-stack'>
+        <div id='title'>
+            <p class='eyebrow'>Synoptic chart of news discourse</p>
+            <h1>Svalbard Weather Map</h1>
+            <p class='sub'>Svalbardposten · digital archive 2006–2024</p>
+            <p class='credit'>After Rodighiero &amp; Daniélou · <a href='https://github.com/TinaRosado/dataviz_svalbardposten_weathermap'>source</a></p>
         </div>
 
-        <p class='section'>Lines</p>
-        <p class='lead'>Isobars ring each system, tightening where discourse intensifies; fronts mark where a warming system advances on a cooling one.</p>
-        <div class='key-row'>
-            <span class='key-glyph'>
-                <svg width='24' height='16' viewBox='0 0 24 16' fill='none' stroke='currentColor' stroke-width='1'>
-                    <path d='M2 8 Q12 -1 22 8' />
-                    <path d='M4.5 11 Q12 4 19.5 11' />
-                    <path d='M7 13.5 Q12 9 17 13.5' />
-                </svg>
-            </span>
-            <span><b>Isobars</b> — tight = discourse intensity</span>
-        </div>
-        <div class='key-row'>
-            <span class='key-glyph'>
-                <svg width='24' height='16' viewBox='0 0 24 16'>
-                    <line x1='2' y1='9' x2='22' y2='9' stroke='#cc6b73' stroke-width='1' />
-                    <path d='M2.5 9 A2.5 2.5 0 0 1 7.5 9 Z' fill='#cc6b73' />
-                    <path d='M9.5 9 A2.5 2.5 0 0 1 14.5 9 Z' fill='#cc6b73' />
-                    <path d='M16.5 9 A2.5 2.5 0 0 1 21.5 9 Z' fill='#cc6b73' />
-                </svg>
-            </span>
-            <span><b>Fronts</b> — direction = discourse advancing</span>
-        </div>
+        <div id='legenda'>
+            <button id='legenda-toggle' type='button' class='eyebrow legend-toggle' aria-expanded='true' aria-controls='legenda-body'>
+                Legend
+                <span class='legend-caret' aria-hidden='true'>▾</span>
+            </button>
+            <div id='legenda-body'>
+                <hr class='key-rule'>
+                <p class='lead'>Read the map as a weather chart: warm systems are discourse entering the debate, cool systems are discourse leaving it.</p>
 
-        <p class='section'>Stations</p>
+                <p class='section'>Pressure</p>
+                <p class='lead'>Clusters of co-occurring actors form pressure systems — highs are discourse warming into the debate, lows are discourse cooling out of it.</p>
+                <div class='key-row'>
+                    <span class='key-glyph'>
+                        <svg width='18' height='12'><rect x='1' y='1' width='16' height='10' rx='3' fill='#a6242f' fill-opacity='0.22' stroke='#a6242f' /></svg>
+                    </span>
+                    <span><b class='hi'>High</b> — emerging discourse (warming)</span>
+                </div>
+                <div class='key-row'>
+                    <span class='key-glyph'>
+                        <svg width='18' height='12'><rect x='1' y='1' width='16' height='10' rx='3' fill='#385da6' fill-opacity='0.22' stroke='#385da6' /></svg>
+                    </span>
+                    <span><b class='lo'>Low</b> — receding discourse (cooling)</span>
+                </div>
 
-        <div id='stations-isolines' class='stations-variant'>
-            <p class='lead'>Each cross marks a single article; its colour encodes the time of publication, running from blue in 2006 to red in 2024.</p>
+                <p class='section'>Lines</p>
+                <p class='lead'>Isobars ring each system, tightening where discourse intensifies; fronts mark where a warming system advances on a cooling one.</p>
+                <div class='key-row'>
+                    <span class='key-glyph'>
+                        <svg width='24' height='16' viewBox='0 0 24 16' fill='none' stroke='currentColor' stroke-width='1'>
+                            <path d='M2 8 Q12 -1 22 8' />
+                            <path d='M4.5 11 Q12 4 19.5 11' />
+                            <path d='M7 13.5 Q12 9 17 13.5' />
+                        </svg>
+                    </span>
+                    <span><b>Isobars</b> — tight = discourse intensity</span>
+                </div>
+                <div class='key-row'>
+                    <span class='key-glyph'>
+                        <svg width='24' height='16' viewBox='0 0 24 16'>
+                            <line x1='2' y1='9' x2='22' y2='9' stroke='#cc6b73' stroke-width='1' />
+                            <path d='M2.5 9 A2.5 2.5 0 0 1 7.5 9 Z' fill='#cc6b73' />
+                            <path d='M9.5 9 A2.5 2.5 0 0 1 14.5 9 Z' fill='#cc6b73' />
+                            <path d='M16.5 9 A2.5 2.5 0 0 1 21.5 9 Z' fill='#cc6b73' />
+                        </svg>
+                    </span>
+                    <span><b>Fronts</b> — direction = discourse advancing</span>
+                </div>
 
-            <div class='key-spectrum'>
-                <span class='spectrum-crosses'>
-                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#0000ff' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#4000bf' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#800080' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#bf0040' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#ff0000' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
-                </span>
-                <span class='spectrum-bar'></span>
-                <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+                <p class='section'>Stations</p>
+
+                <!-- Isolines' cross-based reading is retired (Point Gradient is now the
+                     only visualization), kept hidden rather than deleted. -->
+                <div id='stations-isolines' class='stations-variant' hidden>
+                    <p class='lead'>Each cross marks a single article; its colour encodes the time of publication, running from blue in 2006 to red in 2024.</p>
+
+                    <div class='key-spectrum'>
+                        <span class='spectrum-crosses'>
+                            <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#0000ff' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#4000bf' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#800080' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#bf0040' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8' fill='none' stroke='#ff0000' stroke-width='1.4'><path d='M4 0.5V7.5M0.5 4H7.5' /></svg>
+                        </span>
+                        <span class='spectrum-bar'></span>
+                        <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+                    </div>
+                </div>
+
+                <div id='stations-point-gradient' class='stations-variant'>
+                    <p class='lead'>Each circle marks a single article; its size reflects word count — larger circles are longer articles.</p>
+
+                    <div class='key-spectrum'>
+                        <span class='spectrum-crosses'>
+                            <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#0000ff' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#4000bf' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#800080' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#bf0040' /></svg>
+                            <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#ff0000' /></svg>
+                        </span>
+                        <span class='spectrum-bar'></span>
+                        <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
+                    </div>
+                    <p class='key-note'>Colour is black with Years off. Turn Years on for this same time spectrum, including the 5-year window.</p>
+                </div>
             </div>
-        </div>
-
-        <div id='stations-point-gradient' class='stations-variant' hidden>
-            <p class='lead'>Each circle marks a single article; its size reflects word count — larger circles are longer articles.</p>
-
-            <div class='key-spectrum'>
-                <span class='spectrum-crosses'>
-                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#0000ff' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#4000bf' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#800080' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#bf0040' /></svg>
-                    <svg class='spectrum-cross' width='8' height='8'><circle cx='4' cy='4' r='3.6' fill='#ff0000' /></svg>
-                </span>
-                <span class='spectrum-bar'></span>
-                <span class='spectrum-scale'><span>2006</span><span>2011</span><span>2015</span><span>2020</span><span>2024</span></span>
-            </div>
-            <p class='key-note'>Colour is black with Years off. Turn Years on for this same time spectrum, including the 3-year window.</p>
         </div>
     </div>
 

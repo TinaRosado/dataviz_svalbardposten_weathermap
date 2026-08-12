@@ -80,7 +80,7 @@ export default (entities) => {
 
     const root = new Container()
     root.label = 'point-gradient'
-    root.visible = false // mode-gated by controls.js; safe default until it runs
+    root.visible = false // controls.js sets this from the Articles checkbox; safe default until it runs
     s.viewport.addChild(root)
 
     const circles = new Graphics()

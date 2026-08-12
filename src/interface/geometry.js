@@ -1,6 +1,14 @@
-import { BitmapText } from 'pixi.js'
+import { BitmapText, BlurFilter, Container } from 'pixi.js'
 import { group, mean, polygonHull, polygonCentroid, line, curveCatmullRomClosed } from 'd3'
 import { average, rgb, formatHex } from 'culori'
+
+// Cluster-label glow — a blurred white copy of the same text sitting behind
+// the sharp red/blue one, so topic labels stay readable over the black
+// Point Gradient circles and the coloured density gradient beneath them.
+// Screen-only: the SVG/PDF export (download.js) reads past this copy to the
+// real text, since a blurred raster glow has no vector print equivalent.
+const GLOW_BLUR_STRENGTH = 2.2
+const GLOW_ALPHA = 0.85
 
 // Proportional padding around each cluster's points (uniform scale about the
 // centroid). Lives here so the cluster blobs and the fronts overlap logic can
@@ -89,15 +97,37 @@ const splitInThree = (string) => {
     return out.join('\n')
 }
 
-// The cluster's topic label, centred on its centroid and tinted red/blue.
+// The cluster's topic label, centred on its centroid — wrapped with a
+// blurred white glow copy behind it (see GLOW_* above) so it reads clearly
+// over any background. Returns a Container standing in for the old bare
+// BitmapText: deconflictLabels only reads its x/y/width/height, which
+// Container already exposes the same way.
+//
+// The main text's colour follows "Colour by year" like the circles/crosses
+// do (black off, coloured on) — but its "on" colour is temperatureTint
+// (red/blue by mean temperature, this cluster's own High/Low reading), not a
+// year colour, since a cluster spans many years and has no single one. Both
+// are stashed on the container so clusters.js's setLabelColorByYear can
+// recolour it later without rebuilding.
 export const makeLabel = (c) => {
-    const bitmap = new BitmapText({
-        text: splitInThree(titleCase(c.subject)),
-        style: { fontFamily: 'Lato', fontSize: 3.4, lineHeight: 3.4, align: 'center' },
-    })
-    bitmap.tint = c.key === 'red' ? 0xff0000 : 0x0000ff
-    bitmap.position.set(c.center[0] - bitmap.width / 2, c.center[1] - bitmap.height / 2)
-    return bitmap
+    const text = splitInThree(titleCase(c.subject))
+    const style = { fontFamily: 'Lato', fontSize: 3.4, lineHeight: 3.4, align: 'center' }
+
+    const glow = new BitmapText({ text, style })
+    glow.tint = 0xffffff
+    glow.alpha = GLOW_ALPHA
+    glow.filters = [new BlurFilter({ strength: GLOW_BLUR_STRENGTH })]
+
+    const main = new BitmapText({ text, style })
+    const temperatureTint = c.key === 'red' ? 0xff0000 : 0x0000ff
+    main.tint = temperatureTint // sensible default; controls.js confirms/overrides via setLabelColorByYear on load
+
+    const container = new Container()
+    container.addChild(glow, main)
+    container.position.set(c.center[0] - container.width / 2, c.center[1] - container.height / 2)
+    container.mainText = main
+    container.temperatureTint = temperatureTint
+    return container
 }
 
 // Nudge overlapping labels apart so their topic titles stay legible. Each label

@@ -55,7 +55,6 @@ a:hover {
 ******************************************************************************/
 
 #title, #controls, #legenda, #focus {
-	position: fixed;
 	background: var(--panel);
 	-webkit-backdrop-filter: blur(6px);
 	backdrop-filter: blur(6px);
@@ -64,16 +63,34 @@ a:hover {
 	box-shadow: 0 1px 14px rgba(11, 29, 42, 0.08);
 	color: var(--ink);
 	padding: 13px 15px;
-	max-width: 280px;
 }
 
-#title   { top: 16px;    left: 16px; }     /* masthead */
-#controls{ top: 16px;    right: 16px; }    /* chart layers + view */
-#legenda { bottom: 16px; right: 16px; max-width: 320px; }    /* chart key */
-#focus   { bottom: 16px; left: 16px; width: 320px; } /* station report — matches legend width */
+/* Title and Legend stack together in the top-left corner (Legend extends
+   directly below the masthead) rather than each being independently fixed —
+   #controls has grown tall enough that anchoring Legend to the bottom-right
+   let the two overlap. */
+#left-stack {
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	/* Fixed, not max-width: a flex column with only a max-width shrinks to fit
+	   whichever child is currently widest, so collapsing Legend down to just
+	   its heading would narrow Title too. */
+	width: 320px;
+	max-width: calc(100vw - 32px); /* never overflow a very narrow viewport */
+}
+
+#controls{ position: fixed; top: 16px;    right: 16px; }    /* chart layers + view */
+#focus   { position: fixed; bottom: 16px; left: 16px; width: 320px; } /* station report — matches legend width */
 
 /* Lead section header sits flush to the panel top, like the legend's eyebrow. */
-#focus .section:first-child { margin-top: 0; }
+/* Direct-child, not descendant: "Layers" is #controls's own first section and
+   should sit flush to the panel top, but "Years" (first child of its own
+   nested sub-panel further down) must keep the normal top margin. */
+#focus > .section:first-child, #controls > .section:first-child { margin-top: 0; }
 
 /* Shared eyebrow + section labels — the instrument-readout voice. */
 .eyebrow {
@@ -91,7 +108,7 @@ a:hover {
 	letter-spacing: 0.12em;
 	font-size: 9.5px;
 	color: var(--muted);
-	margin: 13px 0 7px;
+	margin: 20px 0 7px;
 	padding-bottom: 4px;
 	border-bottom: 1px solid var(--hair);
 }
@@ -123,6 +140,35 @@ a:hover {
 /******************************************************************************
  * Chart key (legend) — rows of a synoptic glyph beside its meaning.
 ******************************************************************************/
+
+/* Collapse toggle — the whole heading row is the click target; only the
+   caret rotates, everything else keeps .eyebrow's look untouched. */
+.legend-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+.legend-toggle:hover .legend-caret { color: var(--ink); }
+
+.legend-caret {
+	font-size: 11px;
+	color: var(--muted);
+	transition: transform 0.15s, color 0.15s;
+}
+
+#legenda-toggle[aria-expanded='false'] {
+	margin-bottom: 0; /* no dangling gap when there's nothing shown below */
+}
+
+#legenda-toggle[aria-expanded='false'] .legend-caret {
+	transform: rotate(-90deg);
+}
 
 #legenda .key-rule {
 	border: 0;
@@ -334,53 +380,6 @@ a:hover {
 
 .switch-label { font-size: 11.5px; }
 
-/* Isolines-only layers while Point Gradient is active: kept checkable (so the
-   choice is remembered) but visibly inert — dimmed, not just non-functional,
-   so the dead control doesn't read as a bug. */
-.switch.disabled { opacity: 0.45; }
-.switch.disabled .switch-label { color: var(--muted); }
-
-/******************************************************************************
- * Segmented controls (Visualization mode, Years time range)
-******************************************************************************/
-
-.segmented {
-	display: flex;
-	border: 1px solid var(--rule);
-	border-radius: 2px;
-	overflow: hidden;
-	margin: 6px 0 10px;
-}
-
-.segmented-btn {
-	flex: 1;
-	font-family: var(--mono);
-	font-size: 10px;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
-	color: var(--ink);
-	background: var(--field);
-	border: none;
-	padding: 6px 4px;
-	cursor: pointer;
-	transition: background 0.15s, color 0.15s;
-}
-
-.segmented-btn + .segmented-btn { border-left: 1px solid var(--rule); }
-
-.segmented-btn:hover { background: #eef2f5; }
-
-/* Selected state reads by fill + label, not colour alone. */
-.segmented-btn[aria-pressed='true'] {
-	background: var(--ink);
-	color: #fff;
-}
-
-.segmented-btn:focus-visible {
-	outline: 2px solid var(--low);
-	outline-offset: -2px;
-}
-
 /******************************************************************************
  * Years time control — presets, histogram, two-handle range slider
 ******************************************************************************/
@@ -515,6 +514,7 @@ a:hover {
 	font-size: 10px;
 	color: var(--muted);
 	text-align: center;
+	margin: 12px 0 10px;
 }
 
 /******************************************************************************
@@ -602,9 +602,9 @@ button:focus-visible, a:focus-visible {
 
 @media (max-width: 720px) {
 	#title, #controls, #legenda, #focus {
-		max-width: 46vw;
 		padding: 10px 11px;
 	}
+	#left-stack, #controls, #focus { max-width: 46vw; }
 	#focus { width: auto; max-width: 58vw; }
 	#title h1 { font-size: 14px; }
 	#title .sub, #title .credit { font-size: 10px; }

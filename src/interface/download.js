@@ -216,33 +216,6 @@ const buildSvg = (entities) => {
         svg.appendChild(g)
     }
 
-    // Article crosses — one path per colour (thousands of crosses, so batch to
-    // keep the SVG small). Mirrors elements.js: arms of length 0.4, width 0.1,
-    // and the same shared year range (crosses always keep their own colour —
-    // Isolines has no "off" colour state, unaffected by Colour by year).
-    // Checked via the cross visual itself (not the whole 'elements' stage,
-    // which also carries labels/hits and stays visible in Point Gradient mode)
-    // so this only draws when Isolines is actually the active mode.
-    if (isVisible('elements-crosses')) {
-        const L = 0.4
-        const years = s.visualization?.years ?? yearsFallback
-        const byColor = new Map()
-        entities.forEach((e) => {
-            const year = parseInt(e.year, 10)
-            if (year < years.startYear || year > years.endYear) return
-            const hex = '#' + e.color.slice(2)
-            const x = e.x,
-                y = e.y
-            const seg = `M${x} ${(y - L).toFixed(2)}L${x} ${(y + L).toFixed(2)}M${(x - L).toFixed(2)} ${y}L${(x + L).toFixed(2)} ${y}`
-            byColor.set(hex, (byColor.get(hex) || '') + seg)
-            bbox.add(x - L, y - L)
-            bbox.add(x + L, y + L)
-        })
-        const g = el('g', { 'stroke-width': 0.1, fill: 'none' })
-        byColor.forEach((d, hex) => g.appendChild(el('path', { d, stroke: hex })))
-        svg.appendChild(g)
-    }
-
     // Text labels — read straight off the live scene graph so their positions
     // (including cluster-label deconfliction) match the screen exactly. Pixi
     // BitmapText anchors at the top-left; SVG text sits on the baseline, so drop
@@ -252,14 +225,23 @@ const buildSvg = (entities) => {
         if (!node || !isVisible(label)) return
         const g = el('g', { 'text-anchor': anchor, 'font-family': 'Lato' })
         node.children.forEach((t) => {
-            if (!t.text) return
-            const size = t.style?.fontSize ?? 0.7
-            const lh = t.style?.lineHeight || size
-            const fill = tintHex(t.tint)
+            // Cluster labels wrap a blurred white glow copy + the real text in
+            // a Container now (see geometry.js's makeLabel — screen-only
+            // effect, no vector print equivalent); other label kinds
+            // (elements-years/titles/keywords) are still plain BitmapText.
+            // Either way `t` itself carries the position/bounds to export
+            // from; the text/style/tint may live one level deeper, at
+            // `mainText` specifically — a plain child search would also
+            // match the glow copy (it's a BitmapText too, added first).
+            const textNode = t.text != null ? t : t.mainText
+            if (!textNode) return
+            const size = textNode.style?.fontSize ?? 0.7
+            const lh = textNode.style?.lineHeight || size
+            const fill = tintHex(textNode.tint)
             // Centred multi-line cluster labels vs left-aligned single-line
             // element labels.
             const cx = anchor === 'middle' ? t.x + t.width / 2 : t.x
-            const lines = String(t.text).split('\n')
+            const lines = String(textNode.text).split('\n')
             const text = el('text', { x: cx, 'font-size': size, fill })
             lines.forEach((ln, i) => {
                 text.appendChild(el('tspan', { x: cx, y: (t.y + size * 0.8 + i * lh).toFixed(2) }, ln))
