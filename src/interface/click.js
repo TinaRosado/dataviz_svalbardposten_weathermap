@@ -2,14 +2,29 @@ import { select } from 'd3'
 
 // The station report: clicking an article opens a met-bulletin style readout,
 // grouped by source — an "Article" block (what Svalbardposten published: date,
-// headline, standfirst, byline, tags, length) then an "Analysis" block (what
-// the Weather Map pipeline derived: High/Low system, cluster topic, keywords),
-// with a link out to the source. The original text is Norwegian; prefer the
-// English translations (*_en columns) when present, else the originals.
+// headline, standfirst, excerpt, byline, tags, length) then an "Analysis"
+// block (what the Weather Map pipeline derived: High/Low system, cluster
+// topic, article keywords), with a link out to the source. The original text
+// is Norwegian (*_no columns); prefer the English translations (*_en columns)
+// when present.
 const MONTHS = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
 ]
+
+// The CSV keyword columns hold a JSON array string (e.g. '["fjord", "climate"]').
+// Defensive against already-parsed arrays and missing/malformed values, which
+// return an empty array rather than throwing or leaking raw JSON syntax.
+export function parseKeywords(value) {
+    if (Array.isArray(value)) return value
+    if (typeof value !== 'string' || !value) return []
+    try {
+        const parsed = JSON.parse(value)
+        return Array.isArray(parsed) ? parsed : []
+    } catch {
+        return []
+    }
+}
 
 // "Last, First" → "First Last" for a natural byline; pass through anything
 // that isn't in that shape.
@@ -22,10 +37,12 @@ function formatByline(name) {
 export function click(e) {
     select('#focus').remove() // Replace any previous report
 
-    const tags = e.tags_en || e.tags
-    const title = e.title_en || e.title
-    const subtitle = e.subtitle_en || e.subtitle
-    const keywords = e.top_keywords_en || e.top_keywords
+    const tags = e.tags_en || e.tags_no
+    const title = e.title_en || e.title_no
+    const subtitle = e.subtitle_en || e.subtitle_no
+    const excerpt = e.excerpt_en || e.excerpt_no
+    const topic = e.cluster_subject_en || e.cluster_subject_no || 'Unlabeled topic'
+    const keywords = parseKeywords(e.article_keywords_en || e.article_keywords_no).join(', ')
     const byline = formatByline(e.created_by_name)
     const day = parseInt(e.day)
     const date = day && e.month ? `${day} ${MONTHS[parseInt(e.month) - 1]} ${e.year}` : e.year
@@ -62,6 +79,7 @@ export function click(e) {
     focus.append('p').attr('class', 'readout-date').text(date)
     focus.append('h1').attr('class', 'readout-title').text(title)
     if (subtitle) focus.append('p').attr('class', 'readout-sub').text(subtitle)
+    if (excerpt) focus.append('p').attr('class', 'readout-excerpt').text(excerpt)
     readings([
         ['Byline', byline],
         ['Length', e.word_count && `${e.word_count} words`],
@@ -72,9 +90,9 @@ export function click(e) {
     section('Analysis')
     readings([
         ['System', system, systemClass],
-        ['Topic', e.cluster_subject_x],
+        ['Topic', topic],
     ])
-    termLine('Keywords', keywords && keywords.replace(/[[\]']/g, ''))
+    termLine('Keywords', keywords)
 
     focus
         .append('a')
