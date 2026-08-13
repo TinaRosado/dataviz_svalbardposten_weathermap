@@ -1,0 +1,175 @@
+cluster,cluster_subject_en,cluster_subject_no,model,prompt_version,context_hash
+n_0,Celestial phenomena,Himmelfenomener,gpt-5.6-sol,approved-topic-label-no-v1,8894c570de098bb22b0cad2414c2e85a529583b7a2b5b655cad075397216b29a
+n_1,Longyearbyen healthcare,Helsetjenester i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,88acb69f8efe396095690b10e5e5b634c12c1ddc9f5ba57c7e6b4231fae00c78
+n_10,Annual TV Telethon,TV-aksjonen,gpt-5.6-sol,approved-topic-label-no-v1,5adcf2854dc3264bd3f1f09fa01397d813b5901c64c5efc8df531b6399b57c6d
+n_11,Local sports,Lokalidrett,gpt-5.6-sol,approved-topic-label-no-v1,ca14370c49d5f5ac51e33a75a3d1dfe2bcddf3d2c1231e021c454fee1bae92fd
+n_12,Community Celebrations and Commemorations,Lokale feiringer og markeringer,gpt-5.6-sol,approved-topic-label-no-v1,8cbda71602ac5cf10a83da55adc8116a2b68ad8ea1c2e2b21a70a70ed5973247
+n_13,Svalbardposten newspaper,Avisen Svalbardposten,gpt-5.6-sol,approved-topic-label-no-v1,53ea9dcc850ba525ae4d494582b8fbc3554df6a9c9fbc48f33940b24f03319ba
+n_14,Longyearbyen air travel,Flytrafikk til og fra Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,f1100ee0c955ae07a34c9374cec68e11f144d34b40da558d546e08cdf7acb968
+n_15,Performing arts,Scenekunst,gpt-5.6-sol,approved-topic-label-no-v1,d12904deff2867a3149c7affd08fbbf57652737acb1eae0b559fabd770301c14
+n_16,Weather and climate,Vær og klima,gpt-5.6-sol,approved-topic-label-no-v1,9f50cf5ae69862897e527bfa8f5b51057b0062f9b8cf4bd92a2073dc5a7b183b
+n_17,Art exhibitions,Kunstutstillinger,gpt-5.6-sol,approved-topic-label-no-v1,288f0b3e643d6d8ae49c710fc60fb8ba32a08376f5c710fdd19f95f110067301
+n_18,Dark Season Blues,Dark Season Blues,gpt-5.6-sol,approved-topic-label-no-v1,433e5a448630df048ce3b16ae3fafb87d469e2b8a5fe94081d5d863b0c666f7c
+n_19,Polarjazz Festival,Polarjazz,gpt-5.6-sol,approved-topic-label-no-v1,f1592c799a777f404869dd85744fa5ade1c0e75e26f452045182f9c9101ed908
+n_2,Dogs on Svalbard,Hunder på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,335b051605c299b494ec3750707652cb44011cf738870b2d221d233004b86e0a
+n_20,Longyearbyen Municipal Operations,Longyearbyen bydrift,gpt-5.6-sol,approved-topic-label-no-v1,17d0aa8b188e92b1dd407b4159d1454c0955b10cc19eb483663573c56e204211
+n_21,UNIS education and research,Utdanning og forskning ved UNIS,gpt-5.6-sol,approved-topic-label-no-v1,7d5c7404ec48a28dd7f50f6e74486e915839688767c50dc869aca5040e244936
+n_22,Retail and Hospitality Businesses,"Handels-, overnattings- og serveringsbedrifter",gpt-5.6-sol,approved-topic-label-no-v1,287dbccbba2b7e2682eec4ed3cc1334a1de75e60221e2f81085d870977496613
+n_23,Film culture,Filmkultur,gpt-5.6-sol,approved-topic-label-no-v1,15fed542af5c3c4ff5a266063bd6963da1c4bc1598126e0829d596c130ba7157
+n_24,Cruise tourism development,Utvikling av cruiseturismen,gpt-5.6-sol,approved-topic-label-no-v1,a33000d97d3f0dfd222c7c6c8e600f2a45b27959cd3e14aea035abc170e861a8
+n_25,Museums and cultural heritage,Museer og kulturarv,gpt-5.6-sol,approved-topic-label-no-v1,80ad98f9a888e7542e91e0c1804e4134f62aaec673a96204c119a533a38b3648
+n_26,Wildlife ecology,Viltøkologi,gpt-5.6-sol,approved-topic-label-no-v1,eb1a568828210112d9712896b6a33a8169a4cd3bc03a05b14b39329158874809
+n_27,Tourism industry,Reiselivsnæringen,gpt-5.6-sol,approved-topic-label-no-v1,f954d3bc47b88865b609766caa40e783c2ab14a1389fb5ab2ab4b36685949af8
+n_28,Longyearbyen urban development,Byutvikling i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,7677eea1b20ad2cc760ec2170ceeed35e2404e609ea1628b1045e6c4ee3442e4
+n_29,Longyearbyen local politics,Lokalpolitikk i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,0dec5a64795ff5f7abf93ad9cfcfd081a1996770b7cf705b77eba26796256d3d
+n_3,Rabies and Animal Health,Rabies og dyrehelse,gpt-5.6-sol,approved-topic-label-no-v1,897415489ffdf4c4e051e4e17f749bca83ed6477865490cf3166a3d8ede6d7fd
+n_30,Longyearbyen local government,Longyearbyen lokalstyre,gpt-5.6-sol,approved-topic-label-no-v1,c1284e91fae2915268c46c598fa2a3b4c03fa1bc240f79dd146ef8533b3c00d3
+n_31,Polar research,Polarforskning,gpt-5.6-sol,approved-topic-label-no-v1,c4e6e4d658c1092fe9c71ae2cd7432526586edbd13329df7eba3d1d323f4322a
+n_32,Ny-Ålesund community,Ny-Ålesund-samfunnet,gpt-5.6-sol,approved-topic-label-no-v1,b919ee4fd0138cc5fa18b3fab814f37d347e13944fef33e2467a758bb61f63aa
+n_33,Trust Arktikugol operations,Trust Arktikugols virksomhet,gpt-5.6-sol,approved-topic-label-no-v1,dcd367fe186055aae6a2411c9fead0f8dc74bf7a7cace8a318b3013cd0921cbd
+n_34,Governor of Svalbard,Sysselmesteren på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,7e1af0e63abbe0f1667cbb39ae9e55e74f808e8fd730468328fc289611623cb2
+n_35,Future of Coal Mining,Kulldriftens fremtid,gpt-5.6-sol,approved-topic-label-no-v1,10ceff807623d1a874ac8cdb604becfd68d39abd0a1834cb0c76bcccd2ac64be
+n_36,Store Norske corporate affairs,Store Norskes selskapsforhold,gpt-5.6-sol,approved-topic-label-no-v1,316f46597d3ba30867574e084cc4b33329732d655d55e663fed20a6ea01fc03f
+n_37,Protected Area Management,Forvaltning av verneområder,gpt-5.6-sol,approved-topic-label-no-v1,d1f2a7419d11f35f2d4e02c462680a05c55d08b6832f67d5d2dd613d6f649bc8
+n_38,Store Norske financial crisis,Store Norskes finanskrise,gpt-5.6-sol,approved-topic-label-no-v1,d78cceffba7d9199831ac688580d3826ba519aeee12bd4ad2cd3d6b3d08d6e9c
+n_39,Maritime safety oversight,Tilsyn med sjøsikkerhet,gpt-5.6-sol,approved-topic-label-no-v1,c322164abf42a6749261b3b4f0cfef1ced62935ffff25ad046152ae4f0859653
+n_4,Space Research Infrastructure,Infrastruktur for romforskning,gpt-5.6-sol,approved-topic-label-no-v1,47fa37dbd327da0c34d85e874553103cf9b105ae2e36c6835e774e746a99ce82
+n_40,Polar Bears,Isbjørn,gpt-5.6-sol,approved-topic-label-no-v1,ed6b9ab246c6608f9517fa0ac6fdf41faaad67e3dd77d206dd1bce7b637174f9
+n_41,Tourism industry,Reiselivsnæringen,gpt-5.6-sol,approved-topic-label-no-v1,f28ff275b9e0b2c0ba30161f271222ec23214e9fa3d312650c9c76f0a539c18a
+n_42,Wilderness tourism,Villmarksturisme,gpt-5.6-sol,approved-topic-label-no-v1,7fbf116488da9b6c4644a78f2baf436a30b1bd9fa3eecbea1ea32d6acb4acecb
+n_43,Store Norske coal mining,Store Norskes kulldrift,gpt-5.6-sol,approved-topic-label-no-v1,b9943444c4db58445ebbf088f18f218ec1b0f1054b7c4a09039c9f346a644fde
+n_44,Store Norske coal mining,Store Norskes kulldrift,gpt-5.6-sol,approved-topic-label-no-v1,525b931f0955b7a2672bded04ccb0957500699bb27e9bfeaf6ead1d8d8e6d6a7
+n_45,Crime and court cases,Kriminalitet og rettssaker,gpt-5.6-sol,approved-topic-label-no-v1,91169166361fd8af2cd78d0607f9a7ad8320a7de1f5e946394650550a242bbc3
+n_46,Maritime Operations and Incidents,Maritime operasjoner og hendelser,gpt-5.6-sol,approved-topic-label-no-v1,952494f40fa93e37c649a53a9aa642447641c09ec9fb8cfca8c31752db3c8715
+n_47,Polar Bear Encounters,Møter med isbjørn,gpt-5.6-sol,approved-topic-label-no-v1,bbf183cfdd9b69ccfe2284d10d93effe9b124bd484c4364c069d39476eb3b650
+n_48,Rescue and Police Operations,Redningsaksjoner og politioperasjoner,gpt-5.6-sol,approved-topic-label-no-v1,ca58c084df79077684ca5b3c1ab12f57e07c559b00847c097102b2bf0c4565fb
+n_49,Accidents and rescue operations,Ulykker og redningsaksjoner,gpt-5.6-sol,approved-topic-label-no-v1,6e65bff35d5ab3bd63187b16b692ae2160c2a6755d0f739c4efa96f63301d99e
+n_5,Photography and photo archives,Fotografi og fotoarkiver,gpt-5.6-sol,approved-topic-label-no-v1,17dfeb81c8331cf939673aa096b41d3180f6af4c8fb7e7f604ad9ee42e73938f
+n_50,Police Incident Log,Politiloggen,gpt-5.6-sol,approved-topic-label-no-v1,e7d626683989c606922150ecef7aadd81e24e1534213088b3e3ed5f40b46cf6f
+n_51,Police and Rescue Reports,Politi- og redningsmeldinger,gpt-5.6-sol,approved-topic-label-no-v1,eadfd0eb1457257985246461d89b576eb7232e32f6d665c86fbc2156df7779d7
+n_52,Hunting and Trapping Management,Forvaltning av jakt og fangst,gpt-5.6-sol,approved-topic-label-no-v1,1a8cca1e9152a182da1d29904f21b86daf1df109383cd2c4363a649a087046da
+n_6,Endurance races,Utholdenhetsløp,gpt-5.6-sol,approved-topic-label-no-v1,8d89fc29efd500cd3c214c423195bc103ced87ad991dd294bb970535a41dce5f
+n_7,Kindergarten life,Livet i barnehagen,gpt-5.6-sol,approved-topic-label-no-v1,b55a65beb3f8199972ddbc30836c95e2e0ad31eca4f4e751bdd147e4875df22f
+n_8,Longyearbyen School,Longyearbyen skole,gpt-5.6-sol,approved-topic-label-no-v1,5956d3c9ae16d40c8f7d393eda22a81aa13e96120da5be8b6084ea9bf0f64cb4
+n_9,Trapping stations,Fangststasjoner,gpt-5.6-sol,approved-topic-label-no-v1,2ff66100a1ace6b61b1f0816e57f69e2df04264761b31a1b44e3d53794444e5b
+p_0,Stetten guessing competition,Stetten-konkurransen,gpt-5.6-sol,approved-topic-label-no-v1,6709d9176b5a064103f4c63e6bbd2ebfd38d32ad23222f858dc100536e9f9c2a
+p_1,Svalbard History Films,Filmer om Svalbards historie,gpt-5.6-sol,approved-topic-label-no-v1,ef74eaee7abf60f7f6beaf5496d88a30c56be10a27386de31e83f491b4ed25ad
+p_10,Literary culture,Litteraturkultur,gpt-5.6-sol,approved-topic-label-no-v1,a3bf4859beedd767b3058da6da7b3c1f2ae8631725fdf18c4c1007acbe8599da
+p_100,Housing and property development,Bolig- og eiendomsutvikling,gpt-5.6-sol,approved-topic-label-no-v1,7c488231393c8858a06c82aa6845619041445389667bd3663965e67fcdc214b1
+p_101,Avalanche risk management,Håndtering av skredfare,gpt-5.6-sol,approved-topic-label-no-v1,fbc2e489c6542d57d484f9b68fc7f9a07633321b52f8acc1f2572fee91ab3a83
+p_102,Longyearbyen avalanche risk management,Håndtering av skredfare i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,25b96a011625c003596d9c2c4f01a186461ebce648e1ac22705030832fd5716b
+p_103,Longyearbyen Power Supply,Kraftforsyningen i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,30d33dd8f8bb798054543521bf33c7af0d258116f77b9b6c42a0c38cfa2b9ffa
+p_104,Workplace inspections,Arbeidsplasstilsyn,gpt-5.6-sol,approved-topic-label-no-v1,38ccee200db3724d65251cb1bbea2cd55096c4282e613c91d90b8f529770ef6d
+p_105,Longyearbyen Energy Transition,Energiomstillingen i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,af47a6f20953b75f57291ed208449f25f9fe4e989f37695a33bc9a95b59f00b8
+p_106,Longyearbyen energy transition,Energiomstillingen i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,7737923eb3348a2e13f1b8f3912639a678e74c30580e0b1f3f7a04a3b123ed28
+p_107,Longyearbyen cruise tourism,Cruiseturisme i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,97b4adda095f3f2dfafc5f2288b4b6e1046b107f253ea8b08234e02d9751d243
+p_108,Tourism Development,Reiselivsutvikling,gpt-5.6-sol,approved-topic-label-no-v1,32f18abc62362156e36340e0ca343faca23e797a5f6e1334e20fddde75508061
+p_109,Environmental land-use regulation,Miljøregulering av arealbruk,gpt-5.6-sol,approved-topic-label-no-v1,955faff41b22c080cf2e6bed4098a2fa546028df80bb5330e35620b84100b66e
+p_11,Visual Arts,Billedkunst,gpt-5.6-sol,approved-topic-label-no-v1,60ff4438e82c09e00a15002534fa238449edb7e1cb62a2bc908188d6297df8c3
+p_110,Environmental travel restrictions,Miljøbegrunnede ferdselsrestriksjoner,gpt-5.6-sol,approved-topic-label-no-v1,520972921bbd014f9d83d0a54c2c3a3bd306b76f77d47c29b00f15b6f1617099
+p_111,Svea mine closure and cleanup,Gruvenedleggelse og opprydding i Svea,gpt-5.6-sol,approved-topic-label-no-v1,a2622c13036972137f5697d8b499466c012b687478cea2f8555e43a95241b021
+p_112,Svea–Lunckefjell Mine Closure,Avviklingen av gruvene i Svea og Lunckefjell,gpt-5.6-sol,approved-topic-label-no-v1,66295c38af277f9004ed4d812e9965f102dbe011b5c3eca26df29e1cd351a984
+p_113,Longyearbyen energy supply,Longyearbyens energiforsyning,gpt-5.6-sol,approved-topic-label-no-v1,b08f9b8b453d019cc93935dd43a0295999ebd21d5fd6f4c74af6fc3e778478fd
+p_114,Longyearbyen energy costs,Energikostnader i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,0a32d7e6937c561aa00cf4399eb586752da4ab3100f0b2bc08752a99881162bc
+p_115,Svalbard earthquakes,Jordskjelv på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,bf48beaf0e297d8e46368ea1aead0135fa0fb445eb20175e088bbf7277ffc951
+p_116,Mark Sabbatini and Icepeople,Mark Sabbatini og Icepeople,gpt-5.6-sol,approved-topic-label-no-v1,258cde31b5f34d6d4a9e8beca785c5775672b9539f4437c3505b968ab60e93bb
+p_117,Governor of Svalbard Field Inspectors,Sysselmesterens feltinspektører,gpt-5.6-sol,approved-topic-label-no-v1,e4af0875ab0fd1c2c863885aa30bc1cd112a9265768a83e3c4ec54fd8197ad78
+p_118,Customs and Border Control,Toll- og grensekontroll,gpt-5.6-sol,approved-topic-label-no-v1,3f0a37261687c21aa843a9bf93efbf74fb12c9de1403332594114bb17a320993
+p_119,Sherpa-Built Trail Proposal,Forslag om sherpabygd sti,gpt-5.6-sol,approved-topic-label-no-v1,ea181fca70a0f3103eeb9e59c5e7637d9136f04854f9d52c6a27a3d0b9b8451f
+p_12,Animal health services,Dyrehelsetjenester,gpt-5.6-sol,approved-topic-label-no-v1,32ddd3711011538a46af4be643591500546d879cd471699f0f845359bcdc63eb
+p_120,Tourism Management and Sustainability,Reiselivsforvaltning og bærekraft,gpt-5.6-sol,approved-topic-label-no-v1,9349b4ec7deb6bac8cf4f385b46d29c8389c4f4cdb852978a85422eb34f224a6
+p_13,Satellite ground stations,Satellittbakkestasjoner,gpt-5.6-sol,approved-topic-label-no-v1,70a0ad72fdc78643d59358ed9947290f3fa0c17e6ec0b1cb7b5183f9c780751b
+p_14,Svalbard air ambulance preparedness,Luftambulanseberedskapen på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,76facfba8734264442a48db9e5361841561ba2c5c1e5a6b8c7ea6ef2f32bf678
+p_15,Longyearbyen Hospital,Longyearbyen sykehus,gpt-5.6-sol,approved-topic-label-no-v1,6e99117c4db5ccbe141b849c7740c8d5e9f609b938f5697f88b42263ab59e890
+p_16,Historical photographs,Historiske fotografier,gpt-5.6-sol,approved-topic-label-no-v1,8249e9dca114b37d13feaef613280abd0326b18acee01c6e7137d53bc1593c2d
+p_17,Historical Photographs,Historiske fotografier,gpt-5.6-sol,approved-topic-label-no-v1,deeb949a985c6711cc0e276e3ecfe1b6375a6ee40ebdb599e582bc06057bea6c
+p_18,Longyearbyen student housing,Studentboliger i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,a0ba060ae5a5c5605a877167c42dba9e732d0f78d5ab295fc66aedc325629ac2
+p_19,Telecommunications infrastructure,Telekommunikasjonsinfrastruktur,gpt-5.6-sol,approved-topic-label-no-v1,3b39c3e740a2373451af730a93ac8d0b65d9b148b12ed3aee6c214110ee8369e
+p_2,Old Hospital Property Disputes,Eiendomstvister om Gamle sykehuset,gpt-5.6-sol,approved-topic-label-no-v1,f0d21c8cd8c4681514cdb3a3f3f0b5a0c80e1b7c2734e5f091ba302c402e970e
+p_20,Air travel,Flyreiser,gpt-5.6-sol,approved-topic-label-no-v1,a77139da5b1d065baf8cc84ef8ddc7f3a5734a91927b06aeee4d13df5a5ee42c
+p_21,Svalbardposten local newspaper,Lokalavisen Svalbardposten,gpt-5.6-sol,approved-topic-label-no-v1,5071fe5755be60576dcc0eb48434151b793b97affdb49630af9b8c0cf1595cb2
+p_22,Postal services,Posttjenester,gpt-5.6-sol,approved-topic-label-no-v1,a6e8f6d292c4ac03c2071b2087dab92a4bd070eb777843c5cdd84cd94c16ae17
+p_23,Svalbardbutikken retail operations,Driften av Svalbardbutikken,gpt-5.6-sol,approved-topic-label-no-v1,0a7c9adb7a10f22ea4f75c5edec679b18b27dede9b81844272892840ceeaa483
+p_24,Wildlife ecology,Viltøkologi,gpt-5.6-sol,approved-topic-label-no-v1,56a95d58661a0672f3578a9cfe62b80adc35eb0ce0d45a053bcc6aa3e66085fd
+p_25,Svalbard wildlife,Dyreliv på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,8c7c11b01c4f79b168e3151701f1b8ffbdb2e2b2e21ff8807932bc93b6b709cc
+p_26,Svalbard plant life,Planteliv på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,c97d0fa4f89416a73fcd88c2e26b3f1d992b318580961adc0d8afad58810b196
+p_27,Weather and climate,Vær og klima,gpt-5.6-sol,approved-topic-label-no-v1,04e6249ad26ce8db164793d65a090ef0bbe826482b990e786119779ac7731de8
+p_28,Svalbard geopolitics,Svalbard-geopolitikk,gpt-5.6-sol,approved-topic-label-no-v1,61c29a607182cac45425339b60826ff93169f26f3a143e3341e84a604421fc6f
+p_29,Russian settlements on Svalbard,Russiske bosetninger på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,eafe4a4e29706f00dd53a29bb44738c14de8cd10619b88a5e5e2b8f5ac7cae5c
+p_3,Svalbard Global Seed Vault,Svalbard Globale frøhvelv,gpt-5.6-sol,approved-topic-label-no-v1,f203660da4c734dcabd2c56c8ef1d566d52ae810d26b2123136c63159bd6160e
+p_30,Local sports,Lokalidrett,gpt-5.6-sol,approved-topic-label-no-v1,f73253738054e8d5f5d792af604b457969795bbcc0d83cfee2654e9c5e75d6a8
+p_31,Endurance races,Utholdenhetsløp,gpt-5.6-sol,approved-topic-label-no-v1,d49e50764215d21516fbd73c77ec248990c4f5605a59f180fe40c3e11fea08da
+p_32,Community Sports and Recreation,Lokalsport og fritidsaktiviteter,gpt-5.6-sol,approved-topic-label-no-v1,29e5f744e402ec5524b940230ec368d48937cc51d96c8ab30365c908c76375c0
+p_33,Trappers Trail sled-dog race,Hundeløpet Trappers Trail,gpt-5.6-sol,approved-topic-label-no-v1,981c7d046ca5ee104a8a41990c9b15c327c7ce83c4177026f0d0317fd170ee5f
+p_34,Community life,Livet i lokalsamfunnet,gpt-5.6-sol,approved-topic-label-no-v1,0c845e421ae29dab43264706a902c60da8e99147261f49c2f5c664b1836f77fb
+p_35,Revue and Cultural Awards,Revy og kulturpriser,gpt-5.6-sol,approved-topic-label-no-v1,43f0bd781587b375b4f132f3da0ba67dd0928561d8f34f5d22f65e96aec897fa
+p_36,Dog Keeping,Hundehold,gpt-5.6-sol,approved-topic-label-no-v1,9a957286da1ba9753397957240d629e8b14fb63deb802e949054ef8341107ac2
+p_37,Youth cultural performances,Kulturforestillinger med barn og unge,gpt-5.6-sol,approved-topic-label-no-v1,0bfe9df4495b629e38db66141fd5d73113cec6ff648f2a08c670cb843e6754ca
+p_38,Dark Season Blues Festival,Dark Season Blues-festivalen,gpt-5.6-sol,approved-topic-label-no-v1,5badcac6cb79ce14ae7b135348b5b4947e3d4923646bf66b0ad19fb70b2da9bc
+p_39,Polarjazz Festival,Polarjazz,gpt-5.6-sol,approved-topic-label-no-v1,847090a640b3a4a6bd29761df518c200366a59df67b0cdcb3357e7a30918ae87
+p_4,Longyearbyen banking services,Banktjenester i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,23ac59894c385ee961342297644e1a13990a2fea6f1a3a3a64d10cebd1cb996d
+p_40,Live music,Livemusikk,gpt-5.6-sol,approved-topic-label-no-v1,909b1da70011ea668cfb610a83197e0b3c5073abceaae04c7737ec3a39db3322
+p_41,Fire Safety and Response,Brannsikkerhet og beredskap,gpt-5.6-sol,approved-topic-label-no-v1,6957547cf24559f8d4dc695978634e1e7b6551a0f4b624ac3bf121b6ae37f9de
+p_42,Svalbard Folk High School,Svalbard folkehøgskole,gpt-5.6-sol,approved-topic-label-no-v1,87f2b238e925f4135b5de7cc00eb96b8320541f4d7e25c70d9c978afe3c14b4d
+p_43,Overwintering trapping,Overvintringsfangst,gpt-5.6-sol,approved-topic-label-no-v1,94fc49a4c7630b7d9f56b22af658125b2460d83040694c29b66ac425dd366445
+p_44,Children’s right to education,Barns rett til utdanning,gpt-5.6-sol,approved-topic-label-no-v1,cd25a0e88a99ecb50d327aec4785c59493a3dee49372735f2ce8dc7dd826fae7
+p_45,School life,Skoleliv,gpt-5.6-sol,approved-topic-label-no-v1,33760bdfbb06498a2ae1c96d8d0b402e5146b81c78f1e51378993162e1e62221
+p_46,Kindergarten Provision,Barnehagetilbud,gpt-5.6-sol,approved-topic-label-no-v1,be6077e1927d570144a3753a89d73a9cae7f4d8a1545634a3882af19a64b6ac3
+p_47,Nordpolet Surplus Fund,Nordpolets overskuddsmidler,gpt-5.6-sol,approved-topic-label-no-v1,e27eb79c01f086126ff2514ace5a90f827017508670d15ea175f928771aa0539
+p_48,Exploration History and Heritage,Ekspedisjonshistorie og kulturarv,gpt-5.6-sol,approved-topic-label-no-v1,a4ee0011d902decb9e38d51ab55e272553682a88fe542f9fa78e06839760e810
+p_49,Police and Emergency Responses,Politi- og utrykningsoppdrag,gpt-5.6-sol,approved-topic-label-no-v1,de6abfd91256054eaecb358d06f62be2f87d056ceba783af2d2c8887105e27a1
+p_5,Community Commentary and Features,Lokale kommentarer og reportasjer,gpt-5.6-sol,approved-topic-label-no-v1,e047f84e24212cd060e91265bd1c90a08222049790ec7884a99627df2c237d14
+p_50,Criminal cases,Straffesaker,gpt-5.6-sol,approved-topic-label-no-v1,1cc08fb05b5c25d89903c3d67ccfda8c64ba1dffb1b99a7f1abf4732598b6b14
+p_51,Svalbard environmental research,Miljøforskning på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,801503e787a4ea087be3cd6ccd47bd39351ed6c04bf8cbdd065020ac2b1afea0
+p_52,Community Profiles,Lokale personprofiler,gpt-5.6-sol,approved-topic-label-no-v1,fa1fc9b77b370036aad2133c7369ebcefb8cd8995dba2cd72f0ac68a93c50435
+p_53,Governor’s Office,Sysselmesteren på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,6011ba001cc0e7f44e0420f1cad689235ca604ea687aee9b5cfdc8244bab8165
+p_54,Police Incident Log,Politiloggen,gpt-5.6-sol,approved-topic-label-no-v1,9885508d33a08ddfebe80dca55195ae52b3b9ccf2838855b9465197d48e375f5
+p_55,Svalbard Church,Svalbard kirke,gpt-5.6-sol,approved-topic-label-no-v1,70e554838e719f5973810c2de2ac41d23c35e723b50ed04e94a7640b5b26cf58
+p_56,Bjørnøya and Hopen Stations,Stasjonene på Bjørnøya og Hopen,gpt-5.6-sol,approved-topic-label-no-v1,9c471bd7f77f78c0534d88125e2eb8c14629133836d1b05bbb29cb24d31a3d32
+p_57,Heerodden helicopter crash,Helikopterulykken ved Heerodden,gpt-5.6-sol,approved-topic-label-no-v1,a43661847497cf794ff614c8b826eb153d91da8a52209f9d29536e8b30998b4c
+p_58,Marine pollution,Marin forurensning,gpt-5.6-sol,approved-topic-label-no-v1,87491cb439c396bdf749ff2f30a73be0f01d077a899c3cd6288745716d1fbc8e
+p_59,Public observances,Offentlige markeringer,gpt-5.6-sol,approved-topic-label-no-v1,cb64e258031893025d1ac8b8751aef5a833e7336a1dc98216396c596b84ce401
+p_6,Return of the sun,Solas tilbakekomst,gpt-5.6-sol,approved-topic-label-no-v1,a6facbcdc8912c9e81bbf5dc6e5a1aee136660959247ad57a41a493ba73cbd84
+p_60,Constitution Day celebrations,17. mai-feiring,gpt-5.6-sol,approved-topic-label-no-v1,80cedfec57c546ffc1a0e1d1df9bfea69dd6aa1a3d416c64ae677f114e9b482b
+p_61,Polar bear encounters,Møter med isbjørn,gpt-5.6-sol,approved-topic-label-no-v1,4e94b8372db053b40fc926e696190810ac4ebebe3488462e847d5af2bde30788
+p_62,University Centre in Svalbard,Universitetssenteret på Svalbard (UNIS),gpt-5.6-sol,approved-topic-label-no-v1,d2eb64a4153db69adc25267e704b4441f46f8b98dda233fbc7d335b9b9add661
+p_63,Polar bears,Isbjørn,gpt-5.6-sol,approved-topic-label-no-v1,d049d742085b3af868355942d3e63d8c92a07becef8becfa7847849072727ffb
+p_64,Human–polar bear encounters,Møter mellom mennesker og isbjørn,gpt-5.6-sol,approved-topic-label-no-v1,cd00bc14bccf550c800e5f212d9cd27302437b027870c4ab94c0100b51af02b0
+p_65,Police incident log,Politiloggen,gpt-5.6-sol,approved-topic-label-no-v1,521ba900b1aee842f4977c417d42811eb39bc0aa35f769a975262c79fd5666c9
+p_66,Governor of Svalbard Incident Log,Sysselmesterens hendelseslogg,gpt-5.6-sol,approved-topic-label-no-v1,7831576e0d1e1129c901e78cf7686aadd5c0bf5c05ddf854462407beae64d116
+p_67,Polar research,Polarforskning,gpt-5.6-sol,approved-topic-label-no-v1,c42012e815c369e7527e5167cf6eecf35bddd7e88f5b086f8fb8e4ad3381acdd
+p_68,Ny-Ålesund settlement,Ny-Ålesund,gpt-5.6-sol,approved-topic-label-no-v1,86e7adfda757eddc03d049eafc87fdcaf4a329231b260dc3f72321a3f949a51a
+p_69,Local policing,Lokalt politiarbeid,gpt-5.6-sol,approved-topic-label-no-v1,6ea5f04ac708f0073031fc0b82b68d0361c56c7cc92a35980a827c5179eba58e
+p_7,TV charity fundraising campaign,TV-aksjonen,gpt-5.6-sol,approved-topic-label-no-v1,6f7b2237571c6fd804dc07cab720a13ce55f583cc6d0908d5473266173dfcbcb
+p_70,Police incident reports,Politiets hendelsesrapporter,gpt-5.6-sol,approved-topic-label-no-v1,7d2f35ba47444a90de2c1666b16d6bf521b13691457bcb34e0446306e6df6a46
+p_71,Svalbard Brewery,Svalbard Bryggeri,gpt-5.6-sol,approved-topic-label-no-v1,bf7c5d781c9080e995debf97255593bd27e187fec82c891aab3d2b43fef25796
+p_72,Drinking Water Safety,Drikkevannssikkerhet,gpt-5.6-sol,approved-topic-label-no-v1,5c458aba179e318b9365db333e3f86744088a004e884397c356f40ad9fc9977b
+p_73,Maritime Safety and Regulation,Sjøsikkerhet og regelverk,gpt-5.6-sol,approved-topic-label-no-v1,9ef0c0ab3acdfdd370a1976eebd65e1af4da5be0af1c1a64b72a9b7d3b93a6cf
+p_74,Longyearbyen small businesses,Småbedrifter i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,b656556322dfca5f659881d3d00bde9512574abb3bbdd5ad7f057ca9f18aaa4b
+p_75,Local dining scene,Lokalt restaurant- og uteliv,gpt-5.6-sol,approved-topic-label-no-v1,2bbf312b0014ff8abbb61ed7545fe75d833f0df72df0b396755faaf24ff815e7
+p_76,Environmental Protection Fund,Svalbards miljøvernfond,gpt-5.6-sol,approved-topic-label-no-v1,e16e16e8f2de50941dbfa5b439b718afdf08d1475dfcc8cb836e91985d06ac4d
+p_77,Cabin plots,Hyttetomter,gpt-5.6-sol,approved-topic-label-no-v1,2706a80ed34d5fbce1426f00ad7a1b7371362d571fb283f714eec6cc3a8dd344
+p_78,Boat Incidents and Rescues,Båthendelser og redningsaksjoner,gpt-5.6-sol,approved-topic-label-no-v1,23fb2e2274708a5e4650b1c54e61035dadb80259981756ed0bc821120c5047fb
+p_79,Northguider grounding and salvage,Grunnstøtingen og bergingen av «Northguider»,gpt-5.6-sol,approved-topic-label-no-v1,a0521999ed08937b16568329f42f71fbd80082633b3d4fc9288dd26c02b72489
+p_8,PFAS contamination cleanup,Opprydding av PFAS-forurensning,gpt-5.6-sol,approved-topic-label-no-v1,e288b01c02326a5d4755ecb77e44049af4b55d0063815507a85a36de7ffe12b1
+p_80,Mine 7 operations,Driften i Gruve 7,gpt-5.6-sol,approved-topic-label-no-v1,194c289faf797f4f264ee24f8de4f637734577844907f8173ac3649796fa7f53
+p_81,Longyearbyen Port,Longyearbyen havn,gpt-5.6-sol,approved-topic-label-no-v1,f830b59898f9887399a5be76ee22c57d47e72a72b0f17aca387d119c9c4da14e
+p_82,Alcohol Licensing and Café Leases,Skjenkebevillinger og kaféleieavtaler,gpt-5.6-sol,approved-topic-label-no-v1,8320f8a74e59983dfbf42d87fce0abf332bf6329a6a890cf1e652a550d6fcb11
+p_83,Population Trends,Befolkningsutvikling,gpt-5.6-sol,approved-topic-label-no-v1,9a2e633abb33d79b881c88fbf437130fb20e253f4992ba85693795c182c94c4f
+p_84,Longyearbyen local politics,Lokalpolitikk i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,9da80197845bcc83cd5693677ca862cd28909cec018e8c8799cbbe7505c6f484
+p_85,COVID-19 public health response,Folkehelsetiltak mot covid-19,gpt-5.6-sol,approved-topic-label-no-v1,836400b78d1dc4106ff2eca1a1604e13e60ab4f3d582f12285e4b9abe5ff05a3
+p_86,Svalbard COVID-19 restrictions,Koronarestriksjoner på Svalbard,gpt-5.6-sol,approved-topic-label-no-v1,afd10301b937df6a5c710c7a4966cdf1715c1d444d2a6d13af581e08d68cccc5
+p_87,Longyearbyen local governance,Lokalstyret i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,9655e286ccf9a657ad2ab202ed709bac3722269ea669ccf6da8225a1749a6ea9
+p_88,NAV unemployment benefit cases,NAV-saker om dagpenger,gpt-5.6-sol,approved-topic-label-no-v1,4676ea3b2a438b9c04e1d0c473c9d0c7c5b4cd00522786a32cea54c2f5f1abc3
+p_89,COVID-19 economic relief,Økonomiske støtteordninger under koronakrisen,gpt-5.6-sol,approved-topic-label-no-v1,e4ec20ab57098bb7cbd7357bb34e0a3584ae85e6e358c945314b20df2ff8b168
+p_9,Film and television,Film og TV,gpt-5.6-sol,approved-topic-label-no-v1,ffaa326e75788aeb07e8fb08b4f5c1b0a60420567c88205879af9b2c8da8f4f5
+p_90,Business support schemes,Støtteordninger for næringslivet,gpt-5.6-sol,approved-topic-label-no-v1,c1c16bc61198613a0165e7547da2262cb09f5646d59f398385e191dd927880ad
+p_91,Municipal infrastructure,Kommunal infrastruktur,gpt-5.6-sol,approved-topic-label-no-v1,db9af1fd6ea8e4bfe166287dde82f8e4bcbacb48a83a2db383f0ba59b5355bd0
+p_92,Building demolition and reuse,Riving og gjenbruk av bygg,gpt-5.6-sol,approved-topic-label-no-v1,14012dc66b7a9cab1aa15080898b741c051ce0bbbf9505f37bdbb2bc19e16cb3
+p_93,Tourism industry,Reiselivsnæringen,gpt-5.6-sol,approved-topic-label-no-v1,a03753109d48b90d5d51250c6c00f786016b7ef019813ccdf93dbac092eb9750
+p_94,Emergency Planning and Response,Beredskapsplanlegging og krisehåndtering,gpt-5.6-sol,approved-topic-label-no-v1,84aedfd08bc5af1d8bc7ac6c765b434ca7ba05ede4b34573947a62b7162544d3
+p_95,Business development policy,Næringsutviklingspolitikk,gpt-5.6-sol,approved-topic-label-no-v1,b8b7c0e4aa0fe709d11e5400215ed08c486cc1eeb0f17cdc6235ab08965f6715
+p_96,Svalbard Policy White Paper,Svalbardmeldingen,gpt-5.6-sol,approved-topic-label-no-v1,740872653d4be376f421dc975df94ae755f45526f2e1151c40a9f85ee07ed8e4
+p_97,Waste and Vehicle Disposal,Avfall og vraking av kjøretøy,gpt-5.6-sol,approved-topic-label-no-v1,f759ac6ad4f1bf9b9be29d54c3fe0b022b22389a23fede3cc72ee2bd1ddbcbe4
+p_98,Tourism industry,Reiselivsnæringen,gpt-5.6-sol,approved-topic-label-no-v1,a09deddae4622e7ca09f0558036c63aa4dea2f17f9f9b1f0cd77cb017ebc75ac
+p_99,Longyearbyen housing policy,Boligpolitikk i Longyearbyen,gpt-5.6-sol,approved-topic-label-no-v1,cbe93374262e327f4919b4a1b8de7bc1bb43afa3ccb949eef430b5adca727726
