@@ -1,0 +1,1394 @@
+{
+  "n_0": {
+    "cluster": "n_0",
+    "cluster_subject_en": "Celestial phenomena",
+    "cluster_subject_no": "Himmelfenomener",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8894c570de098bb22b0cad2414c2e85a529583b7a2b5b655cad075397216b29a"
+  },
+  "n_1": {
+    "cluster": "n_1",
+    "cluster_subject_en": "Longyearbyen healthcare",
+    "cluster_subject_no": "Helsetjenester i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "88acb69f8efe396095690b10e5e5b634c12c1ddc9f5ba57c7e6b4231fae00c78"
+  },
+  "n_10": {
+    "cluster": "n_10",
+    "cluster_subject_en": "Annual TV Telethon",
+    "cluster_subject_no": "TV-aksjonen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "5adcf2854dc3264bd3f1f09fa01397d813b5901c64c5efc8df531b6399b57c6d"
+  },
+  "n_11": {
+    "cluster": "n_11",
+    "cluster_subject_en": "Local sports",
+    "cluster_subject_no": "Lokalidrett",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ca14370c49d5f5ac51e33a75a3d1dfe2bcddf3d2c1231e021c454fee1bae92fd"
+  },
+  "n_12": {
+    "cluster": "n_12",
+    "cluster_subject_en": "Community Celebrations and Commemorations",
+    "cluster_subject_no": "Lokale feiringer og markeringer",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8cbda71602ac5cf10a83da55adc8116a2b68ad8ea1c2e2b21a70a70ed5973247"
+  },
+  "n_13": {
+    "cluster": "n_13",
+    "cluster_subject_en": "Svalbardposten newspaper",
+    "cluster_subject_no": "Avisen Svalbardposten",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "53ea9dcc850ba525ae4d494582b8fbc3554df6a9c9fbc48f33940b24f03319ba"
+  },
+  "n_14": {
+    "cluster": "n_14",
+    "cluster_subject_en": "Longyearbyen air travel",
+    "cluster_subject_no": "Flytrafikk til og fra Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f1100ee0c955ae07a34c9374cec68e11f144d34b40da558d546e08cdf7acb968"
+  },
+  "n_15": {
+    "cluster": "n_15",
+    "cluster_subject_en": "Performing arts",
+    "cluster_subject_no": "Scenekunst",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d12904deff2867a3149c7affd08fbbf57652737acb1eae0b559fabd770301c14"
+  },
+  "n_16": {
+    "cluster": "n_16",
+    "cluster_subject_en": "Weather and climate",
+    "cluster_subject_no": "Vær og klima",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9f50cf5ae69862897e527bfa8f5b51057b0062f9b8cf4bd92a2073dc5a7b183b"
+  },
+  "n_17": {
+    "cluster": "n_17",
+    "cluster_subject_en": "Art exhibitions",
+    "cluster_subject_no": "Kunstutstillinger",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "288f0b3e643d6d8ae49c710fc60fb8ba32a08376f5c710fdd19f95f110067301"
+  },
+  "n_18": {
+    "cluster": "n_18",
+    "cluster_subject_en": "Dark Season Blues",
+    "cluster_subject_no": "Dark Season Blues",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "433e5a448630df048ce3b16ae3fafb87d469e2b8a5fe94081d5d863b0c666f7c"
+  },
+  "n_19": {
+    "cluster": "n_19",
+    "cluster_subject_en": "Polarjazz Festival",
+    "cluster_subject_no": "Polarjazzfestivalen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f1592c799a777f404869dd85744fa5ade1c0e75e26f452045182f9c9101ed908"
+  },
+  "n_2": {
+    "cluster": "n_2",
+    "cluster_subject_en": "Dogs on Svalbard",
+    "cluster_subject_no": "Hunder på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "335b051605c299b494ec3750707652cb44011cf738870b2d221d233004b86e0a"
+  },
+  "n_20": {
+    "cluster": "n_20",
+    "cluster_subject_en": "Longyearbyen Municipal Operations",
+    "cluster_subject_no": "Longyearbyen bydrift",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "17d0aa8b188e92b1dd407b4159d1454c0955b10cc19eb483663573c56e204211"
+  },
+  "n_21": {
+    "cluster": "n_21",
+    "cluster_subject_en": "UNIS education and research",
+    "cluster_subject_no": "UNIS-utdanning og -forskning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7d5c7404ec48a28dd7f50f6e74486e915839688767c50dc869aca5040e244936"
+  },
+  "n_22": {
+    "cluster": "n_22",
+    "cluster_subject_en": "Retail and Hospitality Businesses",
+    "cluster_subject_no": "Handels- og serveringsbedrifter",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "287dbccbba2b7e2682eec4ed3cc1334a1de75e60221e2f81085d870977496613"
+  },
+  "n_23": {
+    "cluster": "n_23",
+    "cluster_subject_en": "Film culture",
+    "cluster_subject_no": "Filmkultur",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "15fed542af5c3c4ff5a266063bd6963da1c4bc1598126e0829d596c130ba7157"
+  },
+  "n_24": {
+    "cluster": "n_24",
+    "cluster_subject_en": "Cruise tourism development",
+    "cluster_subject_no": "Utvikling av cruiseturismen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a33000d97d3f0dfd222c7c6c8e600f2a45b27959cd3e14aea035abc170e861a8"
+  },
+  "n_25": {
+    "cluster": "n_25",
+    "cluster_subject_en": "Museums and cultural heritage",
+    "cluster_subject_no": "Museer og kulturarv",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "80ad98f9a888e7542e91e0c1804e4134f62aaec673a96204c119a533a38b3648"
+  },
+  "n_26": {
+    "cluster": "n_26",
+    "cluster_subject_en": "Wildlife ecology",
+    "cluster_subject_no": "Dyreøkologi",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "eb1a568828210112d9712896b6a33a8169a4cd3bc03a05b14b39329158874809"
+  },
+  "n_27": {
+    "cluster": "n_27",
+    "cluster_subject_en": "Tourism industry",
+    "cluster_subject_no": "Reiselivsnæringen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f954d3bc47b88865b609766caa40e783c2ab14a1389fb5ab2ab4b36685949af8"
+  },
+  "n_28": {
+    "cluster": "n_28",
+    "cluster_subject_en": "Longyearbyen urban development",
+    "cluster_subject_no": "Byutvikling i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7677eea1b20ad2cc760ec2170ceeed35e2404e609ea1628b1045e6c4ee3442e4"
+  },
+  "n_29": {
+    "cluster": "n_29",
+    "cluster_subject_en": "Longyearbyen local politics",
+    "cluster_subject_no": "Lokalpolitikk i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "0dec5a64795ff5f7abf93ad9cfcfd081a1996770b7cf705b77eba26796256d3d"
+  },
+  "n_3": {
+    "cluster": "n_3",
+    "cluster_subject_en": "Rabies and Animal Health",
+    "cluster_subject_no": "Rabies og dyrehelse",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "897415489ffdf4c4e051e4e17f749bca83ed6477865490cf3166a3d8ede6d7fd"
+  },
+  "n_30": {
+    "cluster": "n_30",
+    "cluster_subject_en": "Longyearbyen local government",
+    "cluster_subject_no": "Longyearbyen lokalstyre",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c1284e91fae2915268c46c598fa2a3b4c03fa1bc240f79dd146ef8533b3c00d3"
+  },
+  "n_31": {
+    "cluster": "n_31",
+    "cluster_subject_en": "Polar research",
+    "cluster_subject_no": "Polarforskning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c4e6e4d658c1092fe9c71ae2cd7432526586edbd13329df7eba3d1d323f4322a"
+  },
+  "n_32": {
+    "cluster": "n_32",
+    "cluster_subject_en": "Ny-Ålesund community",
+    "cluster_subject_no": "Ny-Ålesund-samfunnet",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b919ee4fd0138cc5fa18b3fab814f37d347e13944fef33e2467a758bb61f63aa"
+  },
+  "n_33": {
+    "cluster": "n_33",
+    "cluster_subject_en": "Trust Arktikugol operations",
+    "cluster_subject_no": "Trust Arktikugols virksomhet",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "dcd367fe186055aae6a2411c9fead0f8dc74bf7a7cace8a318b3013cd0921cbd"
+  },
+  "n_34": {
+    "cluster": "n_34",
+    "cluster_subject_en": "Governor of Svalbard",
+    "cluster_subject_no": "Sysselmesteren på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7e1af0e63abbe0f1667cbb39ae9e55e74f808e8fd730468328fc289611623cb2"
+  },
+  "n_35": {
+    "cluster": "n_35",
+    "cluster_subject_en": "Future of Coal Mining",
+    "cluster_subject_no": "Kulldriftens fremtid",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "10ceff807623d1a874ac8cdb604becfd68d39abd0a1834cb0c76bcccd2ac64be"
+  },
+  "n_36": {
+    "cluster": "n_36",
+    "cluster_subject_en": "Store Norske corporate affairs",
+    "cluster_subject_no": "Store Norskes selskapsforhold",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "316f46597d3ba30867574e084cc4b33329732d655d55e663fed20a6ea01fc03f"
+  },
+  "n_37": {
+    "cluster": "n_37",
+    "cluster_subject_en": "Protected Area Management",
+    "cluster_subject_no": "Forvaltning av verneområder",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d1f2a7419d11f35f2d4e02c462680a05c55d08b6832f67d5d2dd613d6f649bc8"
+  },
+  "n_38": {
+    "cluster": "n_38",
+    "cluster_subject_en": "Store Norske financial crisis",
+    "cluster_subject_no": "Store Norskes finanskrise",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d78cceffba7d9199831ac688580d3826ba519aeee12bd4ad2cd3d6b3d08d6e9c"
+  },
+  "n_39": {
+    "cluster": "n_39",
+    "cluster_subject_en": "Maritime safety oversight",
+    "cluster_subject_no": "Tilsyn med sjøsikkerhet",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c322164abf42a6749261b3b4f0cfef1ced62935ffff25ad046152ae4f0859653"
+  },
+  "n_4": {
+    "cluster": "n_4",
+    "cluster_subject_en": "Space Research Infrastructure",
+    "cluster_subject_no": "Infrastruktur for romforskning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "47fa37dbd327da0c34d85e874553103cf9b105ae2e36c6835e774e746a99ce82"
+  },
+  "n_40": {
+    "cluster": "n_40",
+    "cluster_subject_en": "Polar Bears",
+    "cluster_subject_no": "Isbjørn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ed6b9ab246c6608f9517fa0ac6fdf41faaad67e3dd77d206dd1bce7b637174f9"
+  },
+  "n_41": {
+    "cluster": "n_41",
+    "cluster_subject_en": "Tourism industry",
+    "cluster_subject_no": "Reiselivsnæringen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f28ff275b9e0b2c0ba30161f271222ec23214e9fa3d312650c9c76f0a539c18a"
+  },
+  "n_42": {
+    "cluster": "n_42",
+    "cluster_subject_en": "Wilderness tourism",
+    "cluster_subject_no": "Villmarksturisme",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7fbf116488da9b6c4644a78f2baf436a30b1bd9fa3eecbea1ea32d6acb4acecb"
+  },
+  "n_43": {
+    "cluster": "n_43",
+    "cluster_subject_en": "Store Norske coal mining",
+    "cluster_subject_no": "Store Norskes kulldrift",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b9943444c4db58445ebbf088f18f218ec1b0f1054b7c4a09039c9f346a644fde"
+  },
+  "n_44": {
+    "cluster": "n_44",
+    "cluster_subject_en": "Store Norske coal mining",
+    "cluster_subject_no": "Store Norskes kulldrift",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "525b931f0955b7a2672bded04ccb0957500699bb27e9bfeaf6ead1d8d8e6d6a7"
+  },
+  "n_45": {
+    "cluster": "n_45",
+    "cluster_subject_en": "Crime and court cases",
+    "cluster_subject_no": "Kriminalitet og rettssaker",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "91169166361fd8af2cd78d0607f9a7ad8320a7de1f5e946394650550a242bbc3"
+  },
+  "n_46": {
+    "cluster": "n_46",
+    "cluster_subject_en": "Maritime Operations and Incidents",
+    "cluster_subject_no": "Maritime operasjoner og hendelser",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "952494f40fa93e37c649a53a9aa642447641c09ec9fb8cfca8c31752db3c8715"
+  },
+  "n_47": {
+    "cluster": "n_47",
+    "cluster_subject_en": "Polar Bear Encounters",
+    "cluster_subject_no": "Møter med isbjørn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "bbf183cfdd9b69ccfe2284d10d93effe9b124bd484c4364c069d39476eb3b650"
+  },
+  "n_48": {
+    "cluster": "n_48",
+    "cluster_subject_en": "Rescue and Police Operations",
+    "cluster_subject_no": "Redningsaksjoner og politioperasjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ca58c084df79077684ca5b3c1ab12f57e07c559b00847c097102b2bf0c4565fb"
+  },
+  "n_49": {
+    "cluster": "n_49",
+    "cluster_subject_en": "Accidents and rescue operations",
+    "cluster_subject_no": "Ulykker og redningsaksjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6e65bff35d5ab3bd63187b16b692ae2160c2a6755d0f739c4efa96f63301d99e"
+  },
+  "n_5": {
+    "cluster": "n_5",
+    "cluster_subject_en": "Photography and photo archives",
+    "cluster_subject_no": "Fotografi og fotoarkiver",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "17dfeb81c8331cf939673aa096b41d3180f6af4c8fb7e7f604ad9ee42e73938f"
+  },
+  "n_50": {
+    "cluster": "n_50",
+    "cluster_subject_en": "Police blotter",
+    "cluster_subject_no": "Politiloggen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e7d626683989c606922150ecef7aadd81e24e1534213088b3e3ed5f40b46cf6f"
+  },
+  "n_51": {
+    "cluster": "n_51",
+    "cluster_subject_en": "Police and Rescue Reports",
+    "cluster_subject_no": "Politi- og redningsmeldinger",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "eadfd0eb1457257985246461d89b576eb7232e32f6d665c86fbc2156df7779d7"
+  },
+  "n_52": {
+    "cluster": "n_52",
+    "cluster_subject_en": "Wildlife harvest management",
+    "cluster_subject_no": "Forvaltning av jakt og fangst",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "1a8cca1e9152a182da1d29904f21b86daf1df109383cd2c4363a649a087046da"
+  },
+  "n_6": {
+    "cluster": "n_6",
+    "cluster_subject_en": "Endurance races",
+    "cluster_subject_no": "Utholdenhetsløp",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8d89fc29efd500cd3c214c423195bc103ced87ad991dd294bb970535a41dce5f"
+  },
+  "n_7": {
+    "cluster": "n_7",
+    "cluster_subject_en": "Kindergarten life",
+    "cluster_subject_no": "Livet i barnehagen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b55a65beb3f8199972ddbc30836c95e2e0ad31eca4f4e751bdd147e4875df22f"
+  },
+  "n_8": {
+    "cluster": "n_8",
+    "cluster_subject_en": "Longyearbyen School",
+    "cluster_subject_no": "Longyearbyen skole",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "5956d3c9ae16d40c8f7d393eda22a81aa13e96120da5be8b6084ea9bf0f64cb4"
+  },
+  "n_9": {
+    "cluster": "n_9",
+    "cluster_subject_en": "Trapping stations",
+    "cluster_subject_no": "Fangststasjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "2ff66100a1ace6b61b1f0816e57f69e2df04264761b31a1b44e3d53794444e5b"
+  },
+  "p_0": {
+    "cluster": "p_0",
+    "cluster_subject_en": "Stetten guessing competition",
+    "cluster_subject_no": "Stetten-konkurransen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6709d9176b5a064103f4c63e6bbd2ebfd38d32ad23222f858dc100536e9f9c2a"
+  },
+  "p_1": {
+    "cluster": "p_1",
+    "cluster_subject_en": "Svalbard History Films",
+    "cluster_subject_no": "Filmer om Svalbards historie",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ef74eaee7abf60f7f6beaf5496d88a30c56be10a27386de31e83f491b4ed25ad"
+  },
+  "p_10": {
+    "cluster": "p_10",
+    "cluster_subject_en": "Literary culture",
+    "cluster_subject_no": "Litteraturkultur",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a3bf4859beedd767b3058da6da7b3c1f2ae8631725fdf18c4c1007acbe8599da"
+  },
+  "p_100": {
+    "cluster": "p_100",
+    "cluster_subject_en": "Housing and property development",
+    "cluster_subject_no": "Bolig- og eiendomsutvikling",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7c488231393c8858a06c82aa6845619041445389667bd3663965e67fcdc214b1"
+  },
+  "p_101": {
+    "cluster": "p_101",
+    "cluster_subject_en": "Avalanche risk management",
+    "cluster_subject_no": "Håndtering av skredfare",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "fbc2e489c6542d57d484f9b68fc7f9a07633321b52f8acc1f2572fee91ab3a83"
+  },
+  "p_102": {
+    "cluster": "p_102",
+    "cluster_subject_en": "Longyearbyen avalanche risk management",
+    "cluster_subject_no": "Håndtering av skredfare i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "25b96a011625c003596d9c2c4f01a186461ebce648e1ac22705030832fd5716b"
+  },
+  "p_103": {
+    "cluster": "p_103",
+    "cluster_subject_en": "Longyearbyen Power Supply",
+    "cluster_subject_no": "Kraftforsyningen i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "30d33dd8f8bb798054543521bf33c7af0d258116f77b9b6c42a0c38cfa2b9ffa"
+  },
+  "p_104": {
+    "cluster": "p_104",
+    "cluster_subject_en": "Workplace inspections",
+    "cluster_subject_no": "Arbeidsplasstilsyn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "38ccee200db3724d65251cb1bbea2cd55096c4282e613c91d90b8f529770ef6d"
+  },
+  "p_105": {
+    "cluster": "p_105",
+    "cluster_subject_en": "Longyearbyen Energy Transition",
+    "cluster_subject_no": "Energiomstillingen i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "af47a6f20953b75f57291ed208449f25f9fe4e989f37695a33bc9a95b59f00b8"
+  },
+  "p_106": {
+    "cluster": "p_106",
+    "cluster_subject_en": "Longyearbyen energy transition",
+    "cluster_subject_no": "Energiomstillingen i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7737923eb3348a2e13f1b8f3912639a678e74c30580e0b1f3f7a04a3b123ed28"
+  },
+  "p_107": {
+    "cluster": "p_107",
+    "cluster_subject_en": "Longyearbyen cruise tourism",
+    "cluster_subject_no": "Cruiseturisme i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "97b4adda095f3f2dfafc5f2288b4b6e1046b107f253ea8b08234e02d9751d243"
+  },
+  "p_108": {
+    "cluster": "p_108",
+    "cluster_subject_en": "Tourism Development",
+    "cluster_subject_no": "Reiselivsutvikling",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "32f18abc62362156e36340e0ca343faca23e797a5f6e1334e20fddde75508061"
+  },
+  "p_109": {
+    "cluster": "p_109",
+    "cluster_subject_en": "Environmental land-use regulation",
+    "cluster_subject_no": "Miljøregulering av arealbruk",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "955faff41b22c080cf2e6bed4098a2fa546028df80bb5330e35620b84100b66e"
+  },
+  "p_11": {
+    "cluster": "p_11",
+    "cluster_subject_en": "Visual Arts",
+    "cluster_subject_no": "Billedkunst",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "60ff4438e82c09e00a15002534fa238449edb7e1cb62a2bc908188d6297df8c3"
+  },
+  "p_110": {
+    "cluster": "p_110",
+    "cluster_subject_en": "Environmental travel restrictions",
+    "cluster_subject_no": "Miljøbegrunnede ferdselsrestriksjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "520972921bbd014f9d83d0a54c2c3a3bd306b76f77d47c29b00f15b6f1617099"
+  },
+  "p_111": {
+    "cluster": "p_111",
+    "cluster_subject_en": "Svea mine closure and cleanup",
+    "cluster_subject_no": "Nedleggelse og opprydding av Svea gruve",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a2622c13036972137f5697d8b499466c012b687478cea2f8555e43a95241b021"
+  },
+  "p_112": {
+    "cluster": "p_112",
+    "cluster_subject_en": "Svea–Lunckefjell Mine Closure",
+    "cluster_subject_no": "Avviklingen av gruvene i Svea og Lunckefjell",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "66295c38af277f9004ed4d812e9965f102dbe011b5c3eca26df29e1cd351a984"
+  },
+  "p_113": {
+    "cluster": "p_113",
+    "cluster_subject_en": "Longyearbyen energy supply",
+    "cluster_subject_no": "Longyearbyens energiforsyning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b08f9b8b453d019cc93935dd43a0295999ebd21d5fd6f4c74af6fc3e778478fd"
+  },
+  "p_114": {
+    "cluster": "p_114",
+    "cluster_subject_en": "Longyearbyen energy costs",
+    "cluster_subject_no": "Energikostnader i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "0a32d7e6937c561aa00cf4399eb586752da4ab3100f0b2bc08752a99881162bc"
+  },
+  "p_115": {
+    "cluster": "p_115",
+    "cluster_subject_en": "Svalbard earthquakes",
+    "cluster_subject_no": "Jordskjelv på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "bf48beaf0e297d8e46368ea1aead0135fa0fb445eb20175e088bbf7277ffc951"
+  },
+  "p_116": {
+    "cluster": "p_116",
+    "cluster_subject_en": "Mark Sabbatini and Icepeople",
+    "cluster_subject_no": "Mark Sabbatini og Icepeople",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "258cde31b5f34d6d4a9e8beca785c5775672b9539f4437c3505b968ab60e93bb"
+  },
+  "p_117": {
+    "cluster": "p_117",
+    "cluster_subject_en": "Governor’s field inspectors",
+    "cluster_subject_no": "Sysselmesterens feltinspektører",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e4af0875ab0fd1c2c863885aa30bc1cd112a9265768a83e3c4ec54fd8197ad78"
+  },
+  "p_118": {
+    "cluster": "p_118",
+    "cluster_subject_en": "Customs and Border Control",
+    "cluster_subject_no": "Toll- og grensekontroll",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "3f0a37261687c21aa843a9bf93efbf74fb12c9de1403332594114bb17a320993"
+  },
+  "p_119": {
+    "cluster": "p_119",
+    "cluster_subject_en": "Sherpa Trail Proposal",
+    "cluster_subject_no": "Forslag om sherpasti",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ea181fca70a0f3103eeb9e59c5e7637d9136f04854f9d52c6a27a3d0b9b8451f"
+  },
+  "p_12": {
+    "cluster": "p_12",
+    "cluster_subject_en": "Animal health services",
+    "cluster_subject_no": "Dyrehelsetjenester",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "32ddd3711011538a46af4be643591500546d879cd471699f0f845359bcdc63eb"
+  },
+  "p_120": {
+    "cluster": "p_120",
+    "cluster_subject_en": "Tourism Management and Sustainability",
+    "cluster_subject_no": "Reiselivsledelse og bærekraft",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9349b4ec7deb6bac8cf4f385b46d29c8389c4f4cdb852978a85422eb34f224a6"
+  },
+  "p_13": {
+    "cluster": "p_13",
+    "cluster_subject_en": "Satellite ground stations",
+    "cluster_subject_no": "Satellittbakkestasjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "70a0ad72fdc78643d59358ed9947290f3fa0c17e6ec0b1cb7b5183f9c780751b"
+  },
+  "p_14": {
+    "cluster": "p_14",
+    "cluster_subject_en": "Svalbard air ambulance preparedness",
+    "cluster_subject_no": "Luftambulanseberedskapen på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "76facfba8734264442a48db9e5361841561ba2c5c1e5a6b8c7ea6ef2f32bf678"
+  },
+  "p_15": {
+    "cluster": "p_15",
+    "cluster_subject_en": "Longyearbyen Hospital",
+    "cluster_subject_no": "Longyearbyen sykehus",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6e99117c4db5ccbe141b849c7740c8d5e9f609b938f5697f88b42263ab59e890"
+  },
+  "p_16": {
+    "cluster": "p_16",
+    "cluster_subject_en": "Historical photographs",
+    "cluster_subject_no": "Historiske fotografier",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8249e9dca114b37d13feaef613280abd0326b18acee01c6e7137d53bc1593c2d"
+  },
+  "p_17": {
+    "cluster": "p_17",
+    "cluster_subject_en": "Historical Photographs",
+    "cluster_subject_no": "Historiske fotografier",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "deeb949a985c6711cc0e276e3ecfe1b6375a6ee40ebdb599e582bc06057bea6c"
+  },
+  "p_18": {
+    "cluster": "p_18",
+    "cluster_subject_en": "Longyearbyen student housing",
+    "cluster_subject_no": "Studentboliger i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a0ba060ae5a5c5605a877167c42dba9e732d0f78d5ab295fc66aedc325629ac2"
+  },
+  "p_19": {
+    "cluster": "p_19",
+    "cluster_subject_en": "Telecommunications infrastructure",
+    "cluster_subject_no": "Telekommunikasjonsinfrastruktur",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "3b39c3e740a2373451af730a93ac8d0b65d9b148b12ed3aee6c214110ee8369e"
+  },
+  "p_2": {
+    "cluster": "p_2",
+    "cluster_subject_en": "Old Hospital Property Disputes",
+    "cluster_subject_no": "Eiendomstvister om Gamle sykehuset",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f0d21c8cd8c4681514cdb3a3f3f0b5a0c80e1b7c2734e5f091ba302c402e970e"
+  },
+  "p_20": {
+    "cluster": "p_20",
+    "cluster_subject_en": "Air travel",
+    "cluster_subject_no": "Flyreiser",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a77139da5b1d065baf8cc84ef8ddc7f3a5734a91927b06aeee4d13df5a5ee42c"
+  },
+  "p_21": {
+    "cluster": "p_21",
+    "cluster_subject_en": "Svalbardposten local newspaper",
+    "cluster_subject_no": "Lokalavisen Svalbardposten",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "5071fe5755be60576dcc0eb48434151b793b97affdb49630af9b8c0cf1595cb2"
+  },
+  "p_22": {
+    "cluster": "p_22",
+    "cluster_subject_en": "Postal services",
+    "cluster_subject_no": "Posttjenester",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a6e8f6d292c4ac03c2071b2087dab92a4bd070eb777843c5cdd84cd94c16ae17"
+  },
+  "p_23": {
+    "cluster": "p_23",
+    "cluster_subject_en": "Svalbardbutikken retail operations",
+    "cluster_subject_no": "Svalbardbutikkens butikkdrift",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "0a7c9adb7a10f22ea4f75c5edec679b18b27dede9b81844272892840ceeaa483"
+  },
+  "p_24": {
+    "cluster": "p_24",
+    "cluster_subject_en": "Wildlife ecology",
+    "cluster_subject_no": "Viltøkologi",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "56a95d58661a0672f3578a9cfe62b80adc35eb0ce0d45a053bcc6aa3e66085fd"
+  },
+  "p_25": {
+    "cluster": "p_25",
+    "cluster_subject_en": "Svalbard wildlife",
+    "cluster_subject_no": "Dyreliv på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8c7c11b01c4f79b168e3151701f1b8ffbdb2e2b2e21ff8807932bc93b6b709cc"
+  },
+  "p_26": {
+    "cluster": "p_26",
+    "cluster_subject_en": "Svalbard plant life",
+    "cluster_subject_no": "Planteliv på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c97d0fa4f89416a73fcd88c2e26b3f1d992b318580961adc0d8afad58810b196"
+  },
+  "p_27": {
+    "cluster": "p_27",
+    "cluster_subject_en": "Weather and climate",
+    "cluster_subject_no": "Vær og klima",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "04e6249ad26ce8db164793d65a090ef0bbe826482b990e786119779ac7731de8"
+  },
+  "p_28": {
+    "cluster": "p_28",
+    "cluster_subject_en": "Svalbard geopolitics",
+    "cluster_subject_no": "Svalbard-geopolitikk",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "61c29a607182cac45425339b60826ff93169f26f3a143e3341e84a604421fc6f"
+  },
+  "p_29": {
+    "cluster": "p_29",
+    "cluster_subject_en": "Russian settlements on Svalbard",
+    "cluster_subject_no": "Russiske bosetninger på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "eafe4a4e29706f00dd53a29bb44738c14de8cd10619b88a5e5e2b8f5ac7cae5c"
+  },
+  "p_3": {
+    "cluster": "p_3",
+    "cluster_subject_en": "Svalbard Global Seed Vault",
+    "cluster_subject_no": "Svalbard globale frøhvelv",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f203660da4c734dcabd2c56c8ef1d566d52ae810d26b2123136c63159bd6160e"
+  },
+  "p_30": {
+    "cluster": "p_30",
+    "cluster_subject_en": "Local sports",
+    "cluster_subject_no": "Lokalsport",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f73253738054e8d5f5d792af604b457969795bbcc0d83cfee2654e9c5e75d6a8"
+  },
+  "p_31": {
+    "cluster": "p_31",
+    "cluster_subject_en": "Endurance races",
+    "cluster_subject_no": "Utholdenhetsløp",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d49e50764215d21516fbd73c77ec248990c4f5605a59f180fe40c3e11fea08da"
+  },
+  "p_32": {
+    "cluster": "p_32",
+    "cluster_subject_en": "Community Sports and Recreation",
+    "cluster_subject_no": "Lokalsport og fritidsaktiviteter",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "29e5f744e402ec5524b940230ec368d48937cc51d96c8ab30365c908c76375c0"
+  },
+  "p_33": {
+    "cluster": "p_33",
+    "cluster_subject_en": "Trappers Trail sled-dog race",
+    "cluster_subject_no": "Hundeløpet Trappers Trail",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "981c7d046ca5ee104a8a41990c9b15c327c7ce83c4177026f0d0317fd170ee5f"
+  },
+  "p_34": {
+    "cluster": "p_34",
+    "cluster_subject_en": "Community life",
+    "cluster_subject_no": "Lokalsamfunn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "0c845e421ae29dab43264706a902c60da8e99147261f49c2f5c664b1836f77fb"
+  },
+  "p_35": {
+    "cluster": "p_35",
+    "cluster_subject_en": "Revue and Cultural Awards",
+    "cluster_subject_no": "Revy og kulturpriser",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "43f0bd781587b375b4f132f3da0ba67dd0928561d8f34f5d22f65e96aec897fa"
+  },
+  "p_36": {
+    "cluster": "p_36",
+    "cluster_subject_en": "Dog Keeping",
+    "cluster_subject_no": "Hundehold",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9a957286da1ba9753397957240d629e8b14fb63deb802e949054ef8341107ac2"
+  },
+  "p_37": {
+    "cluster": "p_37",
+    "cluster_subject_en": "Youth cultural performances",
+    "cluster_subject_no": "Kulturforestillinger med barn og unge",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "0bfe9df4495b629e38db66141fd5d73113cec6ff648f2a08c670cb843e6754ca"
+  },
+  "p_38": {
+    "cluster": "p_38",
+    "cluster_subject_en": "Dark Season Blues Festival",
+    "cluster_subject_no": "Dark Season Blues-festivalen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "5badcac6cb79ce14ae7b135348b5b4947e3d4923646bf66b0ad19fb70b2da9bc"
+  },
+  "p_39": {
+    "cluster": "p_39",
+    "cluster_subject_en": "Polarjazz Festival",
+    "cluster_subject_no": "Polarjazz-festivalen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "847090a640b3a4a6bd29761df518c200366a59df67b0cdcb3357e7a30918ae87"
+  },
+  "p_4": {
+    "cluster": "p_4",
+    "cluster_subject_en": "Longyearbyen banking services",
+    "cluster_subject_no": "Banktjenester i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "23ac59894c385ee961342297644e1a13990a2fea6f1a3a3a64d10cebd1cb996d"
+  },
+  "p_40": {
+    "cluster": "p_40",
+    "cluster_subject_en": "Live music",
+    "cluster_subject_no": "Livemusikk",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "909b1da70011ea668cfb610a83197e0b3c5073abceaae04c7737ec3a39db3322"
+  },
+  "p_41": {
+    "cluster": "p_41",
+    "cluster_subject_en": "Fire Safety and Response",
+    "cluster_subject_no": "Brannsikkerhet og beredskap",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6957547cf24559f8d4dc695978634e1e7b6551a0f4b624ac3bf121b6ae37f9de"
+  },
+  "p_42": {
+    "cluster": "p_42",
+    "cluster_subject_en": "Svalbard Folk High School",
+    "cluster_subject_no": "Svalbard folkehøgskole",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "87f2b238e925f4135b5de7cc00eb96b8320541f4d7e25c70d9c978afe3c14b4d"
+  },
+  "p_43": {
+    "cluster": "p_43",
+    "cluster_subject_en": "Overwintering trapping",
+    "cluster_subject_no": "Overvintringsfangst",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "94fc49a4c7630b7d9f56b22af658125b2460d83040694c29b66ac425dd366445"
+  },
+  "p_44": {
+    "cluster": "p_44",
+    "cluster_subject_en": "Children’s right to education",
+    "cluster_subject_no": "Barns rett til utdanning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "cd25a0e88a99ecb50d327aec4785c59493a3dee49372735f2ce8dc7dd826fae7"
+  },
+  "p_45": {
+    "cluster": "p_45",
+    "cluster_subject_en": "School life",
+    "cluster_subject_no": "Skoleliv",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "33760bdfbb06498a2ae1c96d8d0b402e5146b81c78f1e51378993162e1e62221"
+  },
+  "p_46": {
+    "cluster": "p_46",
+    "cluster_subject_en": "Kindergarten Provision",
+    "cluster_subject_no": "Barnehagetilbud",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "be6077e1927d570144a3753a89d73a9cae7f4d8a1545634a3882af19a64b6ac3"
+  },
+  "p_47": {
+    "cluster": "p_47",
+    "cluster_subject_en": "Nordpolet Surplus Fund",
+    "cluster_subject_no": "Nordpolets overskuddsmidler",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e27eb79c01f086126ff2514ace5a90f827017508670d15ea175f928771aa0539"
+  },
+  "p_48": {
+    "cluster": "p_48",
+    "cluster_subject_en": "Exploration History and Heritage",
+    "cluster_subject_no": "Ekspedisjonshistorie og kulturarv",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a4ee0011d902decb9e38d51ab55e272553682a88fe542f9fa78e06839760e810"
+  },
+  "p_49": {
+    "cluster": "p_49",
+    "cluster_subject_en": "Police and Emergency Callouts",
+    "cluster_subject_no": "Politi- og utrykningsoppdrag",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "de6abfd91256054eaecb358d06f62be2f87d056ceba783af2d2c8887105e27a1"
+  },
+  "p_5": {
+    "cluster": "p_5",
+    "cluster_subject_en": "Community Commentary and Features",
+    "cluster_subject_no": "Lokale kommentarer og reportasjer",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e047f84e24212cd060e91265bd1c90a08222049790ec7884a99627df2c237d14"
+  },
+  "p_50": {
+    "cluster": "p_50",
+    "cluster_subject_en": "Criminal cases",
+    "cluster_subject_no": "Straffesaker",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "1cc08fb05b5c25d89903c3d67ccfda8c64ba1dffb1b99a7f1abf4732598b6b14"
+  },
+  "p_51": {
+    "cluster": "p_51",
+    "cluster_subject_en": "Svalbard environmental research",
+    "cluster_subject_no": "Miljøforskning på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "801503e787a4ea087be3cd6ccd47bd39351ed6c04bf8cbdd065020ac2b1afea0"
+  },
+  "p_52": {
+    "cluster": "p_52",
+    "cluster_subject_en": "Community Profiles",
+    "cluster_subject_no": "Lokale personprofiler",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "fa1fc9b77b370036aad2133c7369ebcefb8cd8995dba2cd72f0ac68a93c50435"
+  },
+  "p_53": {
+    "cluster": "p_53",
+    "cluster_subject_en": "Governor’s Office",
+    "cluster_subject_no": "Sysselmesterens kontor",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6011ba001cc0e7f44e0420f1cad689235ca604ea687aee9b5cfdc8244bab8165"
+  },
+  "p_54": {
+    "cluster": "p_54",
+    "cluster_subject_en": "Police blotter",
+    "cluster_subject_no": "Politiloggen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9885508d33a08ddfebe80dca55195ae52b3b9ccf2838855b9465197d48e375f5"
+  },
+  "p_55": {
+    "cluster": "p_55",
+    "cluster_subject_en": "Svalbard Church",
+    "cluster_subject_no": "Svalbard kirke",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "70e554838e719f5973810c2de2ac41d23c35e723b50ed04e94a7640b5b26cf58"
+  },
+  "p_56": {
+    "cluster": "p_56",
+    "cluster_subject_en": "Bjørnøya and Hopen Stations",
+    "cluster_subject_no": "Bjørnøya og Hopen stasjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9c471bd7f77f78c0534d88125e2eb8c14629133836d1b05bbb29cb24d31a3d32"
+  },
+  "p_57": {
+    "cluster": "p_57",
+    "cluster_subject_en": "Heerodden helicopter crash",
+    "cluster_subject_no": "Helikopterulykken ved Heerodden",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a43661847497cf794ff614c8b826eb153d91da8a52209f9d29536e8b30998b4c"
+  },
+  "p_58": {
+    "cluster": "p_58",
+    "cluster_subject_en": "Marine pollution",
+    "cluster_subject_no": "Marin forsøpling",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "87491cb439c396bdf749ff2f30a73be0f01d077a899c3cd6288745716d1fbc8e"
+  },
+  "p_59": {
+    "cluster": "p_59",
+    "cluster_subject_en": "Public observances",
+    "cluster_subject_no": "Offentlige markeringer",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "cb64e258031893025d1ac8b8751aef5a833e7336a1dc98216396c596b84ce401"
+  },
+  "p_6": {
+    "cluster": "p_6",
+    "cluster_subject_en": "Return of the sun",
+    "cluster_subject_no": "Solas tilbakekomst",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a6facbcdc8912c9e81bbf5dc6e5a1aee136660959247ad57a41a493ba73cbd84"
+  },
+  "p_60": {
+    "cluster": "p_60",
+    "cluster_subject_en": "Constitution Day celebrations",
+    "cluster_subject_no": "17. mai-feiring",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "80cedfec57c546ffc1a0e1d1df9bfea69dd6aa1a3d416c64ae677f114e9b482b"
+  },
+  "p_61": {
+    "cluster": "p_61",
+    "cluster_subject_en": "Polar bear encounters",
+    "cluster_subject_no": "Møter med isbjørn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "4e94b8372db053b40fc926e696190810ac4ebebe3488462e847d5af2bde30788"
+  },
+  "p_62": {
+    "cluster": "p_62",
+    "cluster_subject_en": "University Centre in Svalbard",
+    "cluster_subject_no": "Universitetssenteret på Svalbard (UNIS)",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d2eb64a4153db69adc25267e704b4441f46f8b98dda233fbc7d335b9b9add661"
+  },
+  "p_63": {
+    "cluster": "p_63",
+    "cluster_subject_en": "Polar bears",
+    "cluster_subject_no": "Isbjørner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "d049d742085b3af868355942d3e63d8c92a07becef8becfa7847849072727ffb"
+  },
+  "p_64": {
+    "cluster": "p_64",
+    "cluster_subject_en": "Human–polar bear encounters",
+    "cluster_subject_no": "Møter mellom mennesker og isbjørn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "cd00bc14bccf550c800e5f212d9cd27302437b027870c4ab94c0100b51af02b0"
+  },
+  "p_65": {
+    "cluster": "p_65",
+    "cluster_subject_en": "Police incident log",
+    "cluster_subject_no": "Politiloggen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "521ba900b1aee842f4977c417d42811eb39bc0aa35f769a975262c79fd5666c9"
+  },
+  "p_66": {
+    "cluster": "p_66",
+    "cluster_subject_en": "Governor’s incident log",
+    "cluster_subject_no": "Sysselmesterens hendelseslogg",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7831576e0d1e1129c901e78cf7686aadd5c0bf5c05ddf854462407beae64d116"
+  },
+  "p_67": {
+    "cluster": "p_67",
+    "cluster_subject_en": "Polar research",
+    "cluster_subject_no": "Polarforskning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c42012e815c369e7527e5167cf6eecf35bddd7e88f5b086f8fb8e4ad3381acdd"
+  },
+  "p_68": {
+    "cluster": "p_68",
+    "cluster_subject_en": "Ny-Ålesund settlement",
+    "cluster_subject_no": "Ny-Ålesund",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "86e7adfda757eddc03d049eafc87fdcaf4a329231b260dc3f72321a3f949a51a"
+  },
+  "p_69": {
+    "cluster": "p_69",
+    "cluster_subject_en": "Local policing",
+    "cluster_subject_no": "Lokalt politiarbeid",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6ea5f04ac708f0073031fc0b82b68d0361c56c7cc92a35980a827c5179eba58e"
+  },
+  "p_7": {
+    "cluster": "p_7",
+    "cluster_subject_en": "TV charity fundraising campaign",
+    "cluster_subject_no": "TV-aksjonen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "6f7b2237571c6fd804dc07cab720a13ce55f583cc6d0908d5473266173dfcbcb"
+  },
+  "p_70": {
+    "cluster": "p_70",
+    "cluster_subject_en": "Police incident reports",
+    "cluster_subject_no": "Politiets hendelsesrapporter",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "7d2f35ba47444a90de2c1666b16d6bf521b13691457bcb34e0446306e6df6a46"
+  },
+  "p_71": {
+    "cluster": "p_71",
+    "cluster_subject_en": "Svalbard Brewery",
+    "cluster_subject_no": "Svalbard Bryggeri",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "bf7c5d781c9080e995debf97255593bd27e187fec82c891aab3d2b43fef25796"
+  },
+  "p_72": {
+    "cluster": "p_72",
+    "cluster_subject_en": "Drinking Water Safety",
+    "cluster_subject_no": "Drikkevannssikkerhet",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "5c458aba179e318b9365db333e3f86744088a004e884397c356f40ad9fc9977b"
+  },
+  "p_73": {
+    "cluster": "p_73",
+    "cluster_subject_en": "Maritime Safety and Regulation",
+    "cluster_subject_no": "Maritim sikkerhet og regelverk",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9ef0c0ab3acdfdd370a1976eebd65e1af4da5be0af1c1a64b72a9b7d3b93a6cf"
+  },
+  "p_74": {
+    "cluster": "p_74",
+    "cluster_subject_en": "Longyearbyen small businesses",
+    "cluster_subject_no": "Småbedrifter i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b656556322dfca5f659881d3d00bde9512574abb3bbdd5ad7f057ca9f18aaa4b"
+  },
+  "p_75": {
+    "cluster": "p_75",
+    "cluster_subject_en": "Local dining scene",
+    "cluster_subject_no": "Lokalt restaurant- og uteliv",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "2bbf312b0014ff8abbb61ed7545fe75d833f0df72df0b396755faaf24ff815e7"
+  },
+  "p_76": {
+    "cluster": "p_76",
+    "cluster_subject_en": "Environmental Protection Fund",
+    "cluster_subject_no": "Svalbards miljøvernfond",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e16e16e8f2de50941dbfa5b439b718afdf08d1475dfcc8cb836e91985d06ac4d"
+  },
+  "p_77": {
+    "cluster": "p_77",
+    "cluster_subject_en": "Cabin plots",
+    "cluster_subject_no": "Hyttetomter",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "2706a80ed34d5fbce1426f00ad7a1b7371362d571fb283f714eec6cc3a8dd344"
+  },
+  "p_78": {
+    "cluster": "p_78",
+    "cluster_subject_en": "Boat Incidents and Rescues",
+    "cluster_subject_no": "Båthendelser og redningsaksjoner",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "23fb2e2274708a5e4650b1c54e61035dadb80259981756ed0bc821120c5047fb"
+  },
+  "p_79": {
+    "cluster": "p_79",
+    "cluster_subject_en": "Northguider grounding and salvage",
+    "cluster_subject_no": "«Northguider»-grunnstøtingen og bergingen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a0521999ed08937b16568329f42f71fbd80082633b3d4fc9288dd26c02b72489"
+  },
+  "p_8": {
+    "cluster": "p_8",
+    "cluster_subject_en": "PFAS contamination cleanup",
+    "cluster_subject_no": "Opprydding av PFAS-forurensning",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e288b01c02326a5d4755ecb77e44049af4b55d0063815507a85a36de7ffe12b1"
+  },
+  "p_80": {
+    "cluster": "p_80",
+    "cluster_subject_en": "Mine 7 operations",
+    "cluster_subject_no": "Driften i Gruve 7",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "194c289faf797f4f264ee24f8de4f637734577844907f8173ac3649796fa7f53"
+  },
+  "p_81": {
+    "cluster": "p_81",
+    "cluster_subject_en": "Longyearbyen Port",
+    "cluster_subject_no": "Longyearbyen havn",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f830b59898f9887399a5be76ee22c57d47e72a72b0f17aca387d119c9c4da14e"
+  },
+  "p_82": {
+    "cluster": "p_82",
+    "cluster_subject_en": "Alcohol Licensing and Café Leases",
+    "cluster_subject_no": "Skjenkebevillinger og kaféleieavtaler",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "8320f8a74e59983dfbf42d87fce0abf332bf6329a6a890cf1e652a550d6fcb11"
+  },
+  "p_83": {
+    "cluster": "p_83",
+    "cluster_subject_en": "Population Trends",
+    "cluster_subject_no": "Befolkningsutvikling",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9a2e633abb33d79b881c88fbf437130fb20e253f4992ba85693795c182c94c4f"
+  },
+  "p_84": {
+    "cluster": "p_84",
+    "cluster_subject_en": "Longyearbyen local politics",
+    "cluster_subject_no": "Lokalpolitikk i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9da80197845bcc83cd5693677ca862cd28909cec018e8c8799cbbe7505c6f484"
+  },
+  "p_85": {
+    "cluster": "p_85",
+    "cluster_subject_en": "COVID-19 public health response",
+    "cluster_subject_no": "Folkehelsetiltak mot covid-19",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "836400b78d1dc4106ff2eca1a1604e13e60ab4f3d582f12285e4b9abe5ff05a3"
+  },
+  "p_86": {
+    "cluster": "p_86",
+    "cluster_subject_en": "Svalbard COVID-19 restrictions",
+    "cluster_subject_no": "Koronarestriksjoner på Svalbard",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "afd10301b937df6a5c710c7a4966cdf1715c1d444d2a6d13af581e08d68cccc5"
+  },
+  "p_87": {
+    "cluster": "p_87",
+    "cluster_subject_en": "Longyearbyen local governance",
+    "cluster_subject_no": "Lokalstyret i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "9655e286ccf9a657ad2ab202ed709bac3722269ea669ccf6da8225a1749a6ea9"
+  },
+  "p_88": {
+    "cluster": "p_88",
+    "cluster_subject_en": "NAV unemployment benefit cases",
+    "cluster_subject_no": "NAV-saker om dagpenger",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "4676ea3b2a438b9c04e1d0c473c9d0c7c5b4cd00522786a32cea54c2f5f1abc3"
+  },
+  "p_89": {
+    "cluster": "p_89",
+    "cluster_subject_en": "COVID-19 economic relief",
+    "cluster_subject_no": "Økonomiske støtteordninger under koronakrisen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "e4ec20ab57098bb7cbd7357bb34e0a3584ae85e6e358c945314b20df2ff8b168"
+  },
+  "p_9": {
+    "cluster": "p_9",
+    "cluster_subject_en": "Film and television",
+    "cluster_subject_no": "Film og TV",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "ffaa326e75788aeb07e8fb08b4f5c1b0a60420567c88205879af9b2c8da8f4f5"
+  },
+  "p_90": {
+    "cluster": "p_90",
+    "cluster_subject_en": "Business support schemes",
+    "cluster_subject_no": "Støtteordninger for næringslivet",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "c1c16bc61198613a0165e7547da2262cb09f5646d59f398385e191dd927880ad"
+  },
+  "p_91": {
+    "cluster": "p_91",
+    "cluster_subject_en": "Municipal infrastructure",
+    "cluster_subject_no": "Kommunal infrastruktur",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "db9af1fd6ea8e4bfe166287dde82f8e4bcbacb48a83a2db383f0ba59b5355bd0"
+  },
+  "p_92": {
+    "cluster": "p_92",
+    "cluster_subject_en": "Building demolition and reuse",
+    "cluster_subject_no": "Riving og gjenbruk av bygg",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "14012dc66b7a9cab1aa15080898b741c051ce0bbbf9505f37bdbb2bc19e16cb3"
+  },
+  "p_93": {
+    "cluster": "p_93",
+    "cluster_subject_en": "Tourism industry",
+    "cluster_subject_no": "Reiselivsnæringen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a03753109d48b90d5d51250c6c00f786016b7ef019813ccdf93dbac092eb9750"
+  },
+  "p_94": {
+    "cluster": "p_94",
+    "cluster_subject_en": "Emergency Preparedness and Response",
+    "cluster_subject_no": "Beredskap og respons",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "84aedfd08bc5af1d8bc7ac6c765b434ca7ba05ede4b34573947a62b7162544d3"
+  },
+  "p_95": {
+    "cluster": "p_95",
+    "cluster_subject_en": "Business development policy",
+    "cluster_subject_no": "Næringsutviklingspolitikk",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "b8b7c0e4aa0fe709d11e5400215ed08c486cc1eeb0f17cdc6235ab08965f6715"
+  },
+  "p_96": {
+    "cluster": "p_96",
+    "cluster_subject_en": "Svalbard White Paper",
+    "cluster_subject_no": "Svalbardmeldingen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "740872653d4be376f421dc975df94ae755f45526f2e1151c40a9f85ee07ed8e4"
+  },
+  "p_97": {
+    "cluster": "p_97",
+    "cluster_subject_en": "Waste and Vehicle Disposal",
+    "cluster_subject_no": "Avfall og kassering av kjøretøy",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "f759ac6ad4f1bf9b9be29d54c3fe0b022b22389a23fede3cc72ee2bd1ddbcbe4"
+  },
+  "p_98": {
+    "cluster": "p_98",
+    "cluster_subject_en": "Tourism industry",
+    "cluster_subject_no": "Reiselivsnæringen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "a09deddae4622e7ca09f0558036c63aa4dea2f17f9f9b1f0cd77cb017ebc75ac"
+  },
+  "p_99": {
+    "cluster": "p_99",
+    "cluster_subject_en": "Longyearbyen housing policy",
+    "cluster_subject_no": "Boligpolitikk i Longyearbyen",
+    "model": "gpt-5.6-sol",
+    "prompt_version": "approved-topic-label-no-v1",
+    "context_hash": "cbe93374262e327f4919b4a1b8de7bc1bb43afa3ccb949eef430b5adca727726"
+  }
+}

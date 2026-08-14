@@ -47,7 +47,7 @@ export const clusterGeometry = (entities) => {
             center,
             color: formatHex(average(colors, 'rgb')),
             key: temperature > 0 ? 'red' : 'blue', // emerging vs receding
-            subject: members[0].cluster_subject_x,
+            subject: members[0].cluster_subject_en || members[0].cluster_subject_no || 'Unlabeled topic',
         })
     })
 

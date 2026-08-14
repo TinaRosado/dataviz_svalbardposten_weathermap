@@ -302,6 +302,13 @@ a:hover {
 	margin: 6px 0 0;
 }
 
+.readout-excerpt {
+	font-size: 11px;
+	color: var(--ink, var(--muted));
+	line-height: 1.4;
+	margin: 8px 0 0;
+}
+
 /* Instrument readings — a two-column label/value grid. */
 .readout-meta {
 	display: grid;

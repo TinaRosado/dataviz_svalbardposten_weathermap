@@ -1,6 +1,6 @@
 import { BitmapText, Container, Graphics, Rectangle } from 'pixi.js'
 
-import { click, deselect } from './click'
+import { click, deselect, parseKeywords } from './click'
 
 export default (entities) => {
     const stage = new Container()
@@ -33,21 +33,16 @@ export default (entities) => {
     // articles, eagerly creating a BitmapText for every mode would be wasteful,
     // so a mode's labels are only materialised the first time it's switched on.
     // Non-interactive: the click target is the cross area, not the label.
-    const topKeywords = (list, n) =>
-        (list || '')
-            .replace(/[[\]']/g, '')
-            .split(',')
-            .map((s) => s.trim())
-            .filter(Boolean)
-            .slice(0, n)
-            .join(', ')
+    // Cluster-level context (this label shows the shared cluster vocabulary
+    // beside each of its member articles, not that article's own keywords).
+    const topKeywords = (value, n) => parseKeywords(value).slice(0, n).join(', ')
 
     const labelModes = [
         { key: 'elements-years', text: (e) => e.year },
-        { key: 'elements-titles', text: (e) => e.title_en || e.title },
+        { key: 'elements-titles', text: (e) => e.title_en || e.title_no },
         {
             key: 'elements-keywords',
-            text: (e) => topKeywords(e.top_keywords_en || e.top_keywords, 3),
+            text: (e) => topKeywords(e.top_keywords_en || e.top_keywords_no, 3),
         },
     ]
 
