@@ -4,18 +4,18 @@
 // Libraries
 
 import { csv, extent, min, scaleLinear } from 'd3'
-import { Application, Assets, Container, Rectangle } from 'pixi.js'
+import { Application, Assets } from 'pixi.js'
 import { Viewport } from 'pixi-viewport'
 
 // Modules
 
-import clusterHover from './interface/clusterHover.js'
 import clusters from './interface/clusters.js'
 import contours from './interface/contours.js'
 import controls from './interface/controls.js'
 import elements from './interface/elements.js'
 import fronts from './interface/fronts.js'
 import gradientFill from './interface/gradientFill.js'
+import languageToggle from './interface/languageToggle.js'
 import legend from './interface/legend.js'
 import pointGradient from './interface/pointGradient.js'
 import { filterEntities } from './lib/filterEntities.js'
@@ -76,6 +76,10 @@ Promise.all([
         return e
     })
 
+    // Pure DOM, no Pixi/viewport needed — wired as soon as the data (for the
+    // 2024 year-color) is ready, rather than waiting on the render below.
+    languageToggle(entities)
+
     // Set variables
 
     window.s = {
@@ -127,12 +131,7 @@ Promise.all([
     await gradientFill(scale_X, scale_Y, marginLeft, marginTop)
 
     contours(entities)
-    const {
-        labels: clusterLabels,
-        setLabelColorByYear,
-        hoverTargets: clusterHoverTargets,
-        neighborsByClusterId,
-    } = clusters(entities)
+    const { labels: clusterLabels, setLabelColorByYear } = clusters(entities)
     // Between clusters and elements, i.e. above contours/cluster fills, below
     // everything else — the circles/labels/fronts added next reorder on top
     // of it regardless.
@@ -140,7 +139,7 @@ Promise.all([
     const elementsHandle = elements(entities)
     fronts(entities)
 
-    // Cluster topic labels (+ their glow, see geometry.js) need to stay
+    // Cluster topic labels (+ their halo plate, see geometry.js) need to stay
     // readable over every other layer, so they move to the very top only
     // once everything else is in place — re-parenting via addChild() moves
     // an existing child rather than duplicating it.
@@ -149,35 +148,8 @@ Promise.all([
     // Read by download.js — only the plain data, not the Pixi handles.
     s.pointGradient = { points: pointGrad.points, yearExtent: pointGrad.yearExtent }
 
-    // Per-cluster hover: wires three kinds of target to the one authoritative
-    // activation function — created only now that both pointGrad and
-    // elementsHandle exist, since clusterHover.js needs both.
-    const hover = clusterHover(pointGrad, elementsHandle, neighborsByClusterId)
-    // 1. Entry — each cluster's topic-label region (clusters.js).
-    clusterHoverTargets.forEach(({ clusterId, target }) => hover.wireHoverTarget(target, clusterId))
-    // 2. Stay-active fallback — the existing per-article hit containers
-    // (pointGradient.js), which already track wherever a circle currently is.
-    pointGrad.hoverTargets.forEach(({ clusterId, target }) =>
-        hover.wireHoverTarget(target, clusterId),
-    )
-    // 3. Stay-active region sized to the *grid* layout's own footprint (not
-    // the network hull) — built only now that pointGrad has computed grid
-    // positions, so a wide/sparse cluster's spread-out circles stay covered
-    // even where they land outside the original hull.
-    const stayHits = new Container()
-    stayHits.label = 'clusters-stay-hits'
-    s.viewport.addChild(stayHits)
-    pointGrad.gridExtentByClusterId.forEach(({ x0, y0, x1, y1, maxR }, clusterId) => {
-        const stay = new Container()
-        stay.position.set(x0 - maxR, y0 - maxR)
-        stay.hitArea = new Rectangle(0, 0, x1 - x0 + 2 * maxR, y1 - y0 + 2 * maxR)
-        stay.eventMode = 'static'
-        stayHits.addChild(stay)
-        hover.wireHoverTarget(stay, clusterId)
-    })
-
     // Layer show/hide switches (reads the rendered layers by their .label)
-    controls(pointGrad, setLabelColorByYear, elementsHandle, hover)
+    controls(pointGrad, setLabelColorByYear, elementsHandle)
 
     // Draw the first frame, then fade the loading cover out to reveal the map
     // (the map is already painted underneath, so it's a clean crossfade). The

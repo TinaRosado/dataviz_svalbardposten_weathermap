@@ -1,6 +1,7 @@
 import { BitmapText, Container, Graphics, Rectangle } from 'pixi.js'
 
 import { click, deselect, parseKeywords } from './click'
+import { pickField } from './language.js'
 
 export default (entities) => {
     const stage = new Container()
@@ -39,28 +40,22 @@ export default (entities) => {
 
     const labelModes = [
         { key: 'elements-years', text: (e) => e.year },
-        { key: 'elements-titles', text: (e) => e.title_en || e.title_no },
+        { key: 'elements-titles', text: (e) => pickField(e, 'title') },
         {
             key: 'elements-keywords',
-            text: (e) => topKeywords(e.top_keywords_en || e.top_keywords_no, 3),
+            text: (e) => topKeywords(pickField(e, 'top_keywords'), 3),
         },
     ]
 
     // Which of an entity's coordinate sets to read — mirrors pointGradient.js's
-    // own layoutMode (the global Grid Layout/Collision Free toggles) and
-    // activeClusterIds (hover, via clusterHover.js — the directly-hovered
-    // cluster plus its precomputed nearby clusters, only meaningful while
-    // layoutMode is 'network') selection exactly. gridX/gridY/collisionX/
-    // collisionY are copied onto each entity by pointGradient.js once
-    // layouts.js has computed them.
+    // own layoutMode (the global Grid Layout/Collision Free toggles) selection
+    // exactly. gridX/gridY/collisionX/collisionY are copied onto each entity by
+    // pointGradient.js once layouts.js has computed them.
     let layoutMode = 'network'
-    let activeClusterIds = new Set()
     const targetFor = (e) => {
         if (layoutMode === 'grid') return [e.gridX, e.gridY]
         if (layoutMode === 'collision') return [e.collisionX, e.collisionY]
-        return layoutMode === 'network' && activeClusterIds.has(e.cluster)
-            ? [e.gridX, e.gridY]
-            : [e.x, e.y]
+        return [e.x, e.y]
     }
 
     const layers = labelModes.map((mode) => {
@@ -68,12 +63,6 @@ export default (entities) => {
         layer.label = mode.key
         layer.visible = false
         let built = false
-        // Built lazily (first activation) at whatever cluster is currently
-        // active, so a label mode switched on while a cluster is already
-        // expanded starts in the right place rather than always on the
-        // network position. `items` keeps the entity each bitmap belongs to,
-        // so setActiveCluster() below can move already-built labels without
-        // rebuilding.
         const items = []
         // Called by controls.js before the layer is first shown.
         layer.build = () => {
@@ -84,7 +73,7 @@ export default (entities) => {
                 if (!text) return
                 const bitmap = new BitmapText({
                     text,
-                    style: { fontFamily: 'Lato', fontSize: 0.7, align: 'left' },
+                    style: { fontFamily: 'Lato', fontSize: 1, align: 'left' },
                 })
                 bitmap.tint = Number(e.color)
                 const [x, y] = targetFor(e)
@@ -98,10 +87,10 @@ export default (entities) => {
         return items
     })
 
-    // Kept in sync by controls.js calling setYearRange() below, same pattern
-    // as activeClusterIds above — defaults open so a layer built before
-    // controls.js ever runs (shouldn't happen, but see applyYears() calling
-    // it once during initial setup) doesn't hide everything by mistake.
+    // Kept in sync by controls.js calling setYearRange() below — defaults open
+    // so a layer built before controls.js ever runs (shouldn't happen, but see
+    // applyYears() calling it once during initial setup) doesn't hide
+    // everything by mistake.
     let currentRange = [-Infinity, Infinity]
     const applyYearRange = () => {
         const [startYear, endYear] = currentRange
@@ -122,7 +111,7 @@ export default (entities) => {
 
     // Repositions every already-built label to its current targetFor() —
     // used when the *global* layout changes, since every label's target may
-    // change at once (unlike hover, which only ever touches two clusters).
+    // change at once.
     const repositionAll = () => {
         layers.forEach((items) => {
             items.forEach(({ bitmap, entity }) => {
@@ -139,28 +128,6 @@ export default (entities) => {
         repositionAll()
     }
 
-    // Called by clusterHover.js on every activation change — `newActiveIds`
-    // is the hovered cluster plus its precomputed nearby clusters (see
-    // clusters.js's neighborsByClusterId), already expanded by
-    // clusterHover.js. Moves only the previously-active and newly-active
-    // clusters' already-built labels (Year/Title/Keywords) to match their
-    // circle, exactly mirroring pointGradient.js's own scoping so unrelated
-    // clusters' labels are never touched. Labels snap directly to their new
-    // target rather than animating alongside the circle's tween — a
-    // deliberate, smaller-scope choice; see the completion report.
-    const setActiveCluster = (newActiveIds) => {
-        const previousIds = activeClusterIds
-        activeClusterIds = newActiveIds
-        if (layoutMode !== 'network') return // no visual effect while a global mode is active — see clusterHover.js's setEnabled
-        layers.forEach((items) => {
-            items.forEach(({ bitmap, entity }) => {
-                if (!previousIds.has(entity.cluster) && !newActiveIds.has(entity.cluster)) return
-                const [x, y] = targetFor(entity)
-                bitmap.position.set(x + 0.3, y + 0.1)
-            })
-        })
-    }
-
     // Invisible per-article hit targets, centred on each cross. Kept in their
     // own container above the crosses/labels so selection works whether or not
     // any label mode is shown.
@@ -168,9 +135,19 @@ export default (entities) => {
     hits.label = 'elements-hits'
     stage.addChild(hits)
 
-    // One hit Container per article, built once (position/hitArea never
-    // change — only its .visible, when the year range moves).
-    const hitList = entities.map((e) => {
+    entities.forEach((e) => {
+        // Cross
+
+        const color = Number(e.color)
+
+        crosses.moveTo(e.x, e.y - length).lineTo(e.x, e.y + length)
+        crosses.moveTo(e.x - length, e.y).lineTo(e.x + length, e.y)
+        crosses.stroke({ width: tickness, color })
+
+        // Interaction — an empty container carrying only a hitArea square
+        // around the cross. hitArea is in local coords, so centre it on origin
+        // and position the container at the cross.
+
         const hit = new Container()
         hit.position.set(e.x, e.y)
         hit.hitArea = new Rectangle(-hitRadius, -hitRadius, hitRadius * 2, hitRadius * 2)
@@ -183,34 +160,7 @@ export default (entities) => {
             click(e)
         }) // On click
         hits.addChild(hit)
-        return { hit, year: parseInt(e.year, 10) }
     })
-
-    // Rebuilds the visible cross field for a year range [startYear, endYear]
-    // (inclusive) — called by controls.js when the shared Years range control
-    // moves. Crosses always keep their existing per-article colour (Isolines
-    // has no "off" colour state); only which articles are drawn/clickable
-    // changes. Stashed on `crosses` (the labelled object controls.js can find),
-    // mirroring the `layer.build` convention above rather than changing this
-    // module's return signature.
-    crosses.redrawByRange = (startYear, endYear) => {
-        crosses.clear()
-        for (let i = 0; i < entities.length; i++) {
-            const e = entities[i]
-            const inRange = hitList[i].year >= startYear && hitList[i].year <= endYear
-            hitList[i].hit.visible = inRange
-            if (!inRange) continue
-            const color = Number(e.color)
-            crosses.moveTo(e.x, e.y - length).lineTo(e.x, e.y + length)
-            crosses.moveTo(e.x - length, e.y).lineTo(e.x + length, e.y)
-            crosses.stroke({ width: tickness, color })
-        }
-    }
-
-    // Initial draw: every article, exactly matching the pre-existing
-    // unconditional behavior (no range control has ever narrowed this yet).
-    const initialYears = entities.map((e) => parseInt(e.year, 10))
-    crosses.redrawByRange(Math.min(...initialYears), Math.max(...initialYears))
 
     // Clicking empty map (anywhere the tap didn't hit an article) closes the
     // station report. The viewport is hittable everywhere — that's how panning
@@ -218,5 +168,5 @@ export default (entities) => {
     s.viewport.eventMode = 'static'
     s.viewport.on('pointertap', () => deselect())
 
-    return { setLayout, setActiveCluster, setYearRange }
+    return { setLayout, setYearRange }
 }

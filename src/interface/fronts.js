@@ -26,17 +26,23 @@ const radius = (hull, center) => {
 // Quadratic Bézier point and derivative (tangent) at parameter u ∈ [0,1].
 const bez = (p0, q, p2, u) => {
     const m = 1 - u
-    return [m * m * p0[0] + 2 * m * u * q[0] + u * u * p2[0], m * m * p0[1] + 2 * m * u * q[1] + u * u * p2[1]]
+    return [
+        m * m * p0[0] + 2 * m * u * q[0] + u * u * p2[0],
+        m * m * p0[1] + 2 * m * u * q[1] + u * u * p2[1],
+    ]
 }
 const bezD = (p0, q, p2, u) => {
     const m = 1 - u
-    return [2 * m * (q[0] - p0[0]) + 2 * u * (p2[0] - q[0]), 2 * m * (q[1] - p0[1]) + 2 * u * (p2[1] - q[1])]
+    return [
+        2 * m * (q[0] - p0[0]) + 2 * u * (p2[0] - q[0]),
+        2 * m * (q[1] - p0[1]) + 2 * u * (p2[1] - q[1]),
+    ]
 }
 
 // Shared style constants — exported so the SVG print export (download.js) draws
 // fronts identically to the on-screen Pixi layer.
-export const FRONT_COLOR = 0xcc6b73 // a lighter red than the map's High red, softer for fronts
-export const FRONT_COLOR_HEX = '#cc6b73'
+export const FRONT_COLOR = 0x000000 // plain black, reads clearly against any cluster/gradient color
+export const FRONT_COLOR_HEX = '#000000'
 export const FRONT_LINE_WIDTH = 1 // the front's base line
 export const PIP_R = 2.2 // semicircle radius — the same on every front (no scaling)
 const PIP_STEP = PIP_R * 3 // centre-to-centre spacing, leaving a gap between pips
@@ -134,7 +140,8 @@ export const frontsGeometry = (entities) => {
             const axis = norm(sub(warm.center, cold.center))
             const along = [-axis[1], axis[0]] // perpendicular to that axis
             const mid = [(c1.center[0] + c2.center[0]) / 2, (c1.center[1] + c2.center[1]) / 2]
-            const half = 0.7 * Math.min(radius(warm.hull, warm.center), radius(cold.hull, cold.center))
+            const half =
+                0.7 * Math.min(radius(warm.hull, warm.center), radius(cold.hull, cold.center))
 
             fronts.push(buildFront(mid, along, half, warm.center))
         }

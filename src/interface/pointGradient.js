@@ -1,6 +1,7 @@
 import { Container, Graphics, Rectangle } from 'pixi.js'
 
 import { click } from './click.js'
+import { showTooltip, hideTooltip } from './tooltip.js'
 import { assignGridLayout, assignCollisionFreeLayout } from './layouts.js'
 
 // Point Gradient — a halftone-style alternative to the cross/Isolines reading
@@ -32,12 +33,18 @@ const CAP_PERCENTILE = 0.95 // upper-domain cap; word counts beyond this clamp t
 const AREA_CURVE_EXPONENT = 2 // applied to the normalised word-count fraction *before* converting to radius, so it shapes area, not radius directly; 1 = linear area (old sqrt-radius behavior), >1 compresses short/medium articles further toward MIN_RADIUS
 const HIT_PADDING = 0.15 // extra click-target margin beyond each circle's own radius
 const MIN_HIT_HALF = 0.7 // matches elements.js's existing cross hitRadius — the interaction floor for small circles
-export const CIRCLE_FILL_OPACITY = 0.6 // circle fill alpha only — lets overlapping articles accumulate visually instead of instantly flattening into one opaque blob
+export const CIRCLE_FILL_OPACITY = 0.65 // circle fill alpha only — lets overlapping articles accumulate visually instead of instantly flattening into one opaque blob
+
+// Highlight ring — a stroked ring (no fill, so the circle underneath stays
+// visible) drawn around whichever single article is currently hovered or
+// selected (clicked — see refreshHighlight below), in that article's own
+// year-color at full opacity (unlike CIRCLE_FILL_OPACITY, deliberately — the
+// highlight should read as a clear, solid indicator, not blend into the
+// field of overlapping fills).
+const HIGHLIGHT_RING_MARGIN = 0.35 // extra radius beyond the circle's own r
+const HIGHLIGHT_RING_WIDTH = 0.3
 
 // ---- Layout-transition tuning ------------------------------------------------
-// Exported so clusterHover.js can size its "must finish expanding and hold
-// before it's allowed to collapse" commitment window against the real
-// animation duration, instead of a second, potentially-drifting copy of it.
 export const TRANSITION_MS = 800
 const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 const prefersReducedMotion = () =>
@@ -79,9 +86,8 @@ export default (entities) => {
     // position), `grid`, and `collision` (see layouts.js — all fully derived
     // from these same points/entities, nothing hard-coded or persisted). A
     // fourth, mutable pair (`renderX`/`renderY`) is what's actually drawn —
-    // it starts on the network position and is the thing setLayout()/
-    // setActiveCluster() below animate, so drawing/hit-testing never touches
-    // the three source sets.
+    // it starts on the network position and is the thing setLayout() below
+    // animates, so drawing/hit-testing never touches the three source sets.
     const points = entities.map((e) => {
         const year = parseInt(e.year, 10)
         if (year < minYear) minYear = year
@@ -106,8 +112,7 @@ export default (entities) => {
 
     // Precompute both alternative layouts synchronously so the result is
     // stable and immediately exportable — no continuous simulation, no
-    // recomputation on every toggle/hover (see layouts.js for how each is
-    // derived).
+    // recomputation on every toggle (see layouts.js for how each is derived).
     assignGridLayout(points, entities)
     assignCollisionFreeLayout(points, entities)
 
@@ -130,10 +135,49 @@ export default (entities) => {
     const circles = new Graphics()
     root.addChild(circles)
 
+    // Single reusable highlight ring, drawn above every circle. Two
+    // independent reasons it can be showing, hover taking precedence since
+    // it's the more immediate/temporary intent: `hoveredPoint` (cleared the
+    // instant the pointer leaves) and `selectedPoint` — set on click, and
+    // deliberately persistent, exactly like click.js's #focus station report:
+    // it stays up after the pointer leaves, until either a different article
+    // is clicked (replaces it) or the background is (clears it, alongside
+    // #focus itself — see the viewport listener near the end of this module).
+    const highlight = new Graphics()
+    highlight.visible = false
+    root.addChild(highlight)
+
+    let hoveredPoint = null
+    let selectedPoint = null
+
+    // Re-evaluates which point (if any) should be showing the ring and
+    // redraws it there — called both from the discrete hover/select
+    // interactions below and from draw() itself, so the ring tracks a
+    // selected/hovered point's live renderX/renderY through any in-progress
+    // layout animation instead of freezing at its position when it was
+    // (un)selected. Does not call s.app.render() itself — callers that aren't
+    // already about to render (draw() is, via ensureAnimating()/redraw()) do
+    // that themselves.
+    const refreshHighlight = () => {
+        const active = hoveredPoint || selectedPoint
+        const [startYear, endYear] = lastRange
+        if (!active || active.year < startYear || active.year > endYear) {
+            highlight.visible = false
+            return
+        }
+        highlight.clear()
+        highlight
+            .circle(active.renderX, active.renderY, active.r + HIGHLIGHT_RING_MARGIN)
+            .stroke({ width: HIGHLIGHT_RING_WIDTH, color: active.color, alpha: 1 })
+        highlight.visible = true
+    }
+
     // Per-article hit targets, sized to each circle (never smaller than the
     // existing fixed hit box used elsewhere) so larger circles stay fully
     // clickable. hitArea size is fixed per point (depends only on r, which
-    // never changes); position tracks renderX/renderY every draw.
+    // never changes); position tracks renderX/renderY every draw. Also the
+    // wiring point for the hover ring + tooltip (mouseover/mouseout) and the
+    // persistent-selection ring (pointertap) above.
     const hits = new Container()
     root.addChild(hits)
 
@@ -146,82 +190,44 @@ export default (entities) => {
         hit.cursor = 'pointer'
         hit.on('pointertap', (event) => {
             event.stopPropagation()
+            selectedPoint = p
+            refreshHighlight()
+            s.app.render()
             click(p.entity)
+        })
+        // Deliberately 'mouseover'/'mouseout', not 'pointerover'/'pointerout' —
+        // PixiJS only dispatches the mouse-named events for pointerType
+        // 'mouse'/'pen' (see node_modules/pixi.js/lib/events/EventBoundary.js),
+        // so touch never triggers a hover highlight/tooltip it could never
+        // dismiss with a second tap.
+        hit.on('mouseover', (event) => {
+            hoveredPoint = p
+            refreshHighlight()
+            s.app.render()
+            showTooltip(p.entity, event.global.x, event.global.y)
+        })
+        hit.on('mouseout', () => {
+            hoveredPoint = null
+            refreshHighlight()
+            s.app.render()
+            hideTooltip()
         })
         hits.addChild(hit)
         return { hit, year: p.year }
     })
 
-    // Exposed so clusterHover.js can wire mouseover/mouseout (hover — and,
-    // via PixiJS's accessibility system, keyboard focus, though only clusters
-    // themselves are made keyboard-focusable, not individual articles; see
-    // the completion report) onto the *same* hit containers already used for
-    // pointertap above, rather than creating a second set of targets.
-    const hoverTargets = hitList.map(({ hit }, i) => ({
-        clusterId: points[i].entity.cluster,
-        target: hit,
-    }))
-
-    // Per-cluster bounding box of *grid* positions (padded by that cluster's
-    // own largest radius, so a circle sitting right at the edge isn't half
-    // outside it), keyed by cluster id — used by index.js to build a "stay
-    // active" hover region sized to where the circles actually spread to
-    // once expanded, rather than the (often much tighter) network hull. See
-    // clusters.js's hover-entry regions for the *entry* trigger, which is
-    // deliberately separate and label-based.
-    const gridExtentByClusterId = new Map()
-    for (const p of points) {
-        const id = p.entity.cluster
-        const extent = gridExtentByClusterId.get(id)
-        if (!extent) {
-            gridExtentByClusterId.set(id, {
-                x0: p.gridX,
-                y0: p.gridY,
-                x1: p.gridX,
-                y1: p.gridY,
-                maxR: p.r,
-            })
-            continue
-        }
-        if (p.gridX < extent.x0) extent.x0 = p.gridX
-        if (p.gridY < extent.y0) extent.y0 = p.gridY
-        if (p.gridX > extent.x1) extent.x1 = p.gridX
-        if (p.gridY > extent.y1) extent.y1 = p.gridY
-        if (p.r > extent.maxR) extent.maxR = p.r
-    }
-
-    // Last colour mode / year range applied — kept so the hover-transition
-    // animation below can keep redrawing under the current filter without
-    // controls.js having to pass them again on every animation frame.
+    // Last colour mode / year range applied — kept so redraws stay correct
+    // without controls.js having to pass them again on every call.
     let lastColorMode = 'off'
     let lastRange = [minYear, maxYear]
 
-    // Two independent, coexisting sources of layout intent:
-    // - `layoutMode` ('network'/'grid'/'collision') — the deliberate, global
-    //   Layers-panel selection (controls.js's Grid Layout/Collision Free
-    //   toggles). Affects every point uniformly.
-    // - `activeClusterIds` — the transient hover state (clusterHover.js): the
-    //   directly-hovered cluster *and* its precomputed nearby clusters (see
-    //   clusters.js's neighborsByClusterId), so a tight/overlapping group
-    //   reposition together. Only meaningful while layoutMode is 'network';
-    //   controls.js disables hovering (via clusterHover.js's setEnabled)
-    //   whenever a global mode is active, so this is guaranteed empty
-    //   whenever layoutMode isn't 'network' — the explicit
-    //   `layoutMode === 'network'` check in targetFor below is just defence
-    //   in depth, not the only thing preventing the two from fighting.
+    // The global Layers-panel selection (network/grid/collision, controls.js's
+    // Grid Layout/Collision Free toggles). Affects every point uniformly.
     let layoutMode = 'network'
-    let activeClusterIds = new Set()
 
     // Repaints every circle/hit at its *current* renderX/renderY (whatever
     // that is right now — settled or mid-transition) under the given colour
-    // mode and year range. Iterates `points` in its fixed original order for
-    // hit positions/visibility (so overlap order there never changes), but
-    // draws the hovered cluster(s)' circles in a second, later pass so they
-    // stay legible over a neighbouring cluster's network-position circles at
-    // a shared boundary (see prompts/cluster-hover.md §9) — with no active
-    // cluster (always true unless layoutMode is 'network') this collapses to
-    // one pass in the original order, so deactivation restores the default
-    // z-order for free, not as a separate step.
+    // mode and year range.
     const draw = () => {
         const [startYear, endYear] = lastRange
         for (let i = 0; i < points.length; i++) {
@@ -232,14 +238,16 @@ export default (entities) => {
         }
 
         circles.clear()
-        const drawCircle = (p) => {
-            if (p.year < startYear || p.year > endYear) return
+        for (const p of points) {
+            if (p.year < startYear || p.year > endYear) continue
             const color = lastColorMode === 'on' ? p.color : 0x000000
             circles.circle(p.renderX, p.renderY, p.r).fill({ color, alpha: CIRCLE_FILL_OPACITY })
         }
-        const isActive = (p) => activeClusterIds.has(p.entity.cluster)
-        for (const p of points) if (!isActive(p)) drawCircle(p)
-        if (activeClusterIds.size > 0) for (const p of points) if (isActive(p)) drawCircle(p)
+
+        // Keeps the highlight ring tracking a hovered/selected point's live
+        // position — draw() runs on every animation frame (ensureAnimating's
+        // step()) as well as on discrete redraws, so this covers both.
+        refreshHighlight()
     }
 
     // Called on discrete state changes only (Years toggle, preset, slider
@@ -253,33 +261,20 @@ export default (entities) => {
 
     redraw('off', [minYear, maxYear]) // initial state: Years off, black, every article
 
-    // ---- Layout/hover transitions ----------------------------------------------
-    // Both setLayout() (global toggle) and setActiveCluster() (hover) funnel
-    // through the same per-point animation mechanism below, so switching one
-    // mid-transition of the other always continues smoothly from wherever a
-    // point currently is rather than conflicting or snapping.
-    //
-    // Each point tracks its *own* animation (p.animStart/p.animFromX/
-    // p.animFromY/p.animTargetX/p.animTargetY) rather than one shared fixed
-    // batch, specifically so rapid hovering across several clusters can't
-    // strand one mid-transition: if cluster A is still animating back to
-    // network when B is hovered, and then C is hovered before B finishes,
-    // A's points are untouched by the B→C call but keep advancing toward
-    // their already-assigned network target in the same shared loop below —
-    // nothing is ever abandoned partway.
+    // ---- Layout transitions -----------------------------------------------------
+    // Each point tracks its own animation (p.animStart/p.animFromX/
+    // p.animFromY/p.animTargetX/p.animTargetY).
     let rafHandle = null
 
     const targetFor = (p) => {
         if (layoutMode === 'grid') return [p.gridX, p.gridY]
         if (layoutMode === 'collision') return [p.collisionX, p.collisionY]
-        return layoutMode === 'network' && activeClusterIds.has(p.entity.cluster)
-            ? [p.gridX, p.gridY]
-            : [p.networkX, p.networkY]
+        return [p.networkX, p.networkY]
     }
 
     // Ensures exactly one animation loop is running whenever any point has a
     // pending tween — never more than one, regardless of how many times
-    // setLayout()/setActiveCluster() are called while it's already running.
+    // setLayout() is called while it's already running.
     const ensureAnimating = () => {
         if (rafHandle != null) return
         const step = () => {
@@ -301,9 +296,8 @@ export default (entities) => {
         rafHandle = requestAnimationFrame(step)
     }
 
-    // (re)targets exactly `affected` — never more — toward each of their
-    // current targetFor() result, continuing from each point's own current
-    // renderX/renderY (mid-flight or settled, doesn't matter).
+    // (re)targets every point toward its current targetFor() result,
+    // continuing from each point's own current renderX/renderY.
     const retarget = (affected) => {
         const reduced = prefersReducedMotion()
         const now = performance.now()
@@ -337,30 +331,22 @@ export default (entities) => {
         retarget(points)
     }
 
-    // Hover (clusterHover.js) — `newActiveIds` is the hovered cluster plus its
-    // precomputed nearby clusters (see clusters.js's neighborsByClusterId),
-    // already expanded by clusterHover.js. Only points belonging to a cluster
-    // in the previous or the new set are ever given a new target here; every
-    // other point's renderX/renderY is left alone, so unrelated clusters
-    // never move (prompts/cluster-hover.md §2/§6).
-    const setActiveCluster = (newActiveIds) => {
-        const previousIds = activeClusterIds
-        activeClusterIds = newActiveIds
-        if (layoutMode !== 'network') return // no visual effect while a global mode is active — see clusterHover.js's setEnabled, which keeps this from ever actually being called in that case
-        const affected = points.filter(
-            (p) => previousIds.has(p.entity.cluster) || newActiveIds.has(p.entity.cluster),
-        )
-        if (affected.length) retarget(affected)
-    }
+    // Background click clears the persistent selection — elements.js wires
+    // this same viewport tap to click.js's deselect(), so the ring and the
+    // station report always close together. Per-hit pointertap above already
+    // calls event.stopPropagation(), so this only ever fires for a genuine
+    // background click, never one that landed on an article.
+    s.viewport.on('pointertap', () => {
+        selectedPoint = null
+        refreshHighlight()
+        s.app.render()
+    })
 
     return {
         root,
         redraw,
         setLayout,
-        setActiveCluster,
         points,
         yearExtent: [minYear, maxYear],
-        hoverTargets,
-        gridExtentByClusterId,
     }
 }

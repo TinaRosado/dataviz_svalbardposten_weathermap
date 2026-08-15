@@ -11,7 +11,7 @@
 // the renderer uses, so there's a single source of truth.
 
 import { contourDensity, line, curveCatmullRomClosed } from 'd3'
-import { clusterGeometry } from './geometry.js'
+import { clusterGeometry, haloRect, LABEL_HALO_RADIUS, LABEL_HALO_ALPHA } from './geometry.js'
 import { frontsGeometry, semicirclePoints, FRONT_COLOR_HEX, FRONT_LINE_WIDTH, PIP_R } from './fronts.js'
 import { CIRCLE_FILL_OPACITY } from './pointGradient.js'
 
@@ -239,25 +239,57 @@ const buildSvg = (entities) => {
     const addLabels = (label, anchor) => {
         const node = findByLabel(s.viewport, label)
         if (!node || !isVisible(label)) return
+        const isClusterLabels = label === 'clusters-labels'
         const g = el('g', { 'text-anchor': anchor, 'font-family': 'Lato' })
         node.children.forEach((t) => {
-            // Cluster labels wrap a blurred white glow copy + the real text in
-            // a Container now (see geometry.js's makeLabel — screen-only
-            // effect, no vector print equivalent); other label kinds
-            // (elements-years/titles/keywords) are still plain BitmapText.
-            // Either way `t` itself carries the position/bounds to export
-            // from; the text/style/tint may live one level deeper, at
-            // `mainText` specifically — a plain child search would also
-            // match the glow copy (it's a BitmapText too, added first).
+            // Cluster labels now carry both an English and a Norwegian set as
+            // siblings (see clusters.js's setLanguage) — only the currently
+            // visible language should print.
+            if (isClusterLabels && !t.visible) return
+            // Cluster labels wrap a plain white halo plate + the real text in
+            // a Container now (see geometry.js's makeLabel); other label
+            // kinds (elements-years/titles/keywords) are still plain
+            // BitmapText. Either way `t` itself carries the position/bounds
+            // to export from; the text/style/tint may live one level deeper,
+            // at `mainText` specifically — a plain child search would also
+            // match the halo plate (a Graphics, not text, but still worth
+            // being explicit about which child actually holds the text).
             const textNode = t.text != null ? t : t.mainText
             if (!textNode) return
             const size = textNode.style?.fontSize ?? 0.7
             const lh = textNode.style?.lineHeight || size
             const fill = tintHex(textNode.tint)
             // Centred multi-line cluster labels vs left-aligned single-line
-            // element labels.
-            const cx = anchor === 'middle' ? t.x + t.width / 2 : t.x
+            // element labels. textNode.width (not t.width, the container's —
+            // i.e. the halo's — padded width) so this lines up with the
+            // halo rect below, which is centred on the text itself too; for
+            // element labels textNode === t, so this is unchanged for them.
+            const cx = anchor === 'middle' ? t.x + textNode.width / 2 : t.x
             const lines = String(textNode.text).split('\n')
+            // Cluster labels only — the same plain white halo plate as the
+            // screen, built from the same haloRect() geometry.js uses, so it
+            // can't drift out of sync with it. `t.x`/`t.y` is the container's
+            // (i.e. the text's own) world position — haloRect's x/y/width/
+            // height are relative to that, in the same local space the
+            // on-screen Graphics halo is drawn in. Emitted before the text so
+            // it paints behind it. Always white/fixed opacity, independent
+            // of "Colour by year" (see clusters.js's setLabelColorByYear,
+            // which never touches this plate either).
+            if (isClusterLabels) {
+                const rect = haloRect(textNode, size)
+                g.appendChild(
+                    el('rect', {
+                        x: t.x + rect.x,
+                        y: t.y + rect.y,
+                        width: rect.width,
+                        height: rect.height,
+                        rx: LABEL_HALO_RADIUS,
+                        ry: LABEL_HALO_RADIUS,
+                        fill: '#ffffff',
+                        'fill-opacity': LABEL_HALO_ALPHA,
+                    }),
+                )
+            }
             const text = el('text', { x: cx, 'font-size': size, fill })
             lines.forEach((ln, i) => {
                 text.appendChild(el('tspan', { x: cx, y: (t.y + size * 0.8 + i * lh).toFixed(2) }, ln))

@@ -54,7 +54,7 @@ a:hover {
  * Panels — one to each corner, like annotations around a synoptic chart.
 ******************************************************************************/
 
-#title, #controls, #legenda, #focus {
+#title, #controls, #legenda, #focus, #tooltip {
 	background: var(--panel);
 	-webkit-backdrop-filter: blur(6px);
 	backdrop-filter: blur(6px);
@@ -86,6 +86,22 @@ a:hover {
 #controls{ position: fixed; top: 16px;    right: 16px; }    /* chart layers + view */
 #focus   { position: fixed; bottom: 16px; left: 16px; width: 320px; } /* station report — matches legend width */
 
+/* Hover tooltip (tooltip.js) — positioned in JS (follows the cursor over the
+   Point Gradient circles), not one of the fixed corners above. Compact
+   (smaller padding than the other panels — it's four short lines, not a
+   report), never intercepts the pointer itself (hovering the tooltip must
+   never register as leaving the circle beneath it), and sits above the
+   canvas so it's never occluded by the map. Hidden by default; tooltip.js
+   toggles display on show/hide. */
+#tooltip {
+	position: fixed;
+	z-index: 20;
+	max-width: 240px;
+	padding: 9px 11px;
+	pointer-events: none;
+	display: none;
+}
+
 /* Lead section header sits flush to the panel top, like the legend's eyebrow. */
 /* Direct-child, not descendant: "Layers" is #controls's own first section and
    should sit flush to the panel top, but "Years" (first child of its own
@@ -113,9 +129,53 @@ a:hover {
 	border-bottom: 1px solid var(--hair);
 }
 
+/* Collapsible section headings (controls.js's Layers/Visual Layout/Filter by
+   Years) — same collapse behaviour and look as the legend's own toggle (see
+   legend.js and .legend-toggle/.legend-caret below): the whole heading row
+   is the click target, aria-expanded drives the caret rotation and the
+   sibling body's `hidden` state purely via these attribute selectors. Full
+   re-specification of .section's typography (not just resetting the button
+   defaults) since #controls button's own rule otherwise outranks .section
+   on this element (an id+element selector beats a lone class). */
+#controls .section-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	font-family: var(--mono);
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-size: 9.5px;
+	color: var(--muted);
+	background: none;
+	border: none;
+	border-bottom: 1px solid var(--hair);
+	border-radius: 0;
+	padding: 0 0 4px;
+	cursor: pointer;
+	transition: background 0.15s, border-color 0.15s;
+}
+
+#controls .section-toggle:hover {
+	background: none;
+	border-color: var(--hair);
+}
+
+#controls .section-toggle:hover .legend-caret { color: var(--ink); }
+
+.section-toggle[aria-expanded='false'] { margin-bottom: 0; }
+.section-toggle[aria-expanded='false'] .legend-caret { transform: rotate(-90deg); }
+
 /******************************************************************************
  * Masthead
 ******************************************************************************/
+
+.title-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 10px;
+}
 
 #title h1 {
 	font-size: 17px;
@@ -123,6 +183,45 @@ a:hover {
 	letter-spacing: -0.01em;
 	line-height: 1.12;
 	margin: 0;
+}
+
+/* NO | ENG data-language toggle — the active option is tinted from script
+   with the map's own 2024 year-color (see languageToggle.js), not a fixed
+   theme color, so it reads as the map's own palette rather than a generic UI
+   accent. The inactive option stays a plain light gray. */
+#lang-toggle {
+	display: flex;
+	align-items: baseline;
+	gap: 5px;
+	flex-shrink: 0;
+}
+
+.lang-option {
+	appearance: none;
+	-webkit-appearance: none;
+	font-family: var(--mono);
+	font-size: 10px;
+	letter-spacing: 0.06em;
+	background: none;
+	border: none;
+	padding: 0;
+	color: #b7c2cc;
+	cursor: pointer;
+}
+
+.lang-option:focus-visible {
+	outline: 1px solid var(--rule);
+	outline-offset: 2px;
+}
+
+.lang-option.active {
+	font-weight: 650;
+}
+
+.lang-sep {
+	font-family: var(--mono);
+	font-size: 10px;
+	color: var(--hair);
 }
 
 #title .sub {
@@ -307,6 +406,18 @@ a:hover {
 	color: var(--ink, var(--muted));
 	line-height: 1.4;
 	margin: 8px 0 0;
+}
+
+/* Hover tooltip's own date line, above its shared .readout-title title —
+   colour set inline per-article (tooltip.js), this is just the fallback/base
+   look. Keywords and Topic below reuse .readout-terms/.readout-terms-label,
+   the same labelled-term-line look the station report uses. */
+.tooltip-date {
+	font-family: var(--mono);
+	font-size: 10px;
+	letter-spacing: 0.04em;
+	color: var(--muted);
+	margin: 0 0 6px; /* same gap before the title as .readout-date in the station report */
 }
 
 /* Instrument readings — a two-column label/value grid. */

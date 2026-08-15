@@ -1,15 +1,17 @@
 // Layer switches — a small panel of toggles that show/hide each viewport
 // layer by flipping its `.visible`. Call after all layers are rendered so they
 // can be located by their `.label`. Some layers expose nested sub-switches
-// (Clusters splits into independently toggleable Fills, Labels, and Fronts).
-// The panel also holds the Years time control, zoom, "Reset view", and A0
-// print-export controls.
+// (Clusters splits into independently toggleable Labels, Fronts, Fills, and
+// Gradient Fill). The panel also holds the Visual Layout radiogroup, the
+// Years time control, zoom, "Reset view", and A0 print-export controls.
 
 import download from './download.js'
 
-// Contours/Clusters/Fronts/Gradient Fill render as a pressure/isoline/front/
-// density reading alongside the Point Gradient circles (see the render order
-// in index.js).
+// Contours/Clusters (Labels/Fronts/Fills/Gradient Fill) render as a pressure/
+// isoline/front/fill/density reading alongside the Point Gradient circles
+// (see the render order in index.js). Gradient Fill sits under Clusters here
+// (see refreshClusterDependents below) even though its own layer is a
+// separate top-level viewport child, same as Labels/Fronts.
 const LAYERS = [
     {
         label: 'elements',
@@ -19,33 +21,23 @@ const LAYERS = [
         exclusive: true,
         children: [
             { label: 'elements-years', name: 'Year' },
-            { label: 'elements-titles', name: 'Title' },
-            { label: 'elements-keywords', name: 'Keywords' },
+            //{ label: 'elements-titles', name: 'Title' },
+            //{ label: 'elements-keywords', name: 'Keywords' },
         ],
     },
     {
         label: 'clusters',
         name: 'Clusters',
         children: [
-            // Fills is still a literal Pixi child of 'clusters' (hidden for
-            // free when its parent is). Labels and Fronts are both separate
-            // top-level viewport children now (Labels sits re-parented above
-            // everything else, see index.js), so their dependency on
-            // Clusters is wired explicitly below (refreshClusterDependents).
-            { label: 'clusters-fills', name: 'Fills' },
             { label: 'clusters-labels', name: 'Labels' },
-            // Front curves only — off by default; combine with Labels (and no
-            // Fills) to read the fronts and their topic labels alone.
             { label: 'fronts', name: 'Fronts' },
+            { label: 'clusters-fills', name: 'Fills' },
+            { label: 'gradient-fill', name: 'Gradient Fill' },
         ],
     },
     {
         label: 'contours',
         name: 'Contours',
-    },
-    {
-        label: 'gradient-fill',
-        name: 'Gradient Fill',
     },
 ]
 
@@ -84,21 +76,86 @@ const makeSwitch = (layer, name, sub) => {
     return { row, input, layer }
 }
 
-export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHoverHandle) => {
+export default (pointGradient, setLabelColorByYear, elementsHandle) => {
     const panel = document.createElement('div')
     panel.id = 'controls'
 
+    // ---- Years state (needed early: "Color by year" now lives in the Layers
+    // section below, between Articles and Year) ----------------------------------
+    // One authoritative range [startYear, endYear] drives the presets, slider,
+    // histogram, range label, article filtering, and the export pipeline.
+    // State persists for the app's lifetime: turning "Color by year" off/on,
+    // or touching any other control, never resets it.
+    const [earliestYear, latestYear] = pointGradient.yearExtent
+    const yearsState = { colorByYear: true, startYear: earliestYear, endYear: latestYear }
+
+    // "Color" — not a Pixi layer toggle (it drives applyYears() below,
+    // not a layer's .visible), but sits at the same secondary level as Year,
+    // directly under Articles and before it. applyYears is a hoisted function
+    // declaration (defined further down), so referencing it here in the
+    // change listener is safe — it only ever runs after the whole panel (and
+    // applyYears itself) exists, in response to a later user interaction.
+    const colorRow = document.createElement('label')
+    colorRow.className = 'switch sub'
+    const colorInput = document.createElement('input')
+    colorInput.type = 'checkbox'
+    colorInput.checked = yearsState.colorByYear
+    const colorSlider = document.createElement('span')
+    colorSlider.className = 'slider'
+    const colorLabel = document.createElement('span')
+    colorLabel.className = 'switch-label'
+    colorLabel.textContent = 'Color'
+    colorRow.append(colorInput, colorSlider, colorLabel)
+    colorInput.addEventListener('change', () => {
+        yearsState.colorByYear = colorInput.checked
+        applyYears()
+    })
+
+    // Collapsible section heading — same collapse behaviour/style as the
+    // legend's own toggle (legend.js, main.css's .legend-toggle/.legend-caret):
+    // the whole heading row toggles a sibling body via aria-expanded, driven
+    // purely by CSS attribute selectors. Returns the body so callers build a
+    // section's content into it instead of appending straight to the panel.
+    let sectionCount = 0
+    const makeCollapsibleSection = (title) => {
+        sectionCount++
+        const bodyId = `controls-section-${sectionCount}`
+
+        const toggle = document.createElement('button')
+        toggle.type = 'button'
+        toggle.className = 'section section-toggle'
+        toggle.setAttribute('aria-expanded', 'true')
+        toggle.setAttribute('aria-controls', bodyId)
+        toggle.textContent = title
+
+        const caret = document.createElement('span')
+        caret.className = 'legend-caret'
+        caret.setAttribute('aria-hidden', 'true')
+        caret.textContent = '▾'
+        toggle.appendChild(caret)
+
+        const body = document.createElement('div')
+        body.id = bodyId
+
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true'
+            toggle.setAttribute('aria-expanded', String(!expanded))
+            body.hidden = expanded
+        })
+
+        panel.append(toggle, body)
+        return body
+    }
+
     // ---- Layers ----------------------------------------------------------------
 
-    const heading = document.createElement('p')
-    heading.className = 'section'
-    heading.textContent = 'Layers'
-    panel.appendChild(heading)
+    const layersBody = makeCollapsibleSection('Layers')
 
     let articlesSwitch = null
     let clustersSwitch = null
     let frontsSwitch = null
     let labelsSwitch = null
+    let gradientFillSwitch = null
 
     LAYERS.forEach(({ label, name, children, exclusive }) => {
         const layer = findByLabel(s.viewport, label)
@@ -106,7 +163,12 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
         const sw = makeSwitch(layer, name, false)
         if (label === 'elements') articlesSwitch = sw
         if (label === 'clusters') clustersSwitch = sw
-        panel.appendChild(sw.row)
+        layersBody.appendChild(sw.row)
+
+        // "Color" — see above — inserted right after Articles' own
+        // row and before its children (Year), not part of the generic
+        // children loop below since it isn't a layer-visibility toggle.
+        if (label === 'elements') layersBody.appendChild(colorRow)
 
         const subs = []
         children?.forEach((sub) => {
@@ -115,7 +177,8 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
             const subSw = makeSwitch(subLayer, sub.name, true)
             if (sub.label === 'fronts') frontsSwitch = subSw
             if (sub.label === 'clusters-labels') labelsSwitch = subSw
-            panel.appendChild(subSw.row)
+            if (sub.label === 'gradient-fill') gradientFillSwitch = subSw
+            layersBody.appendChild(subSw.row)
             subs.push(subSw)
         })
 
@@ -136,81 +199,25 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
         }
     })
 
-    // Fronts and Labels are both separate top-level viewport children, not
-    // literal Pixi children of the 'clusters' Container the way Fills is (see
-    // index.js — Labels re-parents to the very top once every layer exists,
-    // so its topic text stays above the circles). So unlike Fills, turning
-    // Clusters off wouldn't hide either of them for free. This makes them
-    // behave the same way: visible only when both their own switch and the
-    // Clusters switch are checked, restored exactly when Clusters comes back.
+    // Fronts, Labels, and Gradient Fill are all separate top-level viewport
+    // children, not literal Pixi children of the 'clusters' Container the way
+    // Fills is (see index.js — Labels re-parents to the very top once every
+    // layer exists, so its topic text stays above the circles). So unlike
+    // Fills, turning Clusters off wouldn't hide any of them for free. This
+    // makes them all behave the same way: visible only when both their own
+    // switch and the Clusters switch are checked, restored exactly when
+    // Clusters comes back.
     const refreshClusterDependents = () => {
         frontsSwitch.layer.visible = frontsSwitch.input.checked && clustersSwitch.input.checked
         labelsSwitch.layer.visible = labelsSwitch.input.checked && clustersSwitch.input.checked
+        gradientFillSwitch.layer.visible =
+            gradientFillSwitch.input.checked && clustersSwitch.input.checked
     }
     clustersSwitch.input.addEventListener('change', refreshClusterDependents)
     frontsSwitch.input.addEventListener('change', refreshClusterDependents)
     labelsSwitch.input.addEventListener('change', refreshClusterDependents)
+    gradientFillSwitch.input.addEventListener('change', refreshClusterDependents)
     refreshClusterDependents()
-
-    // Grid Layout / Collision Free — directly below Gradient Fill (the last
-    // LAYERS row above), same switch component, but these don't toggle a
-    // Pixi layer's `.visible`: they select which of pointGradient's three
-    // precomputed coordinate sets (network/grid/collision, see layouts.js)
-    // the circles animate to, globally. Mutually exclusive with each other,
-    // same as the Year/Title/Keywords group above — checking one unchecks
-    // the other; unchecking the active one returns to the original network
-    // layout, so "neither checked" is a real, reachable third state, not
-    // just absence.
-    //
-    // Per-cluster hover (clusterHover.js) is a separate, additional way to
-    // reach the grid layout, scoped to one cluster at a time, and only while
-    // this global selection is at its network default — switching either of
-    // these toggles on disables hover (see the setEnabled call below) so the
-    // two mechanisms never fight over the same points.
-    const makeLayoutSwitch = (name) => {
-        const row = document.createElement('label')
-        row.className = 'switch'
-        const input = document.createElement('input')
-        input.type = 'checkbox'
-        const slider = document.createElement('span')
-        slider.className = 'slider'
-        const text = document.createElement('span')
-        text.className = 'switch-label'
-        text.textContent = name
-        row.append(input, slider, text)
-        return { row, input }
-    }
-
-    const gridSwitch = makeLayoutSwitch('Grid Layout')
-    const collisionSwitch = makeLayoutSwitch('Collision Free')
-
-    // Exposes the exclusive relationship to assistive tech without losing the
-    // "neither" state a true radiogroup can't represent as cleanly.
-    const layoutGroup = document.createElement('div')
-    layoutGroup.setAttribute('role', 'group')
-    layoutGroup.setAttribute('aria-label', 'Article layout')
-    layoutGroup.append(gridSwitch.row, collisionSwitch.row)
-    panel.appendChild(layoutGroup)
-
-    const setLayout = (mode) => {
-        gridSwitch.input.checked = mode === 'grid'
-        collisionSwitch.input.checked = mode === 'collision'
-        s.visualization.layout = mode
-        // Disabled (and any active hover cleared) whenever a global mode is
-        // selected; re-enabled back on network — see clusterHover.js.
-        clusterHoverHandle?.setEnabled(mode === 'network')
-        pointGradient.setLayout(mode)
-        // Year/Title/Keywords labels (elements.js) sit right next to each
-        // article's circle — move them to match, whether or not any of them
-        // is currently switched on (setLayout no-ops on unbuilt layers).
-        elementsHandle?.setLayout(mode)
-    }
-    gridSwitch.input.addEventListener('change', () => {
-        setLayout(gridSwitch.input.checked ? 'grid' : 'network')
-    })
-    collisionSwitch.input.addEventListener('change', () => {
-        setLayout(collisionSwitch.input.checked ? 'collision' : 'network')
-    })
 
     // Point Gradient is the only reading of the articles now — the crosses
     // and their fixed hit targets from elements.js (the Isolines reading of
@@ -229,14 +236,62 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
     }
     articlesSwitch.input.addEventListener('change', refreshArticlesVisibility)
 
-    // ---- Years ------------------------------------------------------------------
-    // One authoritative range [startYear, endYear] drives the presets, slider,
-    // histogram, range label, article filtering, and the export pipeline.
-    // State persists for the app's lifetime: turning "Colour by year" off/on,
-    // or touching any other control, never resets it.
-    const [earliestYear, latestYear] = pointGradient.yearExtent
-    const yearsState = { colorByYear: true, startYear: earliestYear, endYear: latestYear }
+    // ---- Visual Layout -----------------------------------------------------------
+    // Which of pointGradient's three precomputed coordinate sets (network/
+    // grid/collision, see layouts.js) the circles use, globally — a true
+    // 3-way exclusive choice via native radio semantics (unlike the old
+    // Grid Layout/Collision Free checkbox pair, there's always exactly one
+    // selection; Network is the default and now a first-class, explicitly
+    // selectable option rather than an implicit "neither checked" state).
+    const layoutBody = makeCollapsibleSection('Visual Layout')
 
+    const layoutGroup = document.createElement('div')
+    layoutGroup.setAttribute('role', 'radiogroup')
+    layoutGroup.setAttribute('aria-label', 'Visual layout')
+    layoutBody.appendChild(layoutGroup)
+
+    const makeLayoutRadio = (name, value) => {
+        const row = document.createElement('label')
+        row.className = 'switch'
+        const input = document.createElement('input')
+        input.type = 'radio'
+        input.name = 'visual-layout'
+        input.value = value
+        input.checked = value === 'network'
+        const slider = document.createElement('span')
+        slider.className = 'slider'
+        const text = document.createElement('span')
+        text.className = 'switch-label'
+        text.textContent = name
+        row.append(input, slider, text)
+        layoutGroup.appendChild(row)
+        return { input, value }
+    }
+
+    const layoutRadios = [
+        makeLayoutRadio('Network', 'network'),
+        makeLayoutRadio('Collision Free', 'collision'),
+        makeLayoutRadio('Point Grid', 'grid'),
+    ]
+
+    const setLayout = (mode) => {
+        layoutRadios.forEach(({ input, value }) => {
+            input.checked = value === mode
+        })
+        s.visualization.layout = mode
+        pointGradient.setLayout(mode)
+        // Year/Title/Keywords labels (elements.js) sit right next to each
+        // article's circle — move them to match, whether or not any of them
+        // is currently switched on (setLayout no-ops on unbuilt layers).
+        elementsHandle?.setLayout(mode)
+    }
+    layoutRadios.forEach(({ input, value }) => {
+        input.addEventListener('change', () => {
+            if (input.checked) setLayout(value)
+        })
+    })
+
+    // ---- Filter by Years ---------------------------------------------------------
     // PixiJS tint (0xRRGGBB) → CSS hex — small local copy, same as download.js's.
     const tintHex = (n) => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6)
 
@@ -273,36 +328,14 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
         return null
     }
 
-    const yearsSection = document.createElement('div')
-    yearsSection.id = 'years-panel'
+    const yearsSection = makeCollapsibleSection('Filter by Years')
+    yearsSection.id = 'years-panel' // keeps the existing #years-panel CSS targeting (spacing)
 
-    const yearsHeading = document.createElement('p')
-    yearsHeading.className = 'section'
-    yearsHeading.textContent = 'Years'
-    yearsSection.appendChild(yearsHeading)
-
-    const colorRow = document.createElement('label')
-    colorRow.className = 'switch'
-    const colorInput = document.createElement('input')
-    colorInput.type = 'checkbox'
-    colorInput.checked = yearsState.colorByYear
-    const colorSlider = document.createElement('span')
-    colorSlider.className = 'slider'
-    const colorLabel = document.createElement('span')
-    colorLabel.className = 'switch-label'
-    colorLabel.textContent = 'Colour by year'
-    colorRow.append(colorInput, colorSlider, colorLabel)
-    yearsSection.appendChild(colorRow)
-    colorInput.addEventListener('change', () => {
-        yearsState.colorByYear = colorInput.checked
-        applyYears()
-    })
-
-    // Presets — the exact same toggle-switch component as Year/Title/Keywords
-    // under Articles (checkbox + pill + label, indented `.sub`), wired as the
-    // same kind of exclusive group: checking one unchecks the other two, and
-    // (since a manually resized range can match none of them) all three can
-    // be unchecked at once.
+    // Presets — first-level toggles now (not indented `.sub`, since "Color by
+    // year" — the row they used to sit just below — has moved up into the
+    // Layers section above). Wired as an exclusive group: checking one
+    // unchecks the other two, and (since a manually resized range can match
+    // none of them) all three can be unchecked at once.
     const presetStack = document.createElement('div')
     presetStack.setAttribute('role', 'group')
     presetStack.setAttribute('aria-label', 'Year range presets')
@@ -314,7 +347,7 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
         { value: '5years', label: '5 years', range: fiveYearRange },
     ].map(({ value, label, range }) => {
         const row = document.createElement('label')
-        row.className = 'switch sub'
+        row.className = 'switch'
         const input = document.createElement('input')
         input.type = 'checkbox'
         const slider = document.createElement('span')
@@ -556,13 +589,9 @@ export default (pointGradient, setLabelColorByYear, elementsHandle, clusterHover
         s.app.render()
     }
 
-    panel.appendChild(yearsSection)
-
     // Shared state read by the export pipeline (download.js) — kept in sync by
     // applyYears() above, never replaced wholesale so it always sees live values.
-    // `layout` ('network'/'grid'/'collision') is set by setLayout() above —
-    // the global toggle only; a hovered cluster never affects it (see
-    // download.js).
+    // `layout` ('network'/'grid'/'collision') is set by setLayout() above.
     s.visualization = { years: { ...yearsState }, layout: 'network' }
 
     // Establish the consistent initial state (Point Gradient visible per the
