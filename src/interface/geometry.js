@@ -12,7 +12,7 @@ import { average, rgb, formatHex } from 'culori'
 // live label bounds), so tuning these three keeps both in sync.
 const LABEL_HALO_PADDING = 0.8
 export const LABEL_HALO_RADIUS = 1
-export const LABEL_HALO_ALPHA = 0.0
+export const LABEL_HALO_ALPHA = 0.7
 
 // public/Lato.fnt's own <info size='59'.../> and <common lineHeight='72'
 // base='60'/>: this font's natural line-height-to-font-size ratio, and where

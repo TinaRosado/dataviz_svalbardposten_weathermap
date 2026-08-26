@@ -89,59 +89,108 @@ function renderReport(e) {
 
     const focus = select('body').append('div').attr('id', 'focus')
 
-    // Content is grouped by source: what the newspaper published (Article) and
-    // what the Weather Map pipeline derived from it (Analysis).
-    const section = (label) => focus.append('p').attr('class', 'section').text(label)
+    // Content is grouped by source into two tabs: what the newspaper
+    // published (Article, shown by default) and what the Weather Map
+    // pipeline derived from it (Cluster Topic). The tab label stands in for
+    // the old .section heading text, so panels don't repeat it inside.
+    const tabList = focus.append('div').attr('class', 'report-tabs').attr('role', 'tablist')
+    const articlePanel = focus.append('div').attr('class', 'report-panel').attr('role', 'tabpanel')
+    const topicPanel = focus
+        .append('div')
+        .attr('class', 'report-panel')
+        .attr('role', 'tabpanel')
+        .attr('hidden', true)
 
-    // Labelled term lines — "Tags: a, b, c" / "Keywords: a, b, c".
-    const termLine = (label, value) => {
+    const articleTab = tabList
+        .append('button')
+        .attr('type', 'button')
+        .attr('class', 'report-tab active')
+        .attr('role', 'tab')
+        .attr('aria-selected', true)
+        .text('Article')
+    const topicTab = tabList
+        .append('button')
+        .attr('type', 'button')
+        .attr('class', 'report-tab')
+        .attr('role', 'tab')
+        .attr('aria-selected', false)
+        .text('Cluster Topic')
+
+    const showArticleTab = (showArticle) => {
+        articleTab.classed('active', showArticle).attr('aria-selected', showArticle)
+        topicTab.classed('active', !showArticle).attr('aria-selected', !showArticle)
+        articlePanel.attr('hidden', showArticle ? null : true)
+        topicPanel.attr('hidden', showArticle ? true : null)
+    }
+    articleTab.on('click', () => showArticleTab(true))
+    topicTab.on('click', () => showArticleTab(false))
+
+    // A labelled term line — "Topic keywords: a, b, c" — used only in the
+    // Cluster Topic tab now; the Article tab's own readings (including Tags)
+    // are all in the unified grid below instead.
+    const termLine = (container, label, value) => {
         if (!value) return
-        const p = focus.append('p').attr('class', 'readout-terms')
+        const p = container.append('p').attr('class', 'readout-terms')
         p.append('span').attr('class', 'readout-terms-label').text(`${label}: `)
         p.append('span').text(value)
     }
 
-    // Instrument readings — label/value pairs in a compact grid.
-    const readings = (pairs) => {
-        const meta = focus.append('dl').attr('class', 'readout-meta')
-        pairs.forEach(([label, value, valueClass]) => {
+    // Instrument readings — label/value pairs in a compact grid. `valueColor`
+    // is for the one reading (Date) whose color is per-article, not a fixed
+    // class like Title's or System's.
+    const readings = (container, pairs) => {
+        const meta = container.append('dl').attr('class', 'readout-meta')
+        pairs.forEach(([label, value, valueClass, valueColor]) => {
             if (!value) return
             meta.append('dt').text(label)
-            meta.append('dd')
+            const dd = meta
+                .append('dd')
                 .attr('class', valueClass || null)
                 .text(value)
+            if (valueColor) dd.style('color', valueColor)
         })
     }
 
-    // From the article (Svalbardposten) — date + title lead. The date is
+    // ---- Article tab — what Svalbardposten published, as one unified
+    // label/value grid so every reading (including Tags now) lines up the
+    // same way. Two exceptions to the panel's otherwise uniform gray: Title
+    // and Keywords (see main.css's dd.readout-value-ink) in ink, and Date,
     // tinted with this article's own year-color, same mapping as the map.
-    section('Article')
-    focus.append('p').attr('class', 'readout-date').style('color', articleColor(e)).text(date)
-    focus.append('h1').attr('class', 'readout-title').text(title)
-    if (subtitle) focus.append('p').attr('class', 'readout-sub').text(subtitle)
-    if (excerpt) focus.append('p').attr('class', 'readout-excerpt').text(excerpt)
-    readings([
-        ['Byline', byline],
+    readings(articlePanel, [
+        ['Date', date, null, articleColor(e)],
+        ['Title', title, 'readout-value-ink'],
+        ['Subtitle', subtitle],
+        ['Keywords', articleKeywords, 'readout-value-ink'],
+        ['Excerpt', excerpt && `"${excerpt}"`],
         ['Length', e.word_count && `${e.word_count} words`],
+        ['Byline', byline],
+        ['Tags', tags],
     ])
-    termLine('Tags', tags)
-
-    // From the analysis (Weather Map pipeline) — derived placement/topic.
-    section('Analysis')
-    readings([
-        ['System', system, systemClass],
-        ['Topic', topic],
-    ])
-    termLine('Topic keywords', topicKeywords)
-    termLine('Article keywords', articleKeywords)
-
-    focus
+    articlePanel
         .append('a')
         .attr('class', 'readout-link')
         .attr('href', `https://www.svalbardposten.no${e.published_url}`)
         .attr('target', '_blank')
         .attr('rel', 'noopener')
         .text('Read on svalbardposten.no ↗')
+
+    // ---- Cluster Topic tab — what the Weather Map pipeline derived. Article
+    // keywords live in the Article tab instead, so they aren't repeated here.
+    readings(topicPanel, [
+        ['System', system, systemClass],
+        ['Topic', topic],
+    ])
+    termLine(topicPanel, 'Topic keywords', topicKeywords)
+
+    // Match both tabs to the taller one's natural content height so
+    // switching tabs doesn't resize the panel — #focus is anchored by
+    // `bottom` (see main.css), so a height change would visibly shift it up
+    // or down instead of just swapping content in place.
+    topicPanel.attr('hidden', null)
+    const maxHeight = Math.max(articlePanel.node().offsetHeight, topicPanel.node().offsetHeight)
+    topicPanel.attr('hidden', true)
+    articlePanel.style('min-height', `${maxHeight}px`)
+    topicPanel.style('min-height', `${maxHeight}px`)
 }
 
 // Close the station report — used when the user clicks empty map (deselect).

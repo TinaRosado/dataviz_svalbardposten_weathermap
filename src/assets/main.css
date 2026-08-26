@@ -347,6 +347,46 @@ a:hover {
  * Station report (article detail, injected by click.js)
 ******************************************************************************/
 
+/* Report tabs — "Article" (what Svalbardposten published) vs "Cluster
+   Topic" (what the Weather Map pipeline derived); Article shown by default.
+   Flush to the panel's own top since this is always #focus's first child. */
+.report-tabs {
+	display: flex;
+	gap: 14px;
+	margin: 0 0 10px;
+	border-bottom: 1px solid var(--hair);
+}
+
+.report-tab {
+	appearance: none;
+	-webkit-appearance: none;
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+	padding: 0 0 6px;
+	font-family: var(--mono);
+	font-size: 9.5px;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--muted);
+	cursor: pointer;
+}
+
+.report-tab:hover { color: var(--ink); }
+
+.report-tab.active {
+	color: var(--ink);
+	border-bottom-color: var(--ink);
+}
+
+.report-tab:focus { outline: none; }
+
+.report-tab:focus-visible {
+	outline: 1px solid var(--rule);
+	outline-offset: 2px;
+}
+
 .readout-year {
 	font-family: var(--mono);
 	font-size: 22px;
@@ -373,6 +413,17 @@ a:hover {
 	font-weight: 600;
 }
 
+/* Station report only (not the hover tooltip, which shares this class) —
+   the panel's harmonized palette keeps every label the same light gray and
+   weight as .readout-meta dt's, Title/Keywords being the exceptions (see
+   dd.readout-value-ink below). Overriding font-weight too, not just color:
+   at the same hex value, this label's 600 vs dt's normal weight still reads
+   as a visibly different (darker/heavier) gray. */
+#focus .readout-terms-label {
+	color: var(--muted);
+	font-weight: 400;
+}
+
 #focus hr {
 	border: none;
 	border-top: 1px solid var(--hair);
@@ -386,7 +437,13 @@ a:hover {
 	margin: 0;
 }
 
-.readout-date {
+/* Hover tooltip's own date line, above its shared .readout-title title —
+   colour set inline per-article (tooltip.js), this is just the fallback/base
+   look. Keywords and Topic below reuse .readout-terms/.readout-terms-label,
+   the same labelled-term-line look the station report uses. The station
+   report's own Date is a .readout-meta row now (see dt/dd below), not a
+   standalone element, so this class is tooltip-only. */
+.tooltip-date {
 	font-family: var(--mono);
 	font-size: 10px;
 	letter-spacing: 0.04em;
@@ -394,37 +451,11 @@ a:hover {
 	margin: 0 0 6px;
 }
 
-.readout-sub {
-	font-size: 11px;
-	color: var(--muted);
-	line-height: 1.32;
-	margin: 6px 0 0;
-}
-
-.readout-excerpt {
-	font-size: 11px;
-	color: var(--ink, var(--muted));
-	line-height: 1.4;
-	margin: 8px 0 0;
-}
-
-/* Hover tooltip's own date line, above its shared .readout-title title —
-   colour set inline per-article (tooltip.js), this is just the fallback/base
-   look. Keywords and Topic below reuse .readout-terms/.readout-terms-label,
-   the same labelled-term-line look the station report uses. */
-.tooltip-date {
-	font-family: var(--mono);
-	font-size: 10px;
-	letter-spacing: 0.04em;
-	color: var(--muted);
-	margin: 0 0 6px; /* same gap before the title as .readout-date in the station report */
-}
-
 /* Instrument readings — a two-column label/value grid. */
 .readout-meta {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 3px 10px;
+	gap: 7px 10px;
 	margin: 10px 0 0;
 	font-size: 10.5px;
 	line-height: 1.3;
@@ -436,11 +467,31 @@ a:hover {
 	text-transform: uppercase;
 	letter-spacing: 0.07em;
 	color: var(--muted);
+	font-weight: 400;
 }
 
 .readout-meta dd {
 	margin: 0;
 	font-weight: 550;
+	color: var(--muted);
+}
+
+/* Title and Keywords are the panel's ink-black readings — everything else
+   (Subtitle, Excerpt, Byline, Length, Tags, System, Topic) stays gray via
+   .readout-meta dd above. */
+.readout-meta dd.readout-value-ink {
+	color: var(--ink);
+}
+
+/* .hi/.lo (High/Low system color) would otherwise lose to .readout-meta dd
+   above — that's a class+element selector, higher specificity than .hi/.lo
+   alone — so the System reading's red/blue needs pinning back explicitly. */
+.readout-meta dd.hi {
+	color: var(--high);
+}
+
+.readout-meta dd.lo {
+	color: var(--low);
 }
 
 

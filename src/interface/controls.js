@@ -20,19 +20,27 @@ const LAYERS = [
         // cross, so activating one deactivates the rest.
         exclusive: true,
         children: [
-            { label: 'elements-years', name: 'Year' },
+            //{ label: 'elements-years', name: 'Year' },
             //{ label: 'elements-titles', name: 'Title' },
             //{ label: 'elements-keywords', name: 'Keywords' },
         ],
     },
     {
-        label: 'clusters',
-        name: 'Clusters',
+        // Bound directly to the clusters-labels layer (not the 'clusters'
+        // parent Container) now that Labels/Fills/Fronts/Gradient Fill are
+        // all hidden below — this is the only Clusters-related toggle left
+        // in the UI, so it should directly control label visibility rather
+        // than the (now practically empty) parent, which the label layer
+        // isn't even a Pixi child of. Restore `label: 'clusters'` if any of
+        // these children come back, so the sub-switches' AND-gating (see
+        // refreshClusterDependents) has a meaningful parent switch again.
+        label: 'clusters-labels',
+        name: 'Cluster Labels',
         children: [
-            { label: 'clusters-labels', name: 'Labels' },
-            { label: 'fronts', name: 'Fronts' },
-            { label: 'clusters-fills', name: 'Fills' },
-            { label: 'gradient-fill', name: 'Gradient Fill' },
+            //{ label: 'clusters-labels', name: 'Labels' },
+            //{ label: 'clusters-fills', name: 'Fills' },
+            //{ label: 'fronts', name: 'Fronts' },
+            //{ label: 'gradient-fill', name: 'Gradient Fill' },
         ],
     },
     {
@@ -153,31 +161,32 @@ export default (pointGradient, setLabelColorByYear, elementsHandle) => {
 
     let articlesSwitch = null
     let clustersSwitch = null
-    let frontsSwitch = null
-    let labelsSwitch = null
-    let gradientFillSwitch = null
+    //let frontsSwitch = null
+    //let labelsSwitch = null
+    //let gradientFillSwitch = null
 
     LAYERS.forEach(({ label, name, children, exclusive }) => {
         const layer = findByLabel(s.viewport, label)
         if (!layer) return
         const sw = makeSwitch(layer, name, false)
         if (label === 'elements') articlesSwitch = sw
-        if (label === 'clusters') clustersSwitch = sw
+        if (label === 'clusters-labels') clustersSwitch = sw
         layersBody.appendChild(sw.row)
 
         // "Color" — see above — inserted right after Articles' own
         // row and before its children (Year), not part of the generic
         // children loop below since it isn't a layer-visibility toggle.
-        if (label === 'elements') layersBody.appendChild(colorRow)
+        // Temporarily hidden — see the commented-out toggles above/below.
+        //if (label === 'elements') layersBody.appendChild(colorRow)
 
         const subs = []
         children?.forEach((sub) => {
             const subLayer = findByLabel(s.viewport, sub.label)
             if (!subLayer) return
             const subSw = makeSwitch(subLayer, sub.name, true)
-            if (sub.label === 'fronts') frontsSwitch = subSw
-            if (sub.label === 'clusters-labels') labelsSwitch = subSw
-            if (sub.label === 'gradient-fill') gradientFillSwitch = subSw
+            //if (sub.label === 'fronts') frontsSwitch = subSw
+            //if (sub.label === 'clusters-labels') labelsSwitch = subSw
+            //if (sub.label === 'gradient-fill') gradientFillSwitch = subSw
             layersBody.appendChild(subSw.row)
             subs.push(subSw)
         })
@@ -208,15 +217,14 @@ export default (pointGradient, setLabelColorByYear, elementsHandle) => {
     // switch and the Clusters switch are checked, restored exactly when
     // Clusters comes back.
     const refreshClusterDependents = () => {
-        frontsSwitch.layer.visible = frontsSwitch.input.checked && clustersSwitch.input.checked
-        labelsSwitch.layer.visible = labelsSwitch.input.checked && clustersSwitch.input.checked
-        gradientFillSwitch.layer.visible =
-            gradientFillSwitch.input.checked && clustersSwitch.input.checked
+        //frontsSwitch.layer.visible = frontsSwitch.input.checked && clustersSwitch.input.checked
+        //labelsSwitch.layer.visible = labelsSwitch.input.checked && clustersSwitch.input.checked
+        //gradientFillSwitch.layer.visible = gradientFillSwitch.input.checked && clustersSwitch.input.checked
     }
     clustersSwitch.input.addEventListener('change', refreshClusterDependents)
-    frontsSwitch.input.addEventListener('change', refreshClusterDependents)
-    labelsSwitch.input.addEventListener('change', refreshClusterDependents)
-    gradientFillSwitch.input.addEventListener('change', refreshClusterDependents)
+    //frontsSwitch.input.addEventListener('change', refreshClusterDependents)
+    //labelsSwitch.input.addEventListener('change', refreshClusterDependents)
+    //gradientFillSwitch.input.addEventListener('change', refreshClusterDependents)
     refreshClusterDependents()
 
     // Point Gradient is the only reading of the articles now — the crosses
@@ -271,7 +279,7 @@ export default (pointGradient, setLabelColorByYear, elementsHandle) => {
     const layoutRadios = [
         makeLayoutRadio('Network', 'network'),
         makeLayoutRadio('Collision Free', 'collision'),
-        makeLayoutRadio('Point Grid', 'grid'),
+        //makeLayoutRadio('Point Grid', 'grid'),
     ]
 
     const setLayout = (mode) => {
@@ -342,9 +350,9 @@ export default (pointGradient, setLabelColorByYear, elementsHandle) => {
     yearsSection.appendChild(presetStack)
 
     const presetButtons = [
-        { value: 'all', label: 'All', range: [earliestYear, latestYear] },
-        { value: '1year', label: '1 year', range: oneYearRange },
-        { value: '5years', label: '5 years', range: fiveYearRange },
+        //{ value: 'all', label: 'All', range: [earliestYear, latestYear] },
+        //{ value: '1year', label: '1 year', range: oneYearRange },
+        //{ value: '5years', label: '5 years', range: fiveYearRange },
     ].map(({ value, label, range }) => {
         const row = document.createElement('label')
         row.className = 'switch'
