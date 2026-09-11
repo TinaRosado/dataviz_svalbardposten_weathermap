@@ -34,8 +34,7 @@ const LAYERS = [
         // isn't even a Pixi child of. Restore `label: 'clusters'` if any of
         // these children come back, so the sub-switches' AND-gating (see
         // refreshClusterDependents) has a meaningful parent switch again.
-        label: 'clusters-labels',
-        name: 'Cluster Labels',
+        label: 'clusters-labels', name: 'Cluster Labels',
         children: [
             //{ label: 'clusters-labels', name: 'Labels' },
             //{ label: 'clusters-fills', name: 'Fills' },
@@ -44,8 +43,10 @@ const LAYERS = [
         ],
     },
     {
-        label: 'contours',
-        name: 'Contours',
+        label: 'contours', name: 'Contours',
+    },
+    {
+        label: 'clusters-fills', name: 'Fills',
     },
 ]
 
@@ -279,7 +280,7 @@ export default (pointGradient, setLabelColorByYear, elementsHandle) => {
     const layoutRadios = [
         makeLayoutRadio('Network', 'network'),
         makeLayoutRadio('Collision Free', 'collision'),
-        //makeLayoutRadio('Point Grid', 'grid'),
+        makeLayoutRadio('Point Grid', 'grid'),
     ]
 
     const setLayout = (mode) => {
